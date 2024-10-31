@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('descricao');
             $table->string('medida');
             $table->integer('quantidade')->default(0);
+            $table->float('preco');
         });
     }
 

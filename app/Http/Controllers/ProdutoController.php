@@ -12,7 +12,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        return Produto::all();
+        $produtos = Produto::orderByDesc('quantidade')->get();
+
+        return view('produtos.index', ['produtos' => $produtos]);
     }
 
     /**
@@ -36,7 +38,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        //
+        return $produto;
     }
 
     /**
@@ -44,7 +46,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        //
+        return $produto;
     }
 
     /**
@@ -60,6 +62,8 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto)
     {
-        //
+        $produto->delete();
+
+        return back()->with('resposta', ['status' => 'sucesso', 'mensagem' => 'Produto removido com sucesso!']);
     }
 }

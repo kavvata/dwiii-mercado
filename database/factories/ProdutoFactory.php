@@ -71,6 +71,7 @@ class ProdutoFactory extends Factory
             'descricao' => fake()->sentence(10),
             'medida' => fake()->word(),
             'quantidade' => fake()->numberBetween(int1: 1, int2: 50),
+            'preco' => fake()->randomFloat(max: 50),
         ];
     }
 }

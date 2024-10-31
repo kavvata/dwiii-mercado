@@ -9,10 +9,10 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
                 class="flex flex-col gap-6 overflow-hidden bg-white p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
-                <div class="align-center flex justify-between">
+                <div class="h-8 align-center flex justify-between">
                     <input id="search" class="border border-slate-600 sm:rounded-lg dark:bg-slate-900"
                         placeholder="Procure um nome..." type="text">
-                    <a class="p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 sm:rounded-md"
+                    <a class="flex p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 sm:rounded-md justify-items-center items-center"
                         href="{{ route('produtos.create') }}">
                         Novo Produto
                     </a>
@@ -25,7 +25,7 @@
                         <th class="border border-slate-600">Ações</th>
                     </tr>
                     @foreach ($produtos as $produto)
-                        <tr class ="border border-slate-600 dark:hover:bg-gray-900">
+                        <tr class="border border-slate-600 dark:hover:bg-gray-900">
                             <td class="border border-slate-600 py-2 text-center"> {{ $produto->nome }} </td>
                             <td class="border border-slate-600 py-2 text-center"> {{ $produto->quantidade }} </td>
 
@@ -33,7 +33,7 @@
                                 R${{ number_format($produto->preco, 2) }}
                             </td>
 
-                            <td class="flex flex-row justify-center gap-2 py-2">
+                            <td class="flex lg:flex-row justify-center gap-2 py-2 flex-col items-center">
 
                                 <a class="border border-slate-600 px-2 hover:bg-slate-800 sm:rounded-md"
                                     href="{{ route('produtos.show', $produto) }}">Mostrar</a>

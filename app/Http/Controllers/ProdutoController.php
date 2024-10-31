@@ -12,9 +12,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::orderByDesc('quantidade')->get();
+        $produtos = Produto::orderByDesc("quantidade")->get();
 
-        return view('produtos.index', ['produtos' => $produtos]);
+        return view("produtos.index", ["produtos" => $produtos]);
     }
 
     /**
@@ -22,7 +22,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view("produtos.create");
     }
 
     /**
@@ -30,7 +30,19 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "nome" => "required|unique:produtos|max:255",
+            "descricao" => "required|max:255",
+            "medida" => "max:255",
+            "preco" => "required",
+        ]);
+
+        Produto::create($request->all());
+
+        return back()->with("resposta", [
+            "status" => "sucesso",
+            "mensagem" => "Produto criado com sucesso!",
+        ]);
     }
 
     /**
@@ -64,6 +76,9 @@ class ProdutoController extends Controller
     {
         $produto->delete();
 
-        return back()->with('resposta', ['status' => 'sucesso', 'mensagem' => 'Produto removido com sucesso!']);
+        return to_route("produtos.index")->with("resposta", [
+            "status" => "sucesso",
+            "mensagem" => "Produto removido com sucesso!",
+        ]);
     }
 }

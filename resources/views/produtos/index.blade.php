@@ -9,8 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div
                 class="flex flex-col gap-6 overflow-hidden bg-white p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
-                <div>
-                    TODO: filtro
+                <div class="align-center flex justify-between">
+                    <input id="search" class="border border-slate-600 sm:rounded-lg dark:bg-slate-900"
+                        placeholder="Procure um nome..." type="text">
+                    <a class="p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 sm:rounded-md"
+                        href="{{ route('produtos.create') }}">
+                        Novo Produto
+                    </a>
                 </div>
                 <table class="w-full table-fixed">
                     <tr class="border border-slate-600">
@@ -50,4 +55,6 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/produtos/index.js') }}"></script>
 </x-app-layout>

@@ -10,9 +10,9 @@
             <div
                 class="flex flex-col gap-6 overflow-hidden bg-white p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <div class="h-8 align-center flex justify-between">
-                    <input id="search" class="border border-slate-600 sm:rounded-lg dark:bg-slate-900"
+                    <input id="search" class="border border-slate-600 rounded-lg dark:bg-slate-900"
                         placeholder="Procure um nome..." type="text">
-                    <a class="flex p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 sm:rounded-md justify-items-center items-center"
+                    <a class="flex p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 rounded-md justify-items-center items-center"
                         href="{{ route('produtos.create') }}">
                         Novo Produto
                     </a>
@@ -35,16 +35,16 @@
 
                             <td class="flex lg:flex-row justify-center gap-2 py-2 flex-col items-center">
 
-                                <a class="border border-slate-600 px-2 hover:bg-slate-800 sm:rounded-md"
+                                <a class="border border-slate-600 px-2 hover:bg-slate-800 rounded-md"
                                     href="{{ route('produtos.show', $produto) }}">Mostrar</a>
 
-                                <a class="border border-slate-600 px-2 hover:bg-slate-800 sm:rounded-md"
+                                <a class="border border-slate-600 px-2 hover:bg-slate-800 rounded-md"
                                     href="{{ route('produtos.edit', $produto) }}">Editar</a>
 
                                 <form method="POST" action="{{ route('produtos.destroy', $produto) }}">
                                     @method('DELETE')
                                     @csrf
-                                    <button class="bg-red-600 px-2 hover:bg-red-900 sm:rounded-md "
+                                    <button class="bg-red-600 px-2 hover:bg-red-900 rounded-md "
                                         type="">Remover</button>
                                 </form>
 

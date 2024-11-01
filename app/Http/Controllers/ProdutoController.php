@@ -14,7 +14,7 @@ class ProdutoController extends Controller
     {
         $produtos = Produto::orderByDesc('quantidade')->get();
 
-        return view('produtos.index', ['produtos' => $produtos]);
+        return view('produtos.index', compact('produtos'));
     }
 
     /**
@@ -63,7 +63,7 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto)
     {
-        return $produto;
+        return view('produtos.edit', compact('produto'));
     }
 
     /**
@@ -71,7 +71,7 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto)
     {
-        return $produto;
+        return view('produtos.edit', compact('produto'));
     }
 
     /**
@@ -79,7 +79,32 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, Produto $produto)
     {
-        //
+        $request->validate([
+            'nome' => 'required|max:255',
+            'descricao' => 'max:255',
+            'medida' => 'max:255',
+            'quantidade' => 'required',
+            'preco' => 'required',
+        ]);
+
+        /* TODO: formatar antes de enviar para a controller */
+        $preco = $request->input('preco');
+        $preco = str_replace(search: '.', replace: '', subject: $preco);
+        $preco = str_replace(search: ',', replace: '.', subject: $preco);
+        $preco = (float) str_replace(search: 'R$ ', replace: '', subject: $preco);
+
+        $produto->update([
+            'nome' => $request->input('nome'),
+            'descricao' => $request->input('descricao'),
+            'medida' => $request->input('medida'),
+            'quantidade' => $request->input('quantidade'),
+            'preco' => $preco,
+        ]);
+
+        return to_route('produtos.index')->with('resposta', [
+            'status' => 'sucesso',
+            'mensagem' => 'Produto criado com sucesso!',
+        ]);
     }
 
     /**

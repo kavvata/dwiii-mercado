@@ -1,15 +1,14 @@
 const precoInput = document.getElementById("preco");
-const quantidadeIput = document.getElementById('quantidade')
 
-precoInput.onkeyup = () => {
+const formatar = (event) => {
     // brigado https://stackoverflow.com/a/68203262 !!
 
-    let value = precoInput.value
+    let value = event.target.value;
 
     value = value.replace(".", "").replace(",", "").replace(/\D/g, "");
 
     if (value.trim() == "") {
-        value = 0
+        value = 0;
     }
 
     const options = { minimumFractionDigits: 2 };
@@ -17,5 +16,7 @@ precoInput.onkeyup = () => {
         parseFloat(value) / 100,
     );
 
-    precoInput.value = "R$ " + result
-}
+    precoInput.value = "R$ " + result;
+};
+
+precoInput.onkeyup = formatar;

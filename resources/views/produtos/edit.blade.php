@@ -44,7 +44,7 @@
                         class="flex border-0 form-input bg-white text-gray-800 rounded-lg dark:bg-gray-800 dark:text-gray-200 justify-between">
                         <label for="nome">Preco:</label>
                         <input id="preco" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="preco"
-                            value="R$ {{ number_format($produto->preco, 2) }}">
+                            value="R$ {{ number_format($produto->preco, 2, ',') }}">
                     </div>
                 </div>
                 <div class="justify-center">

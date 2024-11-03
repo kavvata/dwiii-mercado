@@ -30,7 +30,7 @@
                             <td class="border border-slate-600 py-2 text-center"> {{ $produto->quantidade }} </td>
 
                             <td class="border border-slate-600 py-2 text-center">
-                                R${{ number_format($produto->preco, 2) }}
+                                R${{ number_format($produto->preco, 2, ',') }}
                             </td>
 
                             <td class="flex lg:flex-row justify-center gap-2 py-2 flex-col items-center">

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @method static \Database\Factories\CategoriaFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Categoria newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Categoria newQuery()
@@ -29,6 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Categoria whereNome($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Categoria whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @mixin IdeHelperCategoria
  */
 class Categoria extends Model
 {

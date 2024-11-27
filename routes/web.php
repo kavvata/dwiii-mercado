@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\SocialLoginController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
@@ -23,5 +24,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->resource('/categorias', CategoriaController::class);
 Route::middleware(['auth'])->resource('/clientes', ClienteController::class);
 Route::middleware(['auth'])->resource('/produtos', ProdutoController::class);
+
+Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])->name('auth.socialite.redirect');
+Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('auth.socialite.callback');
 
 require __DIR__ . '/auth.php';

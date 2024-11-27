@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
- *
  * @method static \Database\Factories\ClienteFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newQuery()
@@ -33,6 +31,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereTelefone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @mixin IdeHelperCliente
  */
 class Cliente extends Model
 {

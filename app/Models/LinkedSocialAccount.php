@@ -15,6 +15,10 @@ class LinkedSocialAccount extends Model
 
     protected $fillable = ['provider_name', 'provider_id', 'provider_token'];
 
+    protected $hidden = [
+        'provider_token',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

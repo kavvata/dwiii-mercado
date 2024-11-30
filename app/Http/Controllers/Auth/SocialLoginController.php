@@ -7,46 +7,46 @@ use App\Models\LinkedSocialAccount;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use Exception;
 
 class SocialLoginController extends Controller
 {
-    public function callback($request): RedirectResponse
+    public function callback(string $provider): RedirectResponse
     {
         try {
-            $accessToken = $request->get('access_token');
-            $provider = $request->get('provider');
-            $providerUser = Socialite::driver($provider)->userFromToken($accessToken);
+            $providerUser = Socialite::driver($provider)->user();
         } catch (Exception $exception) {
             return back()->withErrors($exception->getMessage());
         }
 
-        if (filled($providerUser)) {
-            $user = $providerUser;
-        } else {
-            $linkedSocialAccount = LinkedSocialAccount::where(['provider_name' => $provider, 'provider_id' => $provider])->first();
+        $linkedSocialAccount = LinkedSocialAccount::where(['provider_name' => $provider, 'provider_id' => $providerUser->getId()])->first();
 
-            if ($linkedSocialAccount) {
-                return $linkedSocialAccount->user;
-            }
-
-            $user = User::where(['email' => $providerUser->getEmail(), 'name' => $providerUser->getName()])->firstOrNew();
-
-            if (!$user->id) {
-                $user->markEmailAsVerified();
-            }
-
-            $user->linkedSocialAccounts()->create([
-                'provider_id' => $providerUser->getId(),
-                'provider_name' => $provider,
-            ]);
+        if ($linkedSocialAccount) {
+            return $linkedSocialAccount->user;
         }
+
+        $user = User::firstOrNew(['email' => $providerUser->getEmail()]);
+
+        if (!$user->id) {
+            $user->name = $providerUser->getName();
+            $user->password = Hash::make(Str::random(32));
+            $user->save();
+            $user->markEmailAsVerified();
+        }
+
+        $user->linkedSocialAccounts()->create([
+            'provider_id' => $providerUser->getId(),
+            'provider_name' => $provider,
+            'provider_token' => $providerUser->token,
+        ]);
 
         Auth::login($user);
 
         if (!Auth::check()) {
-            return back()->withErrors(
+            return to_route('/')->withErrors(
                 'Failed to Login. Try again.',
             );
         }
@@ -54,8 +54,8 @@ class SocialLoginController extends Controller
         return to_route('dashboard');
     }
 
-    public function redirect($request): RedirectResponse
+    public function redirect(string $provider): RedirectResponse
     {
-        return Socialite::driver($request->get('provider'))->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 }

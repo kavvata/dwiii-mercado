@@ -18,7 +18,7 @@
                     <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
                         {{ __('Produtos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('produtos.index')">
+                    <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                         {{ __('Categorias') }}
                     </x-nav-link>
                 </div>
@@ -87,7 +87,7 @@
             <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
+            <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('categorias.index')">
                 {{ __('Categorias') }}
             </x-responsive-nav-link>
         </div>

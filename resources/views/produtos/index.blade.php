@@ -27,6 +27,7 @@
                     <tr class="bg-gray-700">
                         <th class="w-16 px-6 pb-2 text-start">Qntd.</th>
                         <th class="px-6 pb-2 text-start">Nome</th>
+                        <th class="px-6 pb-2 text-start">Categoria</th>
                         <th class="w-16 px-6 pb-2 text-start">Preço</th>
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
@@ -34,6 +35,7 @@
                         <tr class=" border-b last:border-b-0 border-slate-600 dark:hover:bg-gray-900">
                             <td class="px-6 py-2 dark:text-gray-400"> {{ $produto->quantidade }} </td>
                             <td class="px-6 py-2"> {{ $produto->nome }} </td>
+                            <td class="px-6 py-2"> {{ $produto->categoria->nome }} </td>
 
                             <td class="px-6 py-2">
                                 R${{ number_format($produto->preco, 2, ',') }}

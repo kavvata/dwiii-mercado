@@ -14,7 +14,9 @@ class ProdutoController extends Controller
      */
     public function index(): View
     {
-        $produtos = Produto::with('categoria')->orderByDesc('quantidade')->get();
+        $produtos = Produto::with('categoria')->orderByDesc('quantidade')->get()->sortBy(function (Produto $produto) {
+            return $produto->categoria->nome;
+        });
 
         return view('produtos.index', compact('produtos'));
     }

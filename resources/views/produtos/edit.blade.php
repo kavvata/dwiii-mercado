@@ -9,11 +9,16 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-            <form method="POST" action="{{ route('produtos.update', $produto) }}"
+            <form method="POST"
+                action="{{ $produto->id ? route('produtos.update', $produto) : route('produtos.store') }}"
                 class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
 
                 @csrf
-                @method('PUT')
+                @if ($produto->id)
+                    @method('PUT')
+                @else
+                    @method('POST')
+                @endif
 
                 <div class="grid grid-cols-2 items-center">
                     <div
@@ -50,11 +55,10 @@
                         class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         <label for="categoria">Categoria:</label>
                         <select class="block dark:bg-gray-900 rounded-lg bg-white text-gray-800 dark:text-gray-200">
-                            <option selected>Choose a country</option>
-                            <option value="US">United States</option>
-                            <option value="CA">Canada</option>
-                            <option value="FR">France</option>
-                            <option value="DE">Germany</option>
+                            @foreach ($categorias as $categoria)
+                                <option @if ($categoria == $produto->categoria) selected="selected" @endif
+                                    value="{{ $categoria }}">{{ $categoria->nome }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>

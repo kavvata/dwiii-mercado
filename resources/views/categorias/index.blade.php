@@ -26,7 +26,7 @@
                 class="overflow-hidden bg-white text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <table id="table-categoria" class="w-full table-fixed overflow-hidden">
                     <tr class="bg-gray-700">
-                        <th class="w-16 px-6 pb-2 text-start">Nome</th>
+                        <th class=" w-32 px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">Descrição</th>
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
@@ -35,7 +35,7 @@
                             <td class="px-6 py-2"> {{ $categoria->nome }} </td>
                             <td class="px-6 py-2"> {{ $categoria->descricao }} </td>
 
-                            <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 lg:flex-row">
+                            <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 md:flex-row">
 
                                 <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
                                     href="{{ route('categorias.edit', $categoria) }}">Editar</a>

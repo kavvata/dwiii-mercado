@@ -22,7 +22,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
@@ -30,7 +30,20 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nome' => 'required|unique:produtos|max:255',
+            'descricao' => 'required|max:255',
+        ]);
+
+        Categoria::create([
+            'nome' => $request->input('nome'),
+            'descricao' => $request->input('descricao'),
+        ]);
+
+        return to_route('categorias.index')->with('resposta', [
+            'status' => 'sucesso',
+            'mensagem' => 'Categoria criada com sucesso!',
+        ]);
     }
 
     /**

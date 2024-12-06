@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +27,11 @@ class ProdutoController extends Controller
      */
     public function create(): View
     {
-        return view('produtos.create');
+        $categorias = Categoria::all();
+
+        $produto = new Produto;
+
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     /**
@@ -36,7 +41,7 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|unique:produtos|max:255',
-            'descricao' => 'max:255',
+            'descricao' => 'required|max:255',
             'medida' => 'max:255',
             'quantidade' => 'required',
             'preco' => 'required',
@@ -74,7 +79,9 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto): View
     {
-        return view('produtos.edit', compact('produto'));
+        $categorias = Categoria::all();
+
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     /**

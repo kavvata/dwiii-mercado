@@ -67,19 +67,19 @@ class UnidadeMedidaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UnidadeMedida $medida)
+    public function update(Request $request, UnidadeMedida $unidadeMedida)
     {
         $request->validate([
-            'sigla' => 'required|unique:unidade_medidas|max:16',
-            'descricao' => 'required|unique:unidade_medidas|max:255',
+            'sigla' => 'required|max:16',
+            'descricao' => 'required|max:255',
         ]);
 
-        $medida->sigla = $request->sigla;
-        $medida->descricao = $request->descricao;
+        $unidadeMedida->sigla = $request->sigla;
+        $unidadeMedida->descricao = $request->descricao;
 
-        $medida->save();
+        $unidadeMedida->save();
 
-        return to_route('categorias.index')->with('resposta', [
+        return to_route('unidade_medidas.index')->with('resposta', [
             'status' => 'sucesso',
             'mensagem' => 'Categoria criada com sucesso!',
         ]);

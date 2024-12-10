@@ -9,22 +9,30 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-            <form method="POST" action="{{ route('categorias.store') }}"
-                class="flex-col gap-6 overflow-hidden bg-white p-6 text-gray-800 shadow-sm rounded-lg dark:bg-gray-800 dark:text-gray-200">
+            <form method="POST"
+                action="{{ $categoria->id ? route('categorias.update', $categoria) : route('categorias.store', $categoria) }}"
+                class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
 
                 @csrf
-                @method('POST')
+                @if ($categoria->id)
+                    )
+                    @method('PUT')
+                @else
+                    @method('POST')
+                @endif
 
                 <div class="grid grid-cols-2 items-center">
                     <div
-                        class="flex border-0 form-input bg-white text-gray-800 rounded-lg dark:bg-gray-800 dark:text-gray-200 justify-between">
-                        <label for="nome">Nome:</label>
-                        <input class="h-8 rounded-lg dark:bg-gray-900" type="text" name="nome">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="nome">Nome:</label>
+                        <input class="h-10 w-64 rounded-lg dark:bg-gray-900" type="text" name="nome"
+                            value="{{ $categoria->nome }}">
                     </div>
                     <div
-                        class="flex border-0 form-input bg-white text-gray-800 rounded-lg dark:bg-gray-800 dark:text-gray-200 justify-between">
-                        <label for="nome">Descricao:</label>
-                        <input class="h-8 rounded-lg dark:bg-gray-900" type="text" name="descricao">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="descricao">Descrição:</label>
+                        <input id="descricao" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="descricao" value="{{ $categoria->descricao }}">
                     </div>
                 </div>
                 <div class="justify-center">

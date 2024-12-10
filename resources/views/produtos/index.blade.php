@@ -57,6 +57,17 @@
                         </tr>
                     @endforeach
                 </table>
+                <div class="justify-center">
+                    @if ($errors->any())
+                        <div class="py-8 alert alert-danger font-bold text-red-600">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-center">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

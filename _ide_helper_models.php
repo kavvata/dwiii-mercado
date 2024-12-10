@@ -46,13 +46,6 @@ namespace App\Models{
 /**
  * 
  *
- * @method static \Database\Factories\ClienteFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente withTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente withoutTrashed()
  * @property int $id
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -61,6 +54,11 @@ namespace App\Models{
  * @property string $cpf
  * @property string $telefone
  * @property string $email
+ * @method static \Database\Factories\ClienteFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereCpf($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereDeletedAt($value)
@@ -69,6 +67,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereNome($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereTelefone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente withoutTrashed()
  * @mixin \Eloquent
  */
 	#[\AllowDynamicProperties]
@@ -113,11 +113,12 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property string $nome
  * @property string $descricao
- * @property string $medida
  * @property int $quantidade
  * @property float $preco
  * @property int $categoria_id
+ * @property int $unidade_medida_id
  * @property-read \App\Models\Categoria|null $categoria
+ * @property-read \App\Models\UnidadeMedida|null $unidadeMedida
  * @method static \Database\Factories\ProdutoFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto newQuery()
@@ -128,10 +129,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereDescricao($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereMedida($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereNome($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto wherePreco($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereQuantidade($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereUnidadeMedidaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Produto withoutTrashed()
@@ -139,6 +140,37 @@ namespace App\Models{
  */
 	#[\AllowDynamicProperties]
 	class IdeHelperProduto {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property string $sigla
+ * @property string $descricao
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Produto> $produtos
+ * @property-read int|null $produtos_count
+ * @method static \Database\Factories\UnidadeMedidaFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereDescricao($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereSigla($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UnidadeMedida withoutTrashed()
+ * @mixin \Eloquent
+ */
+	#[\AllowDynamicProperties]
+	class IdeHelperUnidadeMedida {}
 }
 
 namespace App\Models{

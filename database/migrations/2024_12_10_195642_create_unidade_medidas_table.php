@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Categoria;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,16 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('produtos', function (Blueprint $table) {
+        Schema::create('unidade_medidas', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
             $table->timestamps();
-            $table->string('nome');
+            $table->softDeletes();
+            $table->string('sigla');
             $table->string('descricao');
-            $table->string('medida');
-            $table->integer('quantidade')->default(0);
-            $table->float('preco');
-            $table->foreignIdFor(Categoria::class);
         });
     }
 
@@ -29,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('produtos');
+        Schema::dropIfExists('unidade_medidas');
     }
 };

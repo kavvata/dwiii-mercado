@@ -69,7 +69,6 @@ class ProdutoFactory extends Factory
         return [
             'nome' => $listaNomeProdutos[fake()->unique()->numberBetween(int1: 0, int2: count($listaNomeProdutos) - 1)],
             'descricao' => fake()->sentence(10),
-            'medida' => fake()->word(),
             'quantidade' => fake()->numberBetween(int1: 1, int2: 50),
             'preco' => fake()->randomFloat(max: 50),
         ];

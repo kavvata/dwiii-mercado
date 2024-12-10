@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Novo Contato') }}
+            {{ __('Novo Produto') }}
         </h2>
     </x-slot>
 
@@ -35,15 +35,24 @@
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label class="flex items-center" for="medida">Medida:</label>
-                        <input id="medida" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
-                            name="medida" value="{{ $produto->medida }}">
-                    </div>
-                    <div
-                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         <label class="flex items-center" for="nome">Quantidade:</label>
                         <input id="quantidade" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
                             name="quantidade" value="{{ $produto->quantidade }}">
+                    </div>
+                    <div
+                        class="form-input flex items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="unidade_medida">Unidade de Medida:</label>
+                        <div class="inline-flex h-full w-64 gap-2">
+                            <select name="unidade_medida_id"
+                                class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+                                @foreach ($unidadeMedidas as $unidadeMedida)
+                                    <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
+                                        value="{{ $unidadeMedida->id }}">{{ $unidadeMedida->descricao }}</option>
+                                @endforeach
+                            </select>
+                            <a class="h-full rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800"
+                                href="{{ route('unidade_medidas.create') }}">Nova</a>
+                        </div>
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">

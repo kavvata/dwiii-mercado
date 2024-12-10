@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-    <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-
     <div class="py-12">
         <div class="mx-auto max-w-5xl pb-12 sm:px-6 lg:px-8">
             <div
@@ -18,6 +16,17 @@
                         href="{{ route('categorias.create') }}">
                         Nova Categoria
                     </a>
+                </div>
+                <div class="justify-center">
+                    @if ($errors->any())
+                        <div class="py-6 alert alert-danger font-bold text-red-600">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="text-center">{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -51,17 +60,6 @@
                         </tr>
                     @endforeach
                 </table>
-                <div class="justify-center">
-                    @if ($errors->any())
-                        <div class="py-8 alert alert-danger font-bold text-red-600">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li class="text-center">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </div>
             </div>
         </div>
     </div>

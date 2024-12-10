@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Produto;
+use App\Models\UnidadeMedida;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class ProdutoController extends Controller
      */
     public function index(): View
     {
-        $produtos = Produto::with('categoria')->orderByDesc('quantidade')->get()->sortBy(function (Produto $produto) {
-            return $produto->categoria->nome;
+        $produtos = Produto::with('categoria')->orderByDesc('preco')->get()->sortByDesc(function (Produto $produto) {
+            return $produto->preco * $produto->quantidade;
         });
 
         return view('produtos.index', compact('produtos'));
@@ -28,10 +29,11 @@ class ProdutoController extends Controller
     public function create(): View
     {
         $categorias = Categoria::all();
+        $unidadeMedidas = UnidadeMedida::all();
 
         $produto = new Produto;
 
-        return view('produtos.edit', compact('produto', 'categorias'));
+        return view('produtos.edit', compact('produto', 'categorias', 'unidadeMedidas'));
     }
 
     /**
@@ -42,10 +44,10 @@ class ProdutoController extends Controller
         $request->validate([
             'nome' => 'required|unique:produtos|max:255',
             'descricao' => 'required|max:255',
-            'medida' => 'max:255',
             'quantidade' => 'required',
             'preco' => 'required',
             'categoria_id' => 'required',
+            'unidade_medida_id' => 'required',
         ]);
 
         /* TODO: formatar antes de enviar para a controller */
@@ -61,6 +63,9 @@ class ProdutoController extends Controller
 
         $categoria = Categoria::findOrFail($request->categoria_id);
         $produto->categoria()->associate($categoria);
+
+        $unidadeMedida = Categoria::findOrFail($request->unidade_medida_id);
+        $produto->unidadeMedida()->associate($unidadeMedida);
 
         $produto->save();
 
@@ -86,8 +91,9 @@ class ProdutoController extends Controller
     public function edit(Produto $produto): View
     {
         $categorias = Categoria::all();
+        $unidadeMedidas = UnidadeMedida::all();
 
-        return view('produtos.edit', compact('produto', 'categorias'));
+        return view('produtos.edit', compact('produto', 'categorias', 'unidadeMedidas'));
     }
 
     /**
@@ -98,10 +104,10 @@ class ProdutoController extends Controller
         $request->validate([
             'nome' => 'required|max:255',
             'descricao' => 'required|max:255',
-            'medida' => 'max:255',
             'quantidade' => 'required',
             'preco' => 'required',
             'categoria_id' => 'required',
+            'unidade_medida_id' => 'required',
         ]);
 
         /* TODO: formatar antes de enviar para a controller */
@@ -117,8 +123,16 @@ class ProdutoController extends Controller
             'preco' => $preco,
         ]);
 
-        $novaCategoria = Categoria::findOrFail($request->categoria_id);
-        $produto->categoria()->associate($novaCategoria);
+        if ($request->categoria_id != $produto->categoria->id) {
+            $novaMedida = Categoria::findOrFail($request->categoria_id);
+            $produto->categoria()->associate($novaMedida);
+        }
+
+        if ($request->unidade_medida_id != $produto->unidadeMedida->id) {
+            $novaMedida = Categoria::findOrFail($request->unidade_medida_id);
+            $produto->unidadeMedida()->associate($novaMedida);
+        }
+
         $produto->save();
 
         return to_route('produtos.index')->with('resposta', [

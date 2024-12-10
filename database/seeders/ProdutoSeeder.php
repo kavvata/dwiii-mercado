@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Categoria;
 use App\Models\Produto;
+use App\Models\UnidadeMedida;
 use Illuminate\Database\Seeder;
 
 class ProdutoSeeder extends Seeder
@@ -13,6 +14,8 @@ class ProdutoSeeder extends Seeder
      */
     public function run(): void
     {
+        $un = UnidadeMedida::firstOrCreate(['sigla' => 'un.', 'descricao' => 'Unidade']);
+
         $produtosLimpeza = [
             'Água sanitária',
             'Alvejante',
@@ -32,7 +35,7 @@ class ProdutoSeeder extends Seeder
 
         $c = Categoria::factory()->create(['nome' => 'Limpeza']);
         foreach ($produtosLimpeza as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id]);
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
         }
 
         $produtosHigiene = [
@@ -51,7 +54,7 @@ class ProdutoSeeder extends Seeder
 
         $c = Categoria::factory()->create(['nome' => 'Higiene']);
         foreach ($produtosHigiene as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id]);
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
         }
 
         $produtosFerramentas = [
@@ -60,7 +63,7 @@ class ProdutoSeeder extends Seeder
 
         $c = Categoria::factory()->create(['nome' => 'Ferramentas']);
         foreach ($produtosFerramentas as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id]);
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
         }
 
         $produtosAlimenticios = [
@@ -89,7 +92,7 @@ class ProdutoSeeder extends Seeder
 
         $c = Categoria::factory()->create(['nome' => 'Alimenticios']);
         foreach ($produtosAlimenticios as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id]);
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
         }
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UnidadeMedidaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,9 +22,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth'])->resource('/unidade_medidas', UnidadeMedidaController::class);
 Route::middleware(['auth'])->resource('/categorias', CategoriaController::class);
-Route::middleware(['auth'])->resource('/clientes', ClienteController::class);
 Route::middleware(['auth'])->resource('/produtos', ProdutoController::class);
+
+Route::middleware(['auth'])->resource('/clientes', ClienteController::class);
 
 Route::get('auth/{provider}/redirect', [SocialLoginController::class, 'redirect'])->name('auth.socialite.redirect');
 Route::get('auth/{provider}/callback', [SocialLoginController::class, 'callback'])->name('auth.socialite.callback');

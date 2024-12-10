@@ -25,7 +25,15 @@ class SocialLoginController extends Controller
         $linkedSocialAccount = LinkedSocialAccount::where(['provider_name' => $provider, 'provider_id' => $providerUser->getId()])->first();
 
         if ($linkedSocialAccount) {
-            return $linkedSocialAccount->user;
+            Auth::login($linkedSocialAccount->user);
+
+            if (!Auth::check()) {
+                return to_route('/')->withErrors(
+                    'Failed to Login. Try again.',
+                );
+            }
+
+            return to_route('dashboard');
         }
 
         $user = User::firstOrNew(['email' => $providerUser->getEmail()]);

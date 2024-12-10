@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Produto;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -14,7 +15,9 @@ class ProdutoController extends Controller
      */
     public function index(): View
     {
-        $produtos = Produto::orderByDesc('quantidade')->get();
+        $produtos = Produto::with('categoria')->orderByDesc('quantidade')->get()->sortBy(function (Produto $produto) {
+            return $produto->categoria->nome;
+        });
 
         return view('produtos.index', compact('produtos'));
     }
@@ -24,34 +27,42 @@ class ProdutoController extends Controller
      */
     public function create(): View
     {
-        return view('produtos.create');
+        $categorias = Categoria::all();
+
+        $produto = new Produto;
+
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request, Produto $produto): RedirectResponse
     {
         $request->validate([
             'nome' => 'required|unique:produtos|max:255',
-            'descricao' => 'max:255',
+            'descricao' => 'required|max:255',
             'medida' => 'max:255',
             'quantidade' => 'required',
             'preco' => 'required',
+            'categoria_id' => 'required',
         ]);
 
         /* TODO: formatar antes de enviar para a controller */
-        $preco = $request->input('preco');
+        $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
 
-        Produto::create([
-            'nome' => $request->input('nome'),
-            'descricao' => $request->input('descricao'),
-            'medida' => $request->input('medida'),
-            'quantidade' => $request->input('quantidade'),
-            'preco' => $preco,
-        ]);
+        $produto->nome = $request->nome;
+        $produto->descricao = $request->descricao;
+        $produto->medida = $request->medida;
+        $produto->quantidade = $request->quantidade;
+        $produto->preco = $preco;
+
+        $categoria = Categoria::findOrFail($request->categoria_id);
+        $produto->categoria()->associate($categoria);
+
+        $produto->save();
 
         return to_route('produtos.index')->with('resposta', [
             'status' => 'sucesso',
@@ -64,7 +75,9 @@ class ProdutoController extends Controller
      */
     public function show(Produto $produto): View
     {
-        return view('produtos.edit', compact('produto'));
+        $categorias = Categoria::all();
+
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     /**
@@ -72,7 +85,9 @@ class ProdutoController extends Controller
      */
     public function edit(Produto $produto): View
     {
-        return view('produtos.edit', compact('produto'));
+        $categorias = Categoria::all();
+
+        return view('produtos.edit', compact('produto', 'categorias'));
     }
 
     /**
@@ -82,24 +97,29 @@ class ProdutoController extends Controller
     {
         $request->validate([
             'nome' => 'required|max:255',
-            'descricao' => 'max:255',
+            'descricao' => 'required|max:255',
             'medida' => 'max:255',
             'quantidade' => 'required',
             'preco' => 'required',
+            'categoria_id' => 'required',
         ]);
 
         /* TODO: formatar antes de enviar para a controller */
-        $preco = $request->input('preco');
+        $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
 
         $produto->update([
-            'nome' => $request->input('nome'),
-            'descricao' => $request->input('descricao'),
-            'medida' => $request->input('medida'),
-            'quantidade' => $request->input('quantidade'),
+            'nome' => $request->nome,
+            'descricao' => $request->descricao,
+            'medida' => $request->medida,
+            'quantidade' => $request->quantidade,
             'preco' => $preco,
         ]);
+
+        $novaCategoria = Categoria::findOrFail($request->categoria_id);
+        $produto->categoria()->associate($novaCategoria);
+        $produto->save();
 
         return to_route('produtos.index')->with('resposta', [
             'status' => 'sucesso',

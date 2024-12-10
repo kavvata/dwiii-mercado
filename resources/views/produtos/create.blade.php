@@ -3,7 +3,7 @@
 
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Novo Contato') }}
+            {{ __('Novo Produto') }}
         </h2>
     </x-slot>
 
@@ -42,6 +42,16 @@
                         <label for="nome">Preco:</label>
                         <input id="preco" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="preco"
                             value="R$ 0,00">
+                    </div>
+                    <div
+                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label for="categoria">Categoria:</label>
+                        <select class="block dark:bg-gray-900 rounded-lg bg-white text-gray-800 dark:text-gray-200">
+                            @foreach ($categorias as $categoria)
+                                <option @if ($categoria == $produto->categoria) selected="selected" @endif
+                                    value="{{ $categoria }}">{{ $categoria->nome }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="justify-center">

@@ -25,19 +25,21 @@
                 class="overflow-hidden bg-white text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <table id="table-produto" class="w-full table-fixed overflow-hidden">
                     <tr class="bg-gray-700">
-                        <th class="w-16 px-6 pb-2 text-start">Qntd.</th>
+                        <th class="w-24 px-6 pb-2 text-end">Qntd.</th>
                         <th class="px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">Categoria</th>
-                        <th class="w-16 px-6 pb-2 text-start">Preço</th>
+                        <th class="w-28 px-6 pb-2 text-end">Preço</th>
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
                     @foreach ($produtos as $produto)
                         <tr class=" border-b last:border-b-0 border-slate-600 dark:hover:bg-gray-900">
-                            <td class="px-6 py-2 dark:text-gray-400"> {{ $produto->quantidade }} </td>
+                            <td class="text-end px-6 py-2 dark:text-gray-400">
+                                {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}
+                            </td>
                             <td class="px-6 py-2"> {{ $produto->nome }} </td>
                             <td class="px-6 py-2"> {{ $produto->categoria->nome }} </td>
 
-                            <td class="px-6 py-2">
+                            <td class="px-6 py-2 text-end">
                                 R${{ number_format($produto->preco, 2, ',') }}
                             </td>
 

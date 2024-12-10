@@ -10,7 +10,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
             <form method="POST"
-                action="{{ $produto->id ? route('produtos.update', $produto) : route('produtos.store') }}"
+                action="{{ $produto->id ? route('produtos.update', $produto) : route('produtos.store', $produto) }}"
                 class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
 
                 @csrf
@@ -20,46 +20,51 @@
                     @method('POST')
                 @endif
 
-                <div class="grid grid-cols-2 items-center">
+                <div class="grid grid-cols-2 items-center gap-2">
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="nome">Nome:</label>
-                        <input class="h-8 rounded-lg dark:bg-gray-900" type="text" name="nome"
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="nome">Nome:</label>
+                        <input class="h-10 w-64 rounded-lg dark:bg-gray-900" type="text" name="nome"
                             value="{{ $produto->nome }}">
                     </div>
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="descricao">Descricao:</label>
-                        <input id="descricao" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="descricao"
-                            value="{{ $produto->nome }}">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="descricao">Descrição:</label>
+                        <input id="descricao" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="descricao" value="{{ $produto->nome }}">
                     </div>
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="medida">Medida:</label>
-                        <input id="medida" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="medida"
-                            value="{{ $produto->medida }}">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="medida">Medida:</label>
+                        <input id="medida" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="medida" value="{{ $produto->medida }}">
                     </div>
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="nome">Quantidade:</label>
-                        <input id="quantidade" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="quantidade"
-                            value="{{ $produto->quantidade }}">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="nome">Quantidade:</label>
+                        <input id="quantidade" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="quantidade" value="{{ $produto->quantidade }}">
                     </div>
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="preco">Preco:</label>
-                        <input id="preco" class="h-8 rounded-lg dark:bg-gray-900" type="text" name="preco"
-                            value="R$ {{ number_format($produto->preco, 2, ',') }}">
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="preco">Preco:</label>
+                        <input id="preco" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="preco" value="R$ {{ number_format($produto->preco, 2, ',') }}">
                     </div>
                     <div
-                        class="form-input flex justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label for="categoria">Categoria:</label>
-                        <select class="block dark:bg-gray-900 rounded-lg bg-white text-gray-800 dark:text-gray-200">
-                            @foreach ($categorias as $categoria)
-                                <option @if ($categoria == $produto->categoria) selected="selected" @endif
-                                    value="{{ $categoria }}">{{ $categoria->nome }}</option>
-                            @endforeach
-                        </select>
+                        class="form-input flex items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="categoria">Categoria:</label>
+                        <div class="inline-flex h-full w-64 gap-2">
+                            <select name="categoria_id"
+                                class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+                                @foreach ($categorias as $categoria)
+                                    <option @if ($categoria == $produto->categoria) selected="selected" @endif
+                                        value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                                @endforeach
+                            </select>
+                            <a class="h-full rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800"
+                                href="{{ route('categorias.create') }}">Nova</a>
+                        </div>
                     </div>
                 </div>
                 <div class="justify-center">

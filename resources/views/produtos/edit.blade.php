@@ -31,7 +31,7 @@
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         <label class="flex items-center" for="descricao">Descrição:</label>
                         <input id="descricao" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
-                            name="descricao" value="{{ $produto->nome }}">
+                            name="descricao" value="{{ $produto->descricao }}">
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">

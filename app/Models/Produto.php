@@ -16,10 +16,15 @@ class Produto extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nome', 'descricao', 'medida', 'quantidade', 'preco'];
+    protected $fillable = ['nome', 'descricao', 'quantidade', 'preco'];
 
     public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class);
+    }
+
+    public function unidadeMedida(): BelongsTo
+    {
+        return $this->belongsTo(UnidadeMedida::class);
     }
 }

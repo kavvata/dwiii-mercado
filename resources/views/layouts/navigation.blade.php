@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                         {{ __('Categorias') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.index')">
+                        {{ __('Unidades de Medida') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -87,8 +90,11 @@
             <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.index')">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('categorias.index')">
+            <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                 {{ __('Categorias') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.index')">
+                {{ __('Unidades de Medida') }}
             </x-responsive-nav-link>
         </div>
 

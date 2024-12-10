@@ -12,7 +12,9 @@ class UnidadeMedidaController extends Controller
      */
     public function index()
     {
-        //
+        $medidas = UnidadeMedida::all();
+
+        return view('unidade_medidas.index', compact('medidas'));
     }
 
     /**
@@ -20,23 +22,38 @@ class UnidadeMedidaController extends Controller
      */
     public function create()
     {
-        //
+        $medida = new UnidadeMedida;
+
+        return view('unidade_medidas.edit', compact('medida'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, UnidadeMedida $medida)
     {
-        //
+        $request->validate([
+            'sigla' => 'required|unique:unidade_medidas|max:16',
+            'descricao' => 'required|unique:unidade_medidas|max:255',
+        ]);
+
+        $medida->sigla = $request->sigla;
+        $medida->descricao = $request->descricao;
+
+        $medida->save();
+
+        return to_route('categorias.index')->with('resposta', [
+            'status' => 'sucesso',
+            'mensagem' => 'Categoria criada com sucesso!',
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UnidadeMedida $unidadeMedida)
+    public function show(UnidadeMedida $medida)
     {
-        //
+        return view('unidade_medidas.edit', compact('medida'));
     }
 
     /**
@@ -44,15 +61,28 @@ class UnidadeMedidaController extends Controller
      */
     public function edit(UnidadeMedida $unidadeMedida)
     {
-        //
+        return view('unidade_medidas.edit')->with('medida', $unidadeMedida);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UnidadeMedida $unidadeMedida)
+    public function update(Request $request, UnidadeMedida $medida)
     {
-        //
+        $request->validate([
+            'sigla' => 'required|unique:unidade_medidas|max:16',
+            'descricao' => 'required|unique:unidade_medidas|max:255',
+        ]);
+
+        $medida->sigla = $request->sigla;
+        $medida->descricao = $request->descricao;
+
+        $medida->save();
+
+        return to_route('categorias.index')->with('resposta', [
+            'status' => 'sucesso',
+            'mensagem' => 'Categoria criada com sucesso!',
+        ]);
     }
 
     /**
@@ -60,6 +90,16 @@ class UnidadeMedidaController extends Controller
      */
     public function destroy(UnidadeMedida $unidadeMedida)
     {
-        //
+        $countProdutos = $unidadeMedida->produtos()->count();
+        if ($countProdutos > 0) {
+            return back()->withErrors('Erro ao remover. Unidade de Medida possui ' . $countProdutos . ' produtos vinculados.');
+        }
+
+        $unidadeMedida->delete();
+
+        return to_route('unidade_medidas.index')->with('resposta', [
+            'status' => 'sucesso',
+            'mensagem' => 'Unidade de medida removida com sucesso!',
+        ]);
     }
 }

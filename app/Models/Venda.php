@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,18 +23,18 @@ class Venda extends Model
         return ['data_venda' => 'datetime'];
     }
 
-    public function produto(): HasOne
+    public function produto(): BelongsTo
     {
-        return $this->hasOne(Produto::class);
+        return $this->belongsTo(Produto::class);
     }
 
-    public function cliente(): HasOne
+    public function cliente(): BelongsTo
     {
-        return $this->hasOne(Cliente::class);
+        return $this->belongsTo(Cliente::class);
     }
 
-    public function user(): HasOne
+    public function user(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

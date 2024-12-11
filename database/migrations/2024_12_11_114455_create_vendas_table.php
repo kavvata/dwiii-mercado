@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->integer('quantidade');
             $table->float('preco');
-            $table->date('data_venda');
+            $table->dateTime('data_venda');
             $table->foreignIdFor(Produto::class);
             $table->foreignIdFor(Cliente::class);
             $table->foreignIdFor(User::class);

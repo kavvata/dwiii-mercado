@@ -6,6 +6,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UnidadeMedidaController;
+use App\Http\Controllers\VendaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->resource('/unidade_medidas', UnidadeMedidaController::class);
 Route::middleware(['auth'])->resource('/categorias', CategoriaController::class);
 Route::middleware(['auth'])->resource('/produtos', ProdutoController::class);
+Route::middleware(['auth'])->resource('/vendas', VendaController::class);
 
 Route::middleware(['auth'])->resource('/clientes', ClienteController::class);
 

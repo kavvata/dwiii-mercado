@@ -46,18 +46,18 @@
                             <td class="px-6 py-2 text-end dark:text-gray-400"> {{ $medida->sigla }} </td>
                             <td class="px-6 py-2"> {{ $medida->descricao }} </td>
 
-                            <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 md:flex-row">
+                            <td class="px-6 py-2">
+                                <div class="flex flex-col items-center justify-center gap-4 md:flex-row">
+                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
+                                        href="{{ route('unidade_medidas.edit', $medida) }}">Detalhes</a>
 
-                                <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
-                                    href="{{ route('unidade_medidas.edit', $medida) }}">Editar</a>
-
-                                <form method="POST" action="{{ route('unidade_medidas.destroy', $medida) }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="w-20 rounded-md bg-red-600 px-2 hover:bg-red-900"
-                                        type="">Remover</button>
-                                </form>
-
+                                    <form method="POST" action="{{ route('unidade_medidas.destroy', $medida) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="w-20 rounded-md bg-red-600 px-2 hover:bg-red-900"
+                                            type="">Remover</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

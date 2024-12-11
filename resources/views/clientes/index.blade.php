@@ -48,18 +48,18 @@
                                 {{ substr($cliente->cpf, 0, 3) . '.' . substr($cliente->cpf, 3, 3) . '.' . substr($cliente->cpf, 6, 3) . '-' . substr($cliente->cpf, 9) }}
                             </td>
                             <td class="px-6 py-2"> {{ $cliente->email }} </td>
-                            <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 lg:flex-row">
+                            <td class=" px-6 py-2">
+                                <div class="flex flex-col items-center justify-center gap-4 lg:flex-row">
+                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
+                                        href="{{ route('clientes.edit', $cliente) }}">Detalhes</a>
 
-                                <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
-                                    href="{{ route('clientes.edit', $cliente) }}">Editar</a>
-
-                                <form method="POST" action="{{ route('clientes.destroy', $cliente) }}">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button class="w-20 rounded-md bg-red-600 px-2 hover:bg-red-900"
-                                        type="">Remover</button>
-                                </form>
-
+                                    <form method="POST" action="{{ route('clientes.destroy', $cliente) }}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button class="w-20 rounded-md bg-red-600 px-2 hover:bg-red-900"
+                                            type="">Remover</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

@@ -47,7 +47,9 @@
                                 class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
                                 @foreach ($unidadeMedidas as $unidadeMedida)
                                     <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
-                                        value="{{ $unidadeMedida->id }}">{{ $unidadeMedida->descricao }}</option>
+                                        value="{{ $unidadeMedida->id }}">
+                                        {{ $unidadeMedida->descricao }} ({{ $unidadeMedida->sigla }})
+                                    </option>
                                 @endforeach
                             </select>
                             <a class="h-full rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800"

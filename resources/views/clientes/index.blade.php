@@ -38,15 +38,15 @@
                     <tr class="bg-gray-700">
                         <th class="px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">CPF</th>
-                        <th class="px-6 pb-2 text-start">Telefone</th>
                         <th class="px-6 pb-2 text-start">Email</th>
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
                     @foreach ($clientes as $cliente)
                         <tr class=" border-b last:border-b-0 border-slate-600 dark:hover:bg-gray-900">
                             <td class="px-6 py-2"> {{ $cliente->nome }} </td>
-                            <td class="px-6 py-2"> {{ $cliente->cpf }} </td>
-                            <td class="px-6 py-2"> {{ $cliente->telefone }} </td>
+                            <td class="px-6 py-2 text-wrap">
+                                {{ substr($cliente->cpf, 0, 3) . '.' . substr($cliente->cpf, 3, 3) . '.' . substr($cliente->cpf, 6, 3) . '-' . substr($cliente->cpf, 9) }}
+                            </td>
                             <td class="px-6 py-2"> {{ $cliente->email }} </td>
                             <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 lg:flex-row">
 

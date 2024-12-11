@@ -43,7 +43,7 @@
                     </tr>
                     @foreach ($medidas as $medida)
                         <tr class=" border-b last:border-b-0 border-slate-600 dark:hover:bg-gray-900">
-                            <td class="px-6 py-2 text-end"> {{ $medida->sigla }} </td>
+                            <td class="px-6 py-2 text-end dark:text-gray-400"> {{ $medida->sigla }} </td>
                             <td class="px-6 py-2"> {{ $medida->descricao }} </td>
 
                             <td class="flex flex-col items-center justify-center gap-4 px-6 py-2 md:flex-row">

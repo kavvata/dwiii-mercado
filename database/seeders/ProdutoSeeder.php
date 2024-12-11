@@ -14,85 +14,102 @@ class ProdutoSeeder extends Seeder
      */
     public function run(): void
     {
-        $un = UnidadeMedida::firstOrCreate(['sigla' => 'un.', 'descricao' => 'Unidade']);
+        $un = UnidadeMedida::factory()->create([
+            'sigla' => 'un.',
+            'descricao' => 'Unidade',
+        ]);
+        $kg = UnidadeMedida::factory()->create([
+            'sigla' => 'Kg.',
+            'descricao' => 'Kilogramas',
+        ]);
+
+        $l = UnidadeMedida::factory()->create([
+            'sigla' => 'L.',
+            'descricao' => 'Litros',
+        ]);
+
+        $ml = UnidadeMedida::factory()->create([
+            'sigla' => 'ml.',
+            'descricao' => 'Mililitros',
+        ]);
 
         $produtosLimpeza = [
-            'Água sanitária',
-            'Alvejante',
-            'Amaciante',
-            'Desinfetante',
-            'Detergente',
-            'Escovinhas',
-            'Esponja de aço',
-            'Luvas de borracha',
-            'Pano de chão',
-            'Pano de prato',
-            'Rodo',
-            'Sabão em barra',
-            'Sabão em pó',
-            'Vassoura',
+            'Água sanitária' => $l,
+            'Alvejante' => $l,
+            'Amaciante' => $l,
+            'Desinfetante' => $l,
+            'Detergente' => $l,
+            'Escovinhas' => $un,
+            'Esponja de aço' => $un,
+            'Luvas de borracha' => $un,
+            'Pano de chão' => $un,
+            'Pano de prato' => $un,
+            'Rodo' => $un,
+            'Sabão em barra' => $un,
+            'Sabão em pó' => $kg,
+            'Vassoura' => $un,
         ];
 
         $c = Categoria::factory()->create(['nome' => 'Limpeza']);
-        foreach ($produtosLimpeza as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
+        foreach ($produtosLimpeza as $produtoNome => $unidade) {
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $unidade->id]);
         }
 
         $produtosHigiene = [
-            'Absorvente',
-            'Algodão',
-            'Condicionador',
-            'Cotonete',
-            'Escova de dentes',
-            'Hidratantes',
-            'Lâmina de barbear',
-            'Papel higiênico',
-            'Pasta de dente',
-            'Sabonetes',
-            'Shampoo',
+            'Absorvente' => $un,
+            'Algodão' => $kg,
+            'Condicionador' => $un,
+            'Cotonete' => $un,
+            'Escova de dentes' => $un,
+            'Hidratantes' => $un,
+            'Lâmina de barbear' => $un,
+            'Papel higiênico' => $un,
+            'Pasta de dente' => $un,
+            'Sabonetes' => $un,
+            'Shampoo' => $un,
         ];
 
         $c = Categoria::factory()->create(['nome' => 'Higiene']);
-        foreach ($produtosHigiene as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
+        foreach ($produtosHigiene as $produtoNome => $unidade) {
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $unidade->id]);
         }
 
         $produtosFerramentas = [
-            'Pá',
+            'Pá' => $un,
         ];
 
         $c = Categoria::factory()->create(['nome' => 'Ferramentas']);
-        foreach ($produtosFerramentas as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
+        foreach ($produtosFerramentas as $produtoNome => $unidade) {
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $unidade->id]);
         }
 
         $produtosAlimenticios = [
-            'Arroz',
-            'Azeite',
-            'Bolacha',
-            'Café',
-            'Chá',
-            'Feijão',
-            'Leite',
-            'Macarrão',
-            'Maionese',
-            'Óleo',
-            'Apresuntado',
-            'Iogurte',
-            'Leite fermentado',
-            'Manteiga',
-            'Margarina',
-            'Mortadela',
-            'Peito de peru',
-            'Presunto',
-            'Queijo',
-            'Requeijão',
-            'Salame',
+            'Arroz' => $kg,
+            'Azeite' => $l,
+            'Bolacha' => $un,
+            'Café' => $kg,
+            'Chá' => $kg,
+            'Feijão' => $kg,
+            'Leite' => $l,
+            'Macarrão' => $un,
+            'Maionese' => $un,
+            'Óleo' => $l,
+            'Apresuntado' => $kg,
+            'Iogurte' => $un,
+            'Leite fermentado' => $l,
+            'Manteiga' => $kg,
+            'Margarina' => $kg,
+            'Mortadela' => $kg,
+            'Peito de peru' => $kg,
+            'Presunto' => $kg,
+            'Queijo' => $kg,
+            'Requeijão' => $un,
+            'Salame' => $kg,
         ];
 
         $c = Categoria::factory()->create(['nome' => 'Alimenticios']);
-        foreach ($produtosAlimenticios as $produtoNome) {
-            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $un->id]);
+        foreach ($produtosAlimenticios as $produtoNome => $unidade) {
+            $p = Produto::factory()->create(['nome' => $produtoNome, 'categoria_id' => $c->id, 'unidade_medida_id' => $unidade->id]);
         }
     }
 }

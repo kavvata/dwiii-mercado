@@ -16,6 +16,7 @@ return new class extends Migration {
         Schema::create('vendas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
             $table->integer('quantidade');
             $table->float('preco');
             $table->date('data_venda');

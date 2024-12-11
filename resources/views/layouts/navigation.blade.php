@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.index')">
                         {{ __('Unidades de Medida') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -95,6 +98,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.index')">
                 {{ __('Unidades de Medida') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.index')">
+                {{ __('Clientes') }}
             </x-responsive-nav-link>
         </div>
 

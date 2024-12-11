@@ -42,9 +42,9 @@ class UnidadeMedidaController extends Controller
 
         $medida->save();
 
-        return to_route('categorias.index')->with('resposta', [
+        return to_route('unidade_medidas.index')->with('resposta', [
             'status' => 'sucesso',
-            'mensagem' => 'Categoria criada com sucesso!',
+            'mensagem' => 'Unidade de Medida criada com sucesso!',
         ]);
     }
 

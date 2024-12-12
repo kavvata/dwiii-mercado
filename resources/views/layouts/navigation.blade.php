@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('vendas.index')" :active="request()->routeIs('vendas.*')">
                         {{ __('Vendas') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
+                        {{ __('Clientes') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.*')">
                         {{ __('Produtos') }}
                     </x-nav-link>
@@ -26,9 +29,6 @@
                     </x-nav-link>
                     <x-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.*')">
                         {{ __('Unidades de Medida') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
-                        {{ __('Clientes') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -96,6 +96,9 @@
             <x-responsive-nav-link :href="route('vendas.index')" :active="request()->routeIs('vendas.*')">
                 {{ __('Vendas') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
+                {{ __('Clientes') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('produtos.index')" :active="request()->routeIs('produtos.*')">
                 {{ __('Produtos') }}
             </x-responsive-nav-link>
@@ -104,9 +107,6 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.*')">
                 {{ __('Unidades de Medida') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('clientes.index')" :active="request()->routeIs('clientes.*')">
-                {{ __('Clientes') }}
             </x-responsive-nav-link>
         </div>
 

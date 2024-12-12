@@ -53,10 +53,17 @@
                         <p>R${{ number_format($venda->quantidade * $venda->preco, 2, ',') }}</p>
                     </div>
                 </div>
-                <div class="pt-4">
-                    <a class="mx-auto items-center rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
-                        href="{{ route('vendas.index') }}">Voltar</a>
+                <div class="flex pt-4 justify-between">
+                    <div>
+                        <a class="mx-auto items-center rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
+                            href="{{ route('vendas.index') }}">Voltar</a>
+                    </div>
 
+                    <div>
+                        <!-- TODO: implentar geração de ticket com QRcode -->
+                        <a class="mx-auto items-center rounded-md border border-gray-600 bg-slate-700 p-2 hover:bg-slate-800"
+                            href="">Gerar ticket</a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -3,7 +3,11 @@
 
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Novo Produto') }}
+            @if ($produto->id)
+                Editar {{ $produto->nome }}
+            @else
+                Novo Produto
+            @endif
         </h2>
     </x-slot>
 

@@ -9,7 +9,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-5xl pb-12 sm:px-6 lg:px-8">
             <div
-                class="flex flex-col gap-6 overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
+                class="flex flex-col overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <form method="POST" action="{{ route('vendas.store') }}">
                     <div class="grid grid-cols-2 items-center gap-2">
                         @csrf

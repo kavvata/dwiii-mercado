@@ -9,7 +9,7 @@
     <div class="py-12">
         <div class="mx-auto max-w-5xl pb-12 sm:px-6 lg:px-8">
             <div
-                class="flex flex-col gap-6 overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
+                class="flex flex-col overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <div class="align-center flex h-8 justify-between">
                     <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
                         placeholder="Procure um nome..." type="text">

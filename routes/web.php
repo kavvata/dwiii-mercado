@@ -23,9 +23,13 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware('auth')->group(function () {
+    Route::resource('/produtos', ProdutoController::class);
+    Route::get('produtos/categoria/{categoria}', [ProdutoController::class, 'filtrar'])->name('produtos.filtrar');
+});
+
 Route::middleware(['auth'])->resource('/unidade_medidas', UnidadeMedidaController::class);
 Route::middleware(['auth'])->resource('/categorias', CategoriaController::class);
-Route::middleware(['auth'])->resource('/produtos', ProdutoController::class);
 Route::middleware(['auth'])->resource('/vendas', VendaController::class);
 
 Route::middleware(['auth'])->resource('/clientes', ClienteController::class);

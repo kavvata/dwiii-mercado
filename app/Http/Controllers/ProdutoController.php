@@ -23,6 +23,19 @@ class ProdutoController extends Controller
         return view('produtos.index', compact('produtos'));
     }
 
+    public function filtrar(Categoria $categoria)
+    {
+        $produtos = Produto::with('categoria')
+            ->where('categoria_id', $categoria->id)
+            ->orderByDesc('preco')
+            ->get()
+            ->sortByDesc(function (Produto $produto) {
+                return $produto->preco * $produto->quantidade;
+            });
+
+        return view('produtos.index', compact('produtos'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -1,7 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Produtos') }}
+            @if (Request::route()->getName() == 'produtos.filtrar')
+                Produtos em {{ $produtos[0]->categoria->nome }}
+            @else
+                {{ __('Produtos') }}
+            @endif
         </h2>
     </x-slot>
     <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
@@ -48,7 +52,14 @@
                                 {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}
                             </td>
                             <td class="px-6 py-2"> {{ $produto->nome }} </td>
-                            <td class="px-6 py-2"> {{ $produto->categoria->nome }} </td>
+                            <td class="px-6 py-2">
+                                <div class="flex flex-col items-center justify-center gap-4 lg:flex-row">
+                                    <a class="hover:underline"
+                                        href="{{ route('produtos.filtrar', $produto->categoria) }}">
+                                        {{ $produto->categoria->nome }}
+                                    </a>
+                                </div>
+                            </td>
 
                             <td class="px-6 py-2 text-end">
                                 R${{ number_format($produto->preco, 2, ',') }}

@@ -49,6 +49,9 @@
                                     <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
                                         href="{{ route('categorias.edit', $categoria) }}">Detalhes</a>
 
+                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
+                                        href="{{ route('produtos.filtrar', $categoria) }}">Produtos</a>
+
                                     <form method="POST" action="{{ route('categorias.destroy', $categoria) }}">
                                         @method('DELETE')
                                         @csrf

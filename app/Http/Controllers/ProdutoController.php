@@ -20,7 +20,9 @@ class ProdutoController extends Controller
             return $produto->preco * $produto->quantidade;
         });
 
-        return view('produtos.index', compact('produtos'));
+        $categorias = Categoria::all();
+
+        return view('produtos.index', compact('produtos', 'categorias'));
     }
 
     public function filtrar(Categoria $categoria)
@@ -33,7 +35,9 @@ class ProdutoController extends Controller
                 return $produto->preco * $produto->quantidade;
             });
 
-        return view('produtos.index', compact('produtos'));
+        $categorias = Categoria::all();
+
+        return view('produtos.index', compact('produtos', 'categorias'));
     }
 
     /**

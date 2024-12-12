@@ -8,19 +8,50 @@
             @endif
         </h2>
     </x-slot>
+
     <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
 
     <div class="py-12">
         <div class="mx-auto max-w-5xl pb-12 sm:px-6 lg:px-8">
             <div
-                class="flex flex-col gap-6 overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
-                <div class="align-center flex h-8 justify-between">
-                    <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
-                        placeholder="Procure um nome..." type="text">
-                    <a class="flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
-                        href="{{ route('produtos.create') }}">
-                        Novo Produto
-                    </a>
+                class="flex flex-col overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
+                <div class="align-center flex justify-between">
+                    <div class="flex gap-2">
+
+                        <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
+                            placeholder="Procure um nome..." type="text">
+
+                        <select x-data="{}" @change="window.location = $event.target.value"
+                            class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+
+                            @if (Request::route()->getName() == 'produtos.filtrar')
+
+                                <option value="{{ route('produtos.index') }}">Todos</option>
+
+                                @foreach ($categorias as $categoria)
+                                    <option @if ($categoria == $produtos[0]->categoria) selected="selected" @endif
+                                        value="{{ route('produtos.filtrar', $categoria) }}">
+                                        {{ $categoria->nome }}
+                                    </option>
+                                @endforeach
+                            @else
+                                <option selected="selected" value="{{ route('produtos.index') }}">Todos</option>
+
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{ route('produtos.filtrar', $categoria) }}">
+                                        {{ $categoria->nome }}
+                                    </option>
+                                @endforeach
+                            @endif
+
+                        </select>
+                    </div>
+                    <div>
+                        <a class="flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
+                            href="{{ route('produtos.create') }}">
+                            Novo Produto
+                        </a>
+                    </div>
                 </div>
                 <div class="justify-center">
                     @if ($errors->any())

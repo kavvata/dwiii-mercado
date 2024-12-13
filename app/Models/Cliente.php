@@ -16,4 +16,9 @@ class Cliente extends Model
     use SoftDeletes;
 
     protected $fillable = ['nome', 'cpf', 'telefone', 'email'];
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class);
+    }
 }

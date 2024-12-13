@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cliente;
+use App\Models\Endereco;
 use Illuminate\Http\Request;
 
 class ClienteController extends Controller
@@ -23,6 +24,8 @@ class ClienteController extends Controller
     public function create()
     {
         $cliente = new Cliente;
+
+        $cliente->endereco = new Endereco;
 
         return view('clientes.edit', compact('cliente'));
     }

@@ -33,21 +33,64 @@
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label class="flex items-center" for="descricao">CPF:</label>
+                        <label class="flex items-center" for="cpf">CPF:</label>
                         <input id="cpf" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
                             name="cpf" value="{{ $cliente->cpf }}">
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label class="flex items-center" for="nome">Telefone:</label>
+                        <label class="flex items-center" for="telefone">Telefone:</label>
                         <input id="telefone" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
                             name="telefone" value="{{ $cliente->telefone }}">
                     </div>
                     <div
                         class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
-                        <label class="flex items-center" for="nome">E-mail:</label>
+                        <label class="flex items-center" for="email">E-mail:</label>
                         <input id="email" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
                             name="email" value="{{ $cliente->email }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="cep">CEP:</label>
+                        <div class="inline-flex h-full w-64 gap-2">
+                            <input id="cep" class="w-3/4 rounded-lg dark:bg-gray-900" type="text"
+                                name="cep" value="{{ $cliente->endereco->cep }}">
+
+                            <button id="buscarCep"
+                                class="mx-auto rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800">
+                                Buscar
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="uf">UF:</label>
+                        <input id="uf" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="uf" value="{{ $cliente->endereco->uf }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="cidade">Cidade:</label>
+                        <input id="cidade" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="cidade" value="{{ $cliente->endereco->cidade }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="bairro">Bairro:</label>
+                        <input id="bairro" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="bairro" value="{{ $cliente->endereco->bairro }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="rua">Rua:</label>
+                        <input id="rua" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="rua" value="{{ $cliente->endereco->rua }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="numero">Número:</label>
+                        <input id="numero" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
+                            name="numero" value="{{ $cliente->endereco->numero }}">
                     </div>
                 </div>
                 <div class="justify-center">

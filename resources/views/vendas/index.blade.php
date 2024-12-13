@@ -58,7 +58,7 @@
                 </form>
                 <div class="justify-center">
                     @if ($errors->any())
-                        <div class="py-6 alert alert-danger font-bold text-red-600">
+                        <div class="alert alert-danger py-6 font-bold text-red-600">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li class="text-center">{{ $error }}</li>
@@ -82,8 +82,8 @@
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
                     @foreach ($vendas as $venda)
-                        <tr class=" border-b last:border-b-0 border-slate-600 dark:hover:bg-gray-900">
-                            <td class="text-start px-6 py-2 dark:text-gray-400"> {{ $venda->data_venda }} </td>
+                        <tr class=" border-b border-slate-600 last:border-b-0 dark:hover:bg-gray-900">
+                            <td class="px-6 py-2 text-start dark:text-gray-400"> {{ $venda->data_venda }} </td>
                             <td class="px-6 py-2"> {{ $venda->cliente->nome }} </td>
                             <td class="px-6 py-2"> {{ $venda->produto->nome }} </td>
                             <td class="px-6 py-2 text-end"> {{ $venda->quantidade }} </td>
@@ -93,7 +93,7 @@
 
                             <td class="px-6 py-2">
                                 <div class="flex flex-col items-center justify-center lg:flex-row">
-                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg"
+                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center shadow-sm dark:shadow-lg hover:bg-slate-800 hover:text-gray-200 dark:bg-slate-800 dark:hover:bg-slate-900"
                                         href="{{ route('vendas.show', $venda) }}">Detalhes</a>
                                 </div>
                             </td>

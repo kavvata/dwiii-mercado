@@ -47,7 +47,7 @@
                         </select>
                     </div>
                     <div>
-                        <a class="flex items-center justify-items-center rounded-md border text-gray-200 bg-slate-600 hover:bg-slate-800 border-gray-600 dark:bg-slate-600 p-2 dark:hover:bg-slate-700"
+                        <a class="flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-gray-200 hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                             href="{{ route('produtos.create') }}">
                             Novo Produto
                         </a>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="justify-center">
                     @if ($errors->any())
-                        <div class="py-6 alert alert-danger font-bold text-red-600">
+                        <div class="alert alert-danger py-6 font-bold text-red-600">
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li class="text-center">{{ $error }}</li>
@@ -79,8 +79,8 @@
                     </tr>
                     @foreach ($produtos as $produto)
                         <tr
-                            class=" border-b last:border-b-0 dark:border-slate-600 hover:bg-gray-300 dark:hover:bg-gray-900">
-                            <td class="text-end px-6 py-2 text-gray-500 dark:text-gray-400">
+                            class="border-b last:border-b-0 hover:bg-gray-300 dark:border-slate-600 dark:hover:bg-gray-900">
+                            <td class="px-6 py-2 text-end text-gray-500 dark:text-gray-400">
                                 {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}
                             </td>
                             <td class="px-6 py-2"> {{ $produto->nome }} </td>
@@ -99,13 +99,13 @@
 
                             <td class="px-6 py-2">
                                 <div class="flex flex-col items-center justify-center gap-4 lg:flex-row">
-                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center hover:bg-slate-800 shadow-lg hover:text-gray-200"
+                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center shadow-lg hover:bg-slate-800 hover:text-gray-200 dark:bg-slate-800 dark:hover:bg-slate-900"
                                         href="{{ route('produtos.edit', $produto) }}">Detalhes</a>
 
                                     <form method="POST" action="{{ route('produtos.destroy', $produto) }}">
                                         @method('DELETE')
                                         @csrf
-                                        <button class="w-20 rounded-md bg-red-600 px-2 hover:bg-red-900 text-white"
+                                        <button class="w-20 rounded-md bg-red-600 px-2 text-white hover:bg-red-900"
                                             type="">Remover</button>
                                     </form>
                                 </div>

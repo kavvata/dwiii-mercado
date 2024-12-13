@@ -73,7 +73,7 @@
             <div
                 class="overflow-hidden bg-white text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <table id="table-produto" class="w-full table-fixed overflow-hidden">
-                    <tr class="bg-gray-700">
+                    <tr class="bg-gray-200 dark:bg-gray-700">
                         <th class="px-6 pb-2 text-start">Data</th>
                         <th class="px-6 pb-2 text-start">Cliente</th>
                         <th class="px-6 pb-2 text-start">Produto</th>

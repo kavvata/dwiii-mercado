@@ -55,13 +55,13 @@
                 </div>
                 <div class="flex pt-4 justify-between">
                     <div>
-                        <a class="mx-auto items-center rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
+                        <a class="mx-auto items-center rounded-md border text-white dark:text-gray-200 border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
                             href="{{ route('vendas.index') }}">Voltar</a>
                     </div>
 
                     <div>
                         <!-- TODO: implentar geração de ticket com QRcode -->
-                        <a class="mx-auto items-center rounded-md border border-gray-600 bg-slate-700 p-2 hover:bg-slate-800"
+                        <a class="mx-auto items-center rounded-md border text-white dark:text-gray-200 border-gray-600 bg-slate-700 p-2 hover:bg-slate-800"
                             href="">Gerar ticket</a>
                     </div>
                 </div>

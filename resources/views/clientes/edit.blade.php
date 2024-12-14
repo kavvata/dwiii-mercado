@@ -57,7 +57,7 @@
                                 name="cep" value="{{ $cliente->endereco->cep }}">
 
                             <button id="buscarCep"
-                                class="mx-auto rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800">
+                                class="mx-auto rounded-lg border text-white bg-sky-500 border-gray-400 dark:text-gray-200 dark:border-gray-600 dark:bg-sky-600 p-2 dark:hover:bg-sky-800">
                                 Buscar
                             </button>
                         </div>
@@ -103,11 +103,11 @@
                             </ul>
                         </div>
                     @endif
-                    <a class="h-10 rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
+                    <a class="items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                         href="{{ route('clientes.index') }}">Voltar</a>
 
                     <button type="submit"
-                        class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-gray-200">Salvar</button>
+                        class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-white dark:text-gray-200">Salvar</button>
                 </div>
             </form>
         </div>

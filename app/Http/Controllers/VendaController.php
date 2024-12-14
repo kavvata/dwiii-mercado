@@ -11,6 +11,8 @@ use Auth;
 
 class VendaController extends Controller
 {
+    // TODO: rota para filtro por dataInicio dataFim
+
     /**
      * Display a listing of the resource.
      */

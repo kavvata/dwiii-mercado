@@ -56,7 +56,7 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <a class="h-full rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800"
+                            <a class="mx-auto rounded-lg border text-white bg-sky-500 border-gray-400 dark:text-gray-200 dark:border-gray-600 dark:bg-sky-600 p-2 dark:hover:bg-sky-800"
                                 href="{{ route('unidade_medidas.create') }}">Nova</a>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                         value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                                 @endforeach
                             </select>
-                            <a class="h-full rounded-md border border-gray-600 bg-sky-600 p-2 hover:bg-sky-800"
+                            <a class="mx-auto rounded-lg border text-white bg-sky-500 border-gray-400 dark:text-gray-200 dark:border-gray-600 dark:bg-sky-600 p-2 dark:hover:bg-sky-800"
                                 href="{{ route('categorias.create') }}">Nova</a>
                         </div>
                     </div>
@@ -92,13 +92,17 @@
                             </ul>
                         </div>
                     @endif
-                    <a class="h-10 rounded-md border border-gray-600 bg-slate-600 p-2 hover:bg-slate-700"
+                    <a class="items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                         href="{{ route('produtos.index') }}">Voltar</a>
 
                     <button type="submit"
-                        class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-gray-200">Salvar</button>
+                        class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-white dark:text-gray-200">Salvar</button>
                 </div>
             </form>
+
+            <div class="mt-10">
+                <!-- TODO: tabela com historico de venda -->
+            </div>
         </div>
     </div>
     <script src="{{ asset('js/produtos/create.js') }}"></script>

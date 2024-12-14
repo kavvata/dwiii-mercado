@@ -48,11 +48,11 @@
                             </ul>
                         </div>
                     @endif
-                    <a class="h-10 p-2 border border-gray-600 bg-slate-600 hover:bg-slate-700 rounded-md"
+                    <a class="items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                         href="{{ route('unidade_medidas.index') }}">Voltar</a>
 
                     <button type="submit"
-                        class="p-2 border-gray-200 bg-green-600 px-2 text-gray-200 rounded-lg h-10">Salvar</button>
+                        class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-white dark:text-gray-200">Salvar</button>
                 </div>
             </form>
         </div>

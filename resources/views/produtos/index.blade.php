@@ -16,7 +16,7 @@
             <div
                 class="flex flex-col overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <div class="align-center flex justify-between">
-                    <div class="flex gap-2">
+                    <div class="h-10 flex gap-2">
 
                         <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
                             placeholder="Procure um nome..." type="text">
@@ -47,7 +47,7 @@
                         </select>
                     </div>
                     <div>
-                        <a class="flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-gray-200 hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
+                        <a class="h-10 flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                             href="{{ route('produtos.create') }}">
                             Novo Produto
                         </a>

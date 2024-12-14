@@ -51,22 +51,20 @@
                     </div>
                     <div>
                         <button type="submit"
-                            class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-gray-200">Realizar
-                            Venda
+                            class="h-10 rounded-lg border-gray-200 bg-green-600 p-2 px-2 text-white dark:text-gray-200">
+                            Realizar Venda
                         </button>
                     </div>
                 </form>
-                <div class="justify-center">
-                    @if ($errors->any())
-                        <div class="alert alert-danger py-6 font-bold text-red-600">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li class="text-center">{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                </div>
+                @if ($errors->any())
+                    <div class="justify-center alert alert-danger py-6 font-bold text-red-600">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li class="text-center">{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
         </div>
         <div class="mx-auto max-w-5xl sm:px-6 lg:px-8">
@@ -83,7 +81,8 @@
                     </tr>
                     @foreach ($vendas as $venda)
                         <tr class=" border-b border-slate-600 last:border-b-0 dark:hover:bg-gray-900">
-                            <td class="px-6 py-2 text-start dark:text-gray-400"> {{ $venda->data_venda }} </td>
+                            <td class="px-6 py-2 text-start text-gray-500 dark:text-gray-400"> {{ $venda->data_venda }}
+                            </td>
                             <td class="px-6 py-2"> {{ $venda->cliente->nome }} </td>
                             <td class="px-6 py-2"> {{ $venda->produto->nome }} </td>
                             <td class="px-6 py-2 text-end"> {{ $venda->quantidade }} </td>

@@ -75,17 +75,18 @@
                         <th class="px-6 pb-2 text-start">Data</th>
                         <th class="px-6 pb-2 text-start">Cliente</th>
                         <th class="px-6 pb-2 text-start">Produto</th>
-                        <th class="w-28 px-6 pb-2 text-end">Qntd.</th>
+                        <th class="w-28 px-6 pb-2 text-start">Qntd.</th>
                         <th class="w-28 px-6 pb-2 text-end">Total.</th>
                         <th class="px-6 pb-2">Ações</th>
                     </tr>
                     @foreach ($vendas as $venda)
-                        <tr class=" border-b border-slate-600 last:border-b-0 dark:hover:bg-gray-900">
+                        <tr
+                            class="border-b last:border-b-0 hover:bg-gray-300 dark:border-slate-600 dark:hover:bg-gray-900">
                             <td class="px-6 py-2 text-start text-gray-500 dark:text-gray-400"> {{ $venda->data_venda }}
                             </td>
                             <td class="px-6 py-2"> {{ $venda->cliente->nome }} </td>
                             <td class="px-6 py-2"> {{ $venda->produto->nome }} </td>
-                            <td class="px-6 py-2 text-end"> {{ $venda->quantidade }} </td>
+                            <td class="px-6 py-2 text-start"> {{ $venda->quantidade }} </td>
                             <td class="px-6 py-2 text-end">
                                 R${{ number_format($venda->preco * $venda->quantidade, 2, ',') }}
                             </td>
@@ -103,5 +104,4 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/produtos/index.js') }}"></script>
 </x-app-layout>

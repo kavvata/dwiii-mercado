@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Endereco;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,15 +10,17 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('enderecos', function (Blueprint $table) {
             $table->id();
-            $table->softDeletes();
             $table->timestamps();
-            $table->string('nome');
-            $table->string('cpf');
-            $table->string('telefone');
-            $table->string('email');
-            $table->foreignIdFor(Endereco::class)->nullable(true);
+            $table->softDeletes();
+            $table->string('cep');
+            $table->string('cidade');
+            $table->string('rua');
+            $table->string('numero');
+            $table->string('bairro');
+            $table->string('uf');
+            $table->string('complemento')->default('');
         });
     }
 
@@ -28,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('clientes');
+        Schema::dropIfExists('enderecos');
     }
 };

@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('numero');
             $table->string('bairro');
             $table->string('uf');
-            $table->string('complemento');
+            $table->string('complemento')->default('');
         });
     }
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Endereco;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ return new class extends Migration {
             $table->string('cpf');
             $table->string('telefone');
             $table->string('email');
+            $table->foreignIdFor(Endereco::class)->nullable(true);
         });
     }
 

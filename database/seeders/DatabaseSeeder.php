@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Cliente;
+use App\Models\Endereco;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,7 +22,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Cliente::factory()->count(20)->create();
+        Cliente::factory()->count(20)->create()->each(function (Cliente $cliente) {
+            $endereco = Endereco::factory()->create();
+            $cliente->endereco()->associate($endereco);
+            $cliente->save();
+        });
 
         $this->call(ProdutoSeeder::class);
     }

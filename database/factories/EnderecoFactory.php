@@ -17,7 +17,13 @@ class EnderecoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'cep' => fake('pt_BR')->postcode(),
+            'uf' => 'PR',
+            'cidade' => fake('pt_BR')->city(),
+            'bairro' => fake('pt_BR')->city(),
+            'rua' => fake('pt_BR')->streetName(),
+            'numero' => fake('pt_BR')->buildingNumber(),
+            'complemento' => fake('pt_BR')->paragraph(),
         ];
     }
 }

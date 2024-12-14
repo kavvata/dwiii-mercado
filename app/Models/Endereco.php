@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @mixin IdeHelperEndereco
+ */
 class Endereco extends Model
 {
     /** @use HasFactory<\Database\Factories\EnderecoFactory> */

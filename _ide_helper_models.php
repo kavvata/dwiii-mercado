@@ -54,6 +54,8 @@ namespace App\Models
      * @property string $cpf
      * @property string $telefone
      * @property string $email
+     * @property int|null $endereco_id
+     * @property-read \App\Models\Endereco|null $endereco
      *
      * @method static \Database\Factories\ClienteFactory factory($count = null, $state = [])
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente newModelQuery()
@@ -64,6 +66,7 @@ namespace App\Models
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereDeletedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereEmail($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereEnderecoId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereNome($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Cliente whereTelefone($value)
@@ -75,6 +78,48 @@ namespace App\Models
      */
     #[\AllowDynamicProperties]
     class IdeHelperCliente {}
+}
+
+namespace App\Models
+{
+    /**
+     * @property int $id
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $deleted_at
+     * @property string $cep
+     * @property string $cidade
+     * @property string $rua
+     * @property string $numero
+     * @property string $bairro
+     * @property string $uf
+     * @property string $complemento
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Cliente> $clientes
+     * @property-read int|null $clientes_count
+     *
+     * @method static \Database\Factories\EnderecoFactory factory($count = null, $state = [])
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco newModelQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco newQuery()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco onlyTrashed()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco query()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereBairro($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereCep($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereCidade($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereComplemento($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereDeletedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereNumero($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereRua($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereUf($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco whereUpdatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco withTrashed()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Endereco withoutTrashed()
+     *
+     * @mixin \Eloquent
+     */
+    #[\AllowDynamicProperties]
+    class IdeHelperEndereco {}
 }
 
 namespace App\Models
@@ -216,18 +261,34 @@ namespace App\Models
 namespace App\Models
 {
     /**
+     * @property int $id
+     * @property \Illuminate\Support\Carbon|null $created_at
+     * @property \Illuminate\Support\Carbon|null $updated_at
+     * @property \Illuminate\Support\Carbon|null $deleted_at
      * @property int $quantidade
      * @property float $preco
-     * @property \Illuminate\Support\Carbon|null $data_venda
+     * @property \Illuminate\Support\Carbon $data_venda
+     * @property int $produto_id
+     * @property int $cliente_id
+     * @property int $user_id
      * @property-read \App\Models\Cliente|null $cliente
      * @property-read \App\Models\Produto|null $produto
      * @property-read \App\Models\User|null $user
      *
-     * @method static \Database\Factories\VendaFactory factory($count = null, $state = [])
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda onlyTrashed()
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda query()
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereClienteId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereDataVenda($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereDeletedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda wherePreco($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereProdutoId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereQuantidade($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereUpdatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda whereUserId($value)
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda withTrashed()
      * @method static \Illuminate\Database\Eloquent\Builder<static>|Venda withoutTrashed()
      *

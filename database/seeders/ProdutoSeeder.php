@@ -15,21 +15,25 @@ class ProdutoSeeder extends Seeder
     public function run(): void
     {
         $un = UnidadeMedida::factory()->create([
-            'sigla' => 'un.',
+            'sigla' => 'un',
             'descricao' => 'Unidade',
         ]);
         $kg = UnidadeMedida::factory()->create([
-            'sigla' => 'Kg.',
+            'sigla' => 'Kg',
             'descricao' => 'Kilogramas',
+        ]);
+        $mg = UnidadeMedida::factory()->create([
+            'sigla' => 'mg',
+            'descricao' => 'Miligramas',
         ]);
 
         $l = UnidadeMedida::factory()->create([
-            'sigla' => 'L.',
+            'sigla' => 'L',
             'descricao' => 'Litros',
         ]);
 
         $ml = UnidadeMedida::factory()->create([
-            'sigla' => 'ml.',
+            'sigla' => 'ml',
             'descricao' => 'Mililitros',
         ]);
 

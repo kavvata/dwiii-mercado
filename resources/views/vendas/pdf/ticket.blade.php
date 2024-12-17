@@ -35,14 +35,14 @@
                 <p>{{ $venda->produto->nome }}</p>
             </div>
             <div class="grid-item">
+                <label class="" for="nome">Quantidade:</label>
+                <p>{{ $venda->quantidade }} {{ $venda->produto->unidadeMedida->sigla }}</p>
+            </div>
+            <div class="grid-item">
                 <label class="" for="nome">
                     Preço por {{ $venda->produto->unidadeMedida->sigla }}:
                 </label>
                 <p>R${{ number_format($venda->preco, 2, ',') }}</p>
-            </div>
-            <div class="grid-item ">
-                <label class="" for="nome">Quantidade:</label>
-                <p>{{ $venda->quantidade }} {{ $venda->produto->unidadeMedida->sigla }}</p>
             </div>
             <hr>
             <div class="grid-item total">

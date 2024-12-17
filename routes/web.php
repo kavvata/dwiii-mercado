@@ -30,7 +30,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth'])->resource('/unidade_medidas', UnidadeMedidaController::class);
 Route::middleware(['auth'])->resource('/categorias', CategoriaController::class);
-Route::middleware(['auth'])->resource('/vendas', VendaController::class);
+
+Route::middleware('auth')->group(function () {
+    Route::middleware(['auth'])->resource('/vendas', VendaController::class);
+    Route::get('vendas/ticket/{venda}', [VendaController::class, 'ticket'])->name('vendas.ticket');
+});
 
 Route::middleware(['auth'])->resource('/clientes', ClienteController::class);
 

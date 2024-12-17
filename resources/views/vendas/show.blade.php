@@ -60,13 +60,12 @@
                     </div>
 
                     <div>
-                        <!-- TODO: implentar geração de ticket com QRcode -->
                         <a class="mx-auto items-center rounded-md border text-white dark:text-gray-200 border-gray-600 bg-slate-700 p-2 hover:bg-slate-800"
-                            href="">Gerar ticket</a>
+                            href="{{ route('vendas.ticket', $venda) }}">Gerar ticket</a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
-    <script src="{{ asset('js/produtos/create.js') }}"></script>
 </x-app-layout>

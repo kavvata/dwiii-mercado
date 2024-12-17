@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cliente;
 use App\Models\Produto;
 use App\Models\Venda;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Auth;
@@ -77,6 +78,16 @@ class VendaController extends Controller
     public function show(Venda $venda)
     {
         return view('vendas.show', compact('venda'));
+    }
+
+    public function ticket(Venda $venda)
+    {
+        $pdf = Pdf::loadView('vendas.pdf.ticket', compact('venda'));
+
+        $pdf->setPaper('A7', 'portrait');
+
+        return $pdf->stream($venda->data_venda . '_' . $venda->cliente->nome . '_' . $venda->produto->nome . '.pdf');
+        // return $pdf->download($venda->data_venda . '_' . $venda->cliente->nome . '_' . $venda->produto->nome . '.pdf');
     }
 
     /**

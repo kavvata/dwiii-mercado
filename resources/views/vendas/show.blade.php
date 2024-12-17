@@ -22,7 +22,8 @@
                     <div
                         class="flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
                         <label class="flex items-center" for="nome">Produto:</label>
-                        <p>{{ $venda->produto->nome }}</p>
+                        <a class="hover:underline"
+                            href="{{ route('produtos.edit', $venda->produto) }}">{{ $venda->produto->nome }}</a>
                     </div>
                     <div
                         class="flex h-14 items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">

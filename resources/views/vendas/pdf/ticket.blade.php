@@ -53,7 +53,7 @@
         </div>
 
         <div class="qrcode-container">
-            <img src="{{ (new chillerlan\QRCode\QRCode())->render(Request::url()) }}" alt="">
+            <img src="{{ (new chillerlan\QRCode\QRCode())->render(route('vendas.show', $venda)) }}" alt="">
         </div>
 
     </div>

@@ -60,8 +60,7 @@ class ProdutoSeeder extends Seeder
         }
 
         $produtosHigiene = [
-            'Absorvente' => $un,
-            'Algodão' => $kg,
+            'Algodão' => $un,
             'Condicionador' => $un,
             'Cotonete' => $un,
             'Escova de dentes' => $un,
@@ -100,15 +99,15 @@ class ProdutoSeeder extends Seeder
             'Óleo' => $l,
             'Apresuntado' => $kg,
             'Iogurte' => $un,
-            'Leite fermentado' => $l,
-            'Manteiga' => $kg,
-            'Margarina' => $kg,
-            'Mortadela' => $kg,
-            'Peito de peru' => $kg,
-            'Presunto' => $kg,
-            'Queijo' => $kg,
+            'Leite fermentado' => $ml,
+            'Manteiga' => $mg,
+            'Margarina' => $mg,
+            'Mortadela' => $mg,
+            'Peito de peru' => $mg,
+            'Presunto' => $mg,
+            'Queijo' => $mg,
             'Requeijão' => $un,
-            'Salame' => $kg,
+            'Salame' => $mg,
         ];
 
         $c = Categoria::factory()->create(['nome' => 'Alimenticios']);

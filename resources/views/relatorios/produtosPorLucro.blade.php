@@ -15,7 +15,7 @@
                     <div>
                         <a class="h-10 flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
                             href="{{ route('relatorios.pdf.produtosPorLucro') }}">
-                            Gerar PDF
+                            Exportar em PDF
                         </a>
                     </div>
                 </div>

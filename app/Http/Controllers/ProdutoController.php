@@ -25,7 +25,7 @@ class ProdutoController extends Controller
         return view('produtos.index', compact('produtos', 'categorias'));
     }
 
-    public function filtrar(Categoria $categoria)
+    public function filtrar(Categoria $categoria): View
     {
         $produtos = Produto::with('categoria')
             ->where('categoria_id', $categoria->id)

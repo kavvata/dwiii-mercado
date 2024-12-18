@@ -6,7 +6,10 @@ use App\Models\Cliente;
 use App\Models\Produto;
 use App\Models\Venda;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Auth;
 
@@ -17,7 +20,7 @@ class VendaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $vendas = Venda::orderByDesc('data_venda')->get();
         $produtos = Produto::orderBy('nome')->get();
@@ -29,7 +32,7 @@ class VendaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): void
     {
         //
     }
@@ -37,7 +40,7 @@ class VendaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'quantidade' => 'required',
@@ -75,12 +78,12 @@ class VendaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Venda $venda)
+    public function show(Venda $venda): View
     {
         return view('vendas.show', compact('venda'));
     }
 
-    public function ticket(Venda $venda)
+    public function ticket(Venda $venda): Response
     {
         $pdf = Pdf::loadView('vendas.pdf.ticket', compact('venda'));
 
@@ -90,10 +93,22 @@ class VendaController extends Controller
         // return $pdf->download($venda->data_venda . '_' . $venda->cliente->nome . '_' . $venda->produto->nome . '.pdf');
     }
 
+    public function relatorioPorLucro()
+    {
+        $produtos = Venda::query()
+            ->join('produtos', 'vendas.produto_id', '=', 'produtos.id')
+            ->orderByRaw('SUM(vendas.preco * vendas.quantidade) DESC')
+            ->selectRaw('produtos.nome as produto, SUM(vendas.preco * vendas.quantidade) as lucro_total')
+            ->groupBy('produtos.id')
+            ->get();
+
+        dd($produtos);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Venda $venda)
+    public function edit(Venda $venda): void
     {
         //
     }
@@ -101,7 +116,7 @@ class VendaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Venda $venda)
+    public function update(Request $request, Venda $venda): void
     {
         //
     }
@@ -109,7 +124,7 @@ class VendaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Venda $venda)
+    public function destroy(Venda $venda): void
     {
         //
     }

@@ -93,18 +93,6 @@ class VendaController extends Controller
         // return $pdf->download($venda->data_venda . '_' . $venda->cliente->nome . '_' . $venda->produto->nome . '.pdf');
     }
 
-    public function relatorioPorLucro()
-    {
-        $produtos = Venda::query()
-            ->join('produtos', 'vendas.produto_id', '=', 'produtos.id')
-            ->orderByRaw('SUM(vendas.preco * vendas.quantidade) DESC')
-            ->selectRaw('produtos.nome as produto, SUM(vendas.preco * vendas.quantidade) as lucro_total')
-            ->groupBy('produtos.id')
-            ->get();
-
-        dd($produtos);
-    }
-
     /**
      * Show the form for editing the specified resource.
      */

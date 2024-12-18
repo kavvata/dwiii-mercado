@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venda;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
 class RelatorioController extends Controller
@@ -22,7 +23,7 @@ class RelatorioController extends Controller
             ->get();
     }
 
-    public function produtosPorLucro()
+    public function produtosPorLucro(): View
     {
         $produtos = $this->getProdutosPorLucro();
 

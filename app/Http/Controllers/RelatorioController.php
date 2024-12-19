@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Venda;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
@@ -34,6 +35,13 @@ class RelatorioController extends Controller
     {
         $produtos = $this->getProdutosPorLucro();
 
-        dd($produtos);
+        $total = 0;
+        foreach ($produtos as $produto) {
+            $total += $produto->lucro_total;
+        }
+
+        $pdf = Pdf::loadView('relatorios.pdf.produtosPorLucro', compact('produtos', 'total'));
+
+        return $pdf->stream();
     }
 }

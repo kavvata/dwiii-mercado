@@ -16,7 +16,7 @@ class Produto extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['nome', 'descricao', 'quantidade', 'preco'];
+    protected $fillable = ['nome', 'descricao', 'quantidade', 'preco', 'imagem_src'];
 
     public function categoria(): BelongsTo
     {
@@ -26,5 +26,10 @@ class Produto extends Model
     public function unidadeMedida(): BelongsTo
     {
         return $this->belongsTo(UnidadeMedida::class);
+    }
+
+    public function imagem(): string
+    {
+        return asset($this->imagem_src);
     }
 }

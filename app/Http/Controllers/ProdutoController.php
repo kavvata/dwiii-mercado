@@ -8,6 +8,7 @@ use App\Models\UnidadeMedida;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Storage;
 
 class ProdutoController extends Controller
 {
@@ -65,9 +66,9 @@ class ProdutoController extends Controller
             'preco' => 'required',
             'categoria_id' => 'required',
             'unidade_medida_id' => 'required',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        /* TODO: formatar antes de enviar para a controller */
         $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
@@ -83,6 +84,17 @@ class ProdutoController extends Controller
 
         $unidadeMedida = Categoria::findOrFail($request->unidade_medida_id);
         $produto->unidadeMedida()->associate($unidadeMedida);
+
+        $imagem = $request->file('imagem');
+        $imageName = time() . '.' . $imagem->extension();
+
+        Storage::disk('produto-imagens')->putFileAs(
+            '',
+            $imagem,
+            name: $imageName
+        );
+
+        $produto->imagem_src = 'storage/images' . $imageName;
 
         $produto->save();
 
@@ -125,9 +137,18 @@ class ProdutoController extends Controller
             'preco' => 'required',
             'categoria_id' => 'required',
             'unidade_medida_id' => 'required',
+            'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        /* TODO: formatar antes de enviar para a controller */
+        $imagem = $request->file('imagem');
+        $imageName = time() . '.' . $imagem->extension();
+
+        Storage::disk('produto-imagens')->putFileAs(
+            '',
+            $imagem,
+            name: $imageName
+        );
+
         $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
@@ -138,6 +159,7 @@ class ProdutoController extends Controller
             'medida' => $request->medida,
             'quantidade' => $request->quantidade,
             'preco' => $preco,
+            'imagem_src' => Storage::disk('produto-imagens')->url($imageName),
         ]);
 
         if ($request->categoria_id != $produto->categoria->id) {

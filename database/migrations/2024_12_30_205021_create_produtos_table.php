@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('descricao');
             $table->integer('quantidade')->default(0);
             $table->float('preco');
+            $table->string('imagem_src')->default('produto.png');
             $table->foreignIdFor(Categoria::class);
             $table->foreignIdFor(UnidadeMedida::class);
         });

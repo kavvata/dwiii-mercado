@@ -13,7 +13,7 @@
 
     <div class="py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8 ">
-            <form method="POST"
+            <form method="POST" enctype="multipart/form-data"
                 action="{{ $produto->id ? route('produtos.update', $produto) : route('produtos.store', $produto) }}"
                 class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
 
@@ -65,6 +65,16 @@
                         <label class="flex items-center" for="preco">Preco:</label>
                         <input id="preco" class="h-full w-64 rounded-lg dark:bg-gray-900" type="text"
                             name="preco" value="R$ {{ number_format($produto->preco, 2, ',') }}">
+                    </div>
+                    <div
+                        class="form-input flex h-14 items-start justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                        <label class="flex items-center" for="imagem">Imagem:</label>
+                        <div class="flex flex-col">
+                            <div class="flex justify-center">
+                                <img class="h-32" src="{{ $produto->imagem() }}" alt="{{ $produto->nome }}">
+                            </div>
+                            <input type="file" id="imagem" name="imagem">
+                        </div>
                     </div>
                     <div
                         class="form-input flex items-center justify-between rounded-lg border-0 bg-white text-gray-800 dark:bg-gray-800 dark:text-gray-200">

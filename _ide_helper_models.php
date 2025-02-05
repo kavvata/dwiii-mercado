@@ -159,6 +159,7 @@ namespace App\Models
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property string $nome
+     * @property string $imagem_src
      * @property string $descricao
      * @property int $quantidade
      * @property float $preco

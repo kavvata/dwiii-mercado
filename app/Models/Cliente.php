@@ -17,6 +17,11 @@ class Cliente extends Model
 
     protected $fillable = ['nome', 'cpf', 'telefone', 'email'];
 
+    public function vendas()
+    {
+        return $this->hasMany(Venda::class);
+    }
+
     public function endereco()
     {
         return $this->belongsTo(Endereco::class);

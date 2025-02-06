@@ -8,6 +8,7 @@ use App\Models\Venda;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Traits\Date;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 
 class RelatorioController extends Controller
@@ -29,7 +30,19 @@ class RelatorioController extends Controller
 
     protected function getProdutosSemEstoque()
     {
-        return Produto::query()->where('quantidade', '=', '0')->orderBy('nome')->get();
+        $produtos = Produto::query()
+            ->join('vendas', 'vendas.produto_id', '=', 'produtos.id')
+            ->where('produtos.quantidade', '=', '0')
+            ->selectRaw('produtos.*, vendas.updated_at as data_findou')
+            ->orderByDesc('vendas.updated_at')
+            ->get();
+
+        foreach ($produtos as $produto) {
+            // TODO: registrar um provider para exibir datas corretamente.
+            $produto->data_findou = Carbon::parse($produto->data_findou)->timezone('America/Sao_Paulo')->format('d/m/Y');
+        }
+
+        return $produtos;
     }
 
     protected function getProdutosComEstoque(): Collection
@@ -90,7 +103,10 @@ class RelatorioController extends Controller
 
     public function produtosSemEstoque()
     {
-        return $this->getProdutosSemEstoque();
+        $produtos = $this->getProdutosSemEstoque();
+        $pdf = Pdf::loadView('relatorios.pdf.produtosSemEstoque', compact('produtos'));
+
+        return $pdf->stream();
     }
 
     public function produtosSemEstoquePdf() {}

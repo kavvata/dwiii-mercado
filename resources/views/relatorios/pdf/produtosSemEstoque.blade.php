@@ -5,31 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link href="{{ asset('css/relatorios/pdf/produtosPorLucro.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/relatorios/pdf/relatorio.css') }}" rel="stylesheet">
 </head>
 
 <body>
     <!-- Happiness is not something readymade. It comes from your own actions. - Dalai Lama -->
 
     <div class="header">
-        <h2>Produtos com estoque</h2>
+        <h2>Produtos sem estoque</h2>
     </div>
+    <table class="content">
+        <tr>
+            <th class="number-header">#</th>
+            <th class="text-header">Nome</th>
+            <th class="text-header">Categoria</th>
+            <th class="text-header">Un. de Medida</th>
+            <th class="text-header">Data em que findou</th>
+        </tr>
+        @foreach ($produtos as $i => $produto)
+            <tr>
+                <td class="number-data">{{ $i + 1 }}.</td>
 
-    <div class="content">
-        <div class="grid">
-            @foreach ($produtos as $i => $produto)
-                <div class="grid-item">
-                    <label class="" for="nome">
-                        {{ $i + 1 }}. {{ $produto->nome }} ({{ $produto->categoria->nome }}):
-                    </label>
-                    <p class="">
-                        0 {{ $produto->unidadeMedida->descricao }} em {{ $produto->data_findou }}
-                    </p>
-                </div>
-                <hr>
-            @endforeach
-        </div>
-    </div>
+                <td class="text-data">
+                    {{ $produto->nome }}
+                </td>
+
+                <td class="text-data">
+                    {{ $produto->categoria->nome }}
+                </td>
+
+                <td class="text-data">
+                    {{ $produto->unidadeMedida->descricao }}
+                </td>
+
+                <td class="text-data">
+                    {{ $produto->data_findou }}
+                </td>
+            </tr>
+        @endforeach
+    </table>
 
     <footer>
         Emitido em {{ now()->timezone('America/Sao_Paulo')->format('d/m/Y H:i:s') }}

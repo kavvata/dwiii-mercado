@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link href="{{ asset('css/relatorios/pdf/produtosPorLucro.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/relatorios/pdf/relatorio.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -15,22 +15,51 @@
         <h2>Produtos com estoque</h2>
     </div>
 
-    <div class="content">
-        <div class="grid">
-            @foreach ($produtos as $i => $produto)
-                <div class="grid-item">
-                    <label class="" for="nome">
-                        {{ $i + 1 }}. {{ $produto->nome }} ({{ $produto->categoria->nome }}):
-                    </label>
-                    <p class="">
-                        {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}.
-                        ({{ $produto->percentAtual }}%)
-                    </p>
-                </div>
-                <hr>
-            @endforeach
-        </div>
-    </div>
+    <table class="content">
+        <tr>
+            <th class="number-header">#</th>
+            <th class="text-header">Nome</th>
+            <th class="text-header">Categoria</th>
+            <th class="text-header">Quantidade</th>
+            <th class="number-header">%</th>
+        </tr>
+        @foreach ($produtos as $i => $produto)
+            <tr>
+                <td class="number-data">{{ $i + 1 }}.</td>
+                <td class="text-data">
+                    {{ $produto->nome }}
+                </td>
+                <td class="text-data">
+                    {{ $produto->categoria->nome }}
+                </td>
+                <td class="text-data">
+                    {{ $produto->quantidade }} {{ $produto->unidadeMedida->descricao }}
+                </td>
+                <td class="number-data">
+                    {{ $produto->percentAtual }}%
+                </td>
+            </tr>
+        @endforeach
+    </table>
+
+    <!-- <div class="content"> -->
+    <!--     <div class="grid"> -->
+    <!--         @foreach ($produtos as $i => $produto)
+-->
+    <!--             <div class="grid-item"> -->
+    <!--                 <label class="" for="nome"> -->
+    <!--                     {{ $i + 1 }}. {{ $produto->nome }} ({{ $produto->categoria->nome }}): -->
+    <!--                 </label> -->
+    <!--                 <p class=""> -->
+    <!--                     {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}. -->
+    <!--                     ({{ $produto->percentAtual }}%) -->
+    <!--                 </p> -->
+    <!--             </div> -->
+    <!--             <hr> -->
+    <!--
+@endforeach -->
+    <!--     </div> -->
+    <!-- </div> -->
 
     <footer>
         Emitido em {{ now()->timezone('America/Sao_Paulo')->format('d/m/Y H:i:s') }}

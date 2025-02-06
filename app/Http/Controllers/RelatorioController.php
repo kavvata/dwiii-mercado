@@ -101,17 +101,19 @@ class RelatorioController extends Controller
 
     public function retiradasPorClientePdf() {}
 
-    public function produtosSemEstoque()
+    public function produtosSemEstoque() {}
+
+    public function produtosSemEstoquePdf()
     {
         $produtos = $this->getProdutosSemEstoque();
         $pdf = Pdf::loadView('relatorios.pdf.produtosSemEstoque', compact('produtos'));
 
-        return $pdf->stream();
+        return $pdf->stream('produtos_sem_estoque_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_') . '.pdf');
     }
 
-    public function produtosSemEstoquePdf() {}
+    public function produtosComEstoque() {}
 
-    public function produtosComEstoque()
+    public function produtosComEstoquePdf()
     {
         $produtos = $this->getProdutosComEstoque();
 
@@ -119,6 +121,4 @@ class RelatorioController extends Controller
 
         return $pdf->stream();
     }
-
-    public function produtosComEstoquePdf() {}
 }

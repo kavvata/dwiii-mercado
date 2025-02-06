@@ -34,7 +34,7 @@ class RelatorioController extends Controller
 
     protected function getProdutosComEstoque(): Collection
     {
-        $produtos = Produto::query()->where('quantidade', '!=', '0')->orderByDesc('quantidade')->get();
+        $produtos = Produto::query()->where('quantidade', '!=', '0')->get();
 
         foreach ($produtos as $produto) {
             $quantidadeTotal = $produto->vendas->sum('quantidade');
@@ -46,11 +46,8 @@ class RelatorioController extends Controller
             // que nunca existiu na classe original
             $produto->percentAtual = $percentAtual;
         }
-        $produtos = $produtos->sortByDesc(function ($produto) {
-            return $produto->percentAtual;
-        })->values();
 
-        return $produtos;
+        return $produtos->sortByDesc('percentAtual')->values();
     }
 
     protected function getRetiradasPorPeriodo(Date $inicio, Date $fim)

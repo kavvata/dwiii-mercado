@@ -20,12 +20,12 @@
             @foreach ($produtos as $i => $produto)
                 <div class="grid-item">
                     <label class="" for="nome">
-                        {{ $i + 1 }}. {{ $produto->categoria->nome }} - {{ $produto->nome }}
+                        {{ $i + 1 }}. {{ $produto->nome }} ({{ $produto->categoria->nome }}):
                     </label>
-                    <label class="" for="quantidade">
+                    <p class="">
                         {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}.
                         ({{ $produto->percentAtual }}%)
-                    </label>
+                    </p>
                 </div>
                 <hr>
             @endforeach

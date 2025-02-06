@@ -32,18 +32,14 @@ class RelatorioController extends Controller
         return Produto::query()->where('quantidade', '=', '0')->orderBy('nome')->get();
     }
 
-    protected function getProdutosComEstoque()
+    protected function getProdutosComEstoque(): Collection
     {
         $produtos = Produto::query()->where('quantidade', '!=', '0')->orderByDesc('quantidade')->get();
 
         foreach ($produtos as $produto) {
-            $quantidadeTotal = 0;
-            foreach ($produto->vendas as $venda) {
-                $quantidadeTotal += $venda->quantidade;
-            }
+            $quantidadeTotal = $produto->vendas->sum('quantidade');
             $quantidadeTotal += $produto->quantidade;
-            $percentAtual = ($produto->quantidade / $quantidadeTotal) * 100;
-            $percentAtual = number_format($percentAtual, 0);
+            $percentAtual = number_format(($produto->quantidade / $quantidadeTotal) * 100, 0);
 
             // NOTE: incrivel/assustador:
             // eu posso simplesmente adicionar um atributo

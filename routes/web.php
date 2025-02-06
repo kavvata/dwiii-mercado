@@ -37,6 +37,18 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('relatorios/produtosPorLucro', [RelatorioController::class, 'produtosPorLucro'])->name('relatorios.produtosPorLucro');
     Route::get('relatorios/pdf/produtosPorLucro', [RelatorioController::class, 'produtosPorLucroPdf'])->name('relatorios.pdf.produtosPorLucro');
+
+    Route::get('relatorios/retiradasPorPeriodo', [RelatorioController::class, 'retiradasPorPeriodo'])->name('relatorios.retiradasPorPeriodo');
+    Route::get('relatorios/pdf/retiradasPorPeriodo', [RelatorioController::class, 'retiradasPorPeriodoPdf'])->name('relatorios.pdf.retiradasPorPeriodo');
+
+    Route::get('relatorios/retiradasPorCliente', [RelatorioController::class, 'retiradasPorCliente'])->name('relatorios.retiradasPorCliente');
+    Route::get('relatorios/pdf/retiradasPorCliente', [RelatorioController::class, 'retiradasPorClientePdf'])->name('relatorios.pdf.retiradasPorCliente');
+
+    Route::get('relatorios/produtosSemEstoque', [RelatorioController::class, 'produtosSemEstoque'])->name('relatorios.produtosSemEstoque');
+    Route::get('relatorios/pdf/produtosSemEstoque', [RelatorioController::class, 'produtosSemEstoquePdf'])->name('relatorios.pdf.produtosSemEstoque');
+
+    Route::get('relatorios/produtosComEstoque', [RelatorioController::class, 'produtosComEstoque'])->name('relatorios.produtosComEstoque');
+    Route::get('relatorios/pdf/produtosComEstoque', [RelatorioController::class, 'produtosComEstoquePdf'])->name('relatorios.pdf.produtosComEstoque');
 });
 
 Route::middleware(['auth'])->resource('/unidade_medidas', UnidadeMedidaController::class);

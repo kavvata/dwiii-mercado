@@ -28,6 +28,11 @@ class Produto extends Model
         return $this->belongsTo(UnidadeMedida::class);
     }
 
+    public function vendas()
+    {
+        return $this->hasMany(Venda::class);
+    }
+
     public function imagem(): string
     {
         return asset($this->imagem_src);

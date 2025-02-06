@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cliente;
+use App\Models\Produto;
 use App\Models\Venda;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Traits\Date;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Collection;
 
@@ -23,6 +26,45 @@ class RelatorioController extends Controller
             ->groupBy('produtos.id')
             ->get();
     }
+
+    protected function getProdutosSemEstoque()
+    {
+        return Produto::query()->where('quantidade', '=', '0')->orderBy('nome')->get();
+    }
+
+    protected function getProdutosComEstoque()
+    {
+        $produtos = Produto::query()->where('quantidade', '!=', '0')->orderByDesc('quantidade')->get();
+
+        foreach ($produtos as $produto) {
+            $quantidadeTotal = 0;
+            foreach ($produto->vendas as $venda) {
+                $quantidadeTotal += $venda->quantidade;
+            }
+            $quantidadeTotal += $produto->quantidade;
+            $percentAtual = ($produto->quantidade / $quantidadeTotal) * 100;
+            $percentAtual = number_format($percentAtual, 0);
+
+            // NOTE: incrivel/assustador:
+            // eu posso simplesmente adicionar um atributo
+            // que nunca existiu na classe original
+            $produto->percentAtual = $percentAtual;
+        }
+        $produtos = $produtos->sortByDesc(function ($produto) {
+            return $produto->percentAtual;
+        })->values();
+
+        return $produtos;
+    }
+
+    protected function getRetiradasPorPeriodo(Date $inicio, Date $fim)
+    {
+        // TODO: como receber datas?
+    }
+
+    protected function getRetiradasPorCliente(Cliente $cliente): Collection {}
+
+    /* --- */
 
     public function produtosPorLucro(): View
     {
@@ -44,4 +86,30 @@ class RelatorioController extends Controller
 
         return $pdf->stream();
     }
+
+    public function retiradasPorPeriodo() {}
+
+    public function retiradasPorPeriodoPdf() {}
+
+    public function retiradasPorCliente() {}
+
+    public function retiradasPorClientePdf() {}
+
+    public function produtosSemEstoque()
+    {
+        return $this->getProdutosSemEstoque();
+    }
+
+    public function produtosSemEstoquePdf() {}
+
+    public function produtosComEstoque()
+    {
+        $produtos = $this->getProdutosComEstoque();
+
+        $pdf = Pdf::loadView('relatorios.pdf.produtosComEstoque', compact('produtos'));
+
+        return $pdf->stream();
+    }
+
+    public function produtosComEstoquePdf() {}
 }

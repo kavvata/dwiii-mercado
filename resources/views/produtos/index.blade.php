@@ -66,6 +66,9 @@
                 </div>
             </div>
         </div>
+
+        <livewire:components.table :modelList="$produtos" :campos="['quantidade', 'nome', 'categoria', 'preco']" />
+
         <div class="mx-auto max-w-5xl sm:px-6 lg:px-8">
             <div
                 class="overflow-hidden bg-white text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">

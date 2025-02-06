@@ -32,7 +32,7 @@
     </div>
 
     <footer>
-        Emitido em {{ now() }}
+        Emitido em {{ now()->timezone('America/Sao_Paulo')->format('d/m/Y H:i:s') }}
     </footer>
 
 </body>

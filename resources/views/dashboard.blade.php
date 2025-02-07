@@ -31,7 +31,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="hover:underline" href="{{ route('relatorios.pdf.produtosComEstoque') }}">
+                            <a class="hover:underline" href="{{ route('relatorios.produtosComEstoque') }}">
                                 Produtos com estoque
                             </a>
                         </li>

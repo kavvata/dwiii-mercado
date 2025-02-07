@@ -16,7 +16,7 @@
     </div>
 
     <table class="content">
-        <tr>
+        <tr class="table-header">
             <th class="number-header">#</th>
             <th class="text-header">Nome</th>
             <th class="text-header">Categoria</th>

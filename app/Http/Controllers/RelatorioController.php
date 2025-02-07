@@ -68,7 +68,10 @@ class RelatorioController extends Controller
         // TODO: como receber datas?
     }
 
-    protected function getRetiradasPorCliente(Cliente $cliente): Collection {}
+    protected function getRetiradasPorCliente(): Collection
+    {
+        return Cliente::whereHas('vendas')->get();
+    }
 
     /* --- */
 
@@ -97,9 +100,27 @@ class RelatorioController extends Controller
 
     public function retiradasPorPeriodoPdf() {}
 
-    public function retiradasPorCliente() {}
+    public function retiradasPorClienteIndex()
+    {
+        $cliente = Cliente::query()->first();
+        $vendas = $this->getRetiradasPorCliente($cliente);
 
-    public function retiradasPorClientePdf() {}
+        return view('relatorios.retiradasPorCliente', compact('cliente', 'vendas'));
+    }
+
+    public function retiradasPorCliente()
+    {
+        $clientes = $this->getRetiradasPorCliente();
+
+        return view('relatorios.retiradasPorCliente', compact('clientes'));
+    }
+
+    public function retiradasPorClientePdf()
+    {
+        $clientes = $this->getRetiradasPorCliente();
+
+        return view('relatorios.pdf.retiradasPorCliente', compact('clientes'));
+    }
 
     public function produtosSemEstoque() {}
 

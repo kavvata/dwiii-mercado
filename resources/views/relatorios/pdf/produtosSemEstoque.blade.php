@@ -14,8 +14,8 @@
     <div class="header">
         <h2>Produtos sem estoque</h2>
     </div>
-    <table class="content">
-        <tr>
+    <table class="content" border="1" cellspacing="0" cellpadding="6" width="100%">
+        <tr class="table-header">
             <th class="number-header">#</th>
             <th class="text-header">Nome</th>
             <th class="text-header">Categoria</th>

@@ -7,8 +7,9 @@ use App\Models\Produto;
 use App\Models\Venda;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Collection;
 
 class RelatorioController extends Controller
 {
@@ -27,7 +28,7 @@ class RelatorioController extends Controller
             ->get();
     }
 
-    protected function getProdutosSemEstoque()
+    protected function getProdutosSemEstoque(): Collection
     {
         $produtos = Produto::query()
             ->join('vendas', 'vendas.produto_id', '=', 'produtos.id')
@@ -94,18 +95,33 @@ class RelatorioController extends Controller
         return view('relatorios.produtosPorLucro', compact('produtos'));
     }
 
-    public function retiradasPorPeriodo() {}
+    public function retiradasPorPeriodo(): View
+    {
+        $periodos = $this->getRetiradasPorPeriodo();
 
-    public function retiradasPorCliente() {}
+        return view('relatorios.retiradasPorPeriodo', compact('periodos'));
+    }
 
-    public function produtosSemEstoque() {}
+    public function retiradasPorCliente(): View
+    {
+        $clientes = $this->getRetiradasPorCliente();
 
-    public function produtosComEstoque()
+        return view('relatorios.retiradasPorCliente', compact('clientes'));
+    }
+
+    public function produtosSemEstoque(): View
+    {
+        $produtos = $this->getProdutosSemEstoque();
+
+        return view('relatorios.produtosSemEstoque', compact('produtos'));
+    }
+
+    public function produtosComEstoque(): View
     {
         return view('relatorios.produtosComEstoque', ['produtos' => $this->getProdutosComEstoque()]);
     }
 
-    public function produtosPorLucroPdf()
+    public function produtosPorLucroPdf(): Response
     {
         $produtos = $this->getProdutosPorLucro();
 
@@ -119,7 +135,7 @@ class RelatorioController extends Controller
         return $pdf->stream();
     }
 
-    public function retiradasPorPeriodoPdf()
+    public function retiradasPorPeriodoPdf(): Response
     {
         $periodos = $this->getRetiradasPorPeriodo();
 
@@ -128,7 +144,7 @@ class RelatorioController extends Controller
         return $pdf->stream('retiradas_por_periodo_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
 
-    public function retiradasPorClientePdf()
+    public function retiradasPorClientePdf(): Response
     {
         $clientes = $this->getRetiradasPorCliente();
 
@@ -137,7 +153,7 @@ class RelatorioController extends Controller
         return $pdf->stream('retiradas_por_cliente_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
 
-    public function produtosSemEstoquePdf()
+    public function produtosSemEstoquePdf(): Response
     {
         $produtos = $this->getProdutosSemEstoque();
         $pdf = Pdf::loadView('relatorios.pdf.produtosSemEstoque', compact('produtos'));
@@ -145,7 +161,7 @@ class RelatorioController extends Controller
         return $pdf->stream('produtos_sem_estoque_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
 
-    public function produtosComEstoquePdf()
+    public function produtosComEstoquePdf(): Response
     {
         $produtos = $this->getProdutosComEstoque();
 

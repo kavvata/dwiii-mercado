@@ -16,17 +16,17 @@
                             </a>
                         </li>
                         <li>
-                            <a class="hover:underline" href="{{ route('relatorios.pdf.retiradasPorPeriodo') }}">
+                            <a class="hover:underline" href="{{ route('relatorios.retiradasPorPeriodo') }}">
                                 Retiradas agrupadas por Período
                             </a>
                         </li>
                         <li>
-                            <a class="hover:underline" href="{{ route('relatorios.pdf.retiradasPorCliente') }}">
+                            <a class="hover:underline" href="{{ route('relatorios.retiradasPorCliente') }}">
                                 Retiradas agrupadas por Cliente
                             </a>
                         </li>
                         <li>
-                            <a class="hover:underline" href="{{ route('relatorios.pdf.produtosSemEstoque') }}">
+                            <a class="hover:underline" href="{{ route('relatorios.produtosSemEstoque') }}">
                                 Produtos sem estoque
                             </a>
                         </li>

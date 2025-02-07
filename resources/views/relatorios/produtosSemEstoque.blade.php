@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            Produtos com estoque
+            Produtos sem estoque
         </h2>
     </x-slot>
 
-    <!-- Life is available only in the present moment. - Thich Nhat Hanh -->
+    <!-- It is quality rather than quantity that matters. - Lucius Annaeus Seneca -->
 
     <div class="py-12">
         <div class="mx-auto max-w-5xl pb-12 sm:px-6 lg:px-8">
@@ -14,7 +14,7 @@
                 <div class="align-center flex justify-between">
                     <div>
                         <a class="h-10 flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
-                            href="{{ route('relatorios.pdf.produtosComEstoque') }}">
+                            href="{{ route('relatorios.pdf.produtosSemEstoque') }}">
                             Exportar em PDF
                         </a>
                     </div>
@@ -40,7 +40,8 @@
                         <th class="w-24 px-6 pb-2 text-start">#</th>
                         <th class="px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">Categoria</th>
-                        <th class="px-6 pb-2 text-start">Quantidade vendida</th>
+                        <th class="px-6 pb-2 text-start">Un. de medida</th>
+                        <th class="px-6 pb-2 text-start">Data em que findou</th>
                     </tr>
                     @foreach ($produtos as $i => $produto)
                         <tr
@@ -60,13 +61,12 @@
                                 {{ $produto->categoria->nome }}
                             </td>
 
-                            <td class="px-6 py-2 text-start flex flex-row gap-1">
-                                <p>
-                                    {{ $produto->quantidade }} {{ $produto->unidadeMedida->descricao }}
-                                </p>
-                                <p class="text-gray-500 dark:text-gray-400">
-                                    ({{ $produto->percentAtual }}%)
-                                </p>
+                            <td class="px-6 py-2 text-start">
+                                {{ $produto->unidadeMedida->descricao }}
+                            </td>
+
+                            <td class="px-6 py-2 text-start">
+                                {{ $produto->data_findou }}
                             </td>
 
                         </tr>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-    <link href="{{ asset('css/relatorios/pdf/produtosPorLucro.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/relatorios/pdf/relatorio.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +37,7 @@
     </div>
 
     <footer>
-        Emitido em {{ now() }}
+        Emitido em {{ now()->timezone('America/Sao_Paulo')->format('d/m/Y H:i:s') }}
     </footer>
 
 </body>

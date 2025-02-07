@@ -23,7 +23,7 @@ class VendaController extends Controller
     public function index(): View
     {
         $vendas = Venda::orderByDesc('data_venda')->get();
-        $produtos = Produto::orderBy('nome')->get();
+        $produtos = Produto::orderBy('nome')->where('quantidade', '!=', 0)->get();
         $clientes = Cliente::orderBy('nome')->get();
 
         return view('vendas.index', compact('vendas', 'produtos', 'clientes'));

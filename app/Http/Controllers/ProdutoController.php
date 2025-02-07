@@ -185,6 +185,9 @@ class ProdutoController extends Controller
      */
     public function destroy(Produto $produto): RedirectResponse
     {
+        foreach ($produto->vendas as $v) {
+            $v->delete();
+        }
         $produto->delete();
 
         return to_route('produtos.index')->with('resposta', [

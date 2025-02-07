@@ -40,7 +40,7 @@
                         <th class="w-24 px-6 pb-2 text-start">#</th>
                         <th class="px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">Categoria</th>
-                        <th class="px-6 pb-2 text-start">Quantidade vendida</th>
+                        <th class="px-6 pb-2 text-start">Quantidade</th>
                     </tr>
                     @foreach ($produtos as $i => $produto)
                         <tr
@@ -56,10 +56,14 @@
                                 </div>
                             </td>
 
-                            <td class="px-6 py-2 text-start">
-                                {{ $produto->categoria->nome }}
+                            <td class="px-6 py-2">
+                                <div class="flex flex-col gap-4 lg:flex-row">
+                                    <a class="hover:underline"
+                                        href="{{ route('categorias.edit', $produto->categoria->id) }}">
+                                        {{ $produto->categoria->nome }}
+                                    </a>
+                                </div>
                             </td>
-
                             <td class="px-6 py-2 text-start flex flex-row gap-1">
                                 <p>
                                     {{ $produto->quantidade }} {{ $produto->unidadeMedida->descricao }}

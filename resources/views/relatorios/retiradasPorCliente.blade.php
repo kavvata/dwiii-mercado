@@ -40,7 +40,10 @@
                     @foreach ($clientes as $cliente)
                         <tr class="bg-gray-200 dark:bg-gray-600">
                             <th colspan="4" class="px-6 pb-2 text-start text-lg">
-                                {{ $cliente->nome }}
+                                <a class="hover:underline" href="{{ route('clientes.edit', $cliente->id) }}">
+                                    {{ $cliente->nome }}
+                                </a>
+
                             </th>
                         </tr>
                         <tr class="bg-gray-200 dark:bg-gray-700">

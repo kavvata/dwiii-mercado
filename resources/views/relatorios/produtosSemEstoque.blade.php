@@ -57,12 +57,24 @@
                                 </div>
                             </td>
 
-                            <td class="px-6 py-2 text-start">
-                                {{ $produto->categoria->nome }}
+                            <td class="px-6 py-2">
+                                <div class="flex flex-col gap-4 lg:flex-row">
+                                    <a class="hover:underline"
+                                        href="{{ route('categorias.edit', $produto->categoria->id) }}">
+                                        {{ $produto->categoria->nome }}
+                                    </a>
+                                </div>
                             </td>
 
-                            <td class="px-6 py-2 text-start">
-                                {{ $produto->unidadeMedida->descricao }}
+                            <td class="px-6 py-2">
+                                <div class="flex flex-col gap-4 lg:flex-row">
+                                    <a class="hover:underline"
+                                        href="{{ route('unidade_medidas.edit', $produto->unidadeMedida->id) }}">
+
+                                        {{ $produto->unidadeMedida->descricao }}
+
+                                    </a>
+                                </div>
                             </td>
 
                             <td class="px-6 py-2 text-start">

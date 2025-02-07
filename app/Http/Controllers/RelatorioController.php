@@ -6,7 +6,6 @@ use App\Models\Cliente;
 use App\Models\Produto;
 use App\Models\Venda;
 use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Traits\Date;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
@@ -45,7 +44,7 @@ class RelatorioController extends Controller
         return $produtos;
     }
 
-    protected function getProdutosComEstoque(): Collection
+    protected function getProdutosComEstoque()
     {
         $produtos = Produto::query()->where('quantidade', '!=', '0')->get();
 
@@ -63,14 +62,27 @@ class RelatorioController extends Controller
         return $produtos->sortByDesc('percentAtual')->values();
     }
 
-    protected function getRetiradasPorPeriodo(Date $inicio, Date $fim)
+    protected function getRetiradasPorPeriodo(): Collection
     {
-        // TODO: como receber datas?
+        /** @var Collection<Venda> $vendas */
+        $vendas = Venda::orderByDesc('data_venda')->get();
+
+        $periodos = $vendas->groupBy(function ($venda) {
+            return $venda->data_venda->timezone('America/Sao_Paulo')->format('d/m/Y');
+        });
+
+        return $periodos;
     }
 
     protected function getRetiradasPorCliente(): Collection
     {
-        return Cliente::whereHas('vendas')->get();
+        $clientes = Cliente::whereHas('vendas')->get();
+
+        foreach ($clientes as $cliente) {
+            $cliente->vendas = $cliente->vendas->sortByDesc('data_venda');
+        }
+
+        return $clientes;
     }
 
     /* --- */
@@ -80,6 +92,17 @@ class RelatorioController extends Controller
         $produtos = $this->getProdutosPorLucro();
 
         return view('relatorios.produtosPorLucro', compact('produtos'));
+    }
+
+    public function retiradasPorPeriodo() {}
+
+    public function retiradasPorCliente() {}
+
+    public function produtosSemEstoque() {}
+
+    public function produtosComEstoque()
+    {
+        return view('relatorios.produtosComEstoque', ['produtos' => $this->getProdutosComEstoque()]);
     }
 
     public function produtosPorLucroPdf()
@@ -96,43 +119,31 @@ class RelatorioController extends Controller
         return $pdf->stream();
     }
 
-    public function retiradasPorPeriodo() {}
-
-    public function retiradasPorPeriodoPdf() {}
-
-    public function retiradasPorClienteIndex()
+    public function retiradasPorPeriodoPdf()
     {
-        $cliente = Cliente::query()->first();
-        $vendas = $this->getRetiradasPorCliente($cliente);
+        $periodos = $this->getRetiradasPorPeriodo();
 
-        return view('relatorios.retiradasPorCliente', compact('cliente', 'vendas'));
-    }
+        $pdf = Pdf::loadView('relatorios.pdf.retiradasPorPeriodo', compact('periodos'));
 
-    public function retiradasPorCliente()
-    {
-        $clientes = $this->getRetiradasPorCliente();
-
-        return view('relatorios.retiradasPorCliente', compact('clientes'));
+        return $pdf->stream('retiradas_por_periodo_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
 
     public function retiradasPorClientePdf()
     {
         $clientes = $this->getRetiradasPorCliente();
 
-        return view('relatorios.pdf.retiradasPorCliente', compact('clientes'));
-    }
+        $pdf = Pdf::loadView('relatorios.pdf.retiradasPorCliente', compact('clientes'));
 
-    public function produtosSemEstoque() {}
+        return $pdf->stream('retiradas_por_cliente_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
+    }
 
     public function produtosSemEstoquePdf()
     {
         $produtos = $this->getProdutosSemEstoque();
         $pdf = Pdf::loadView('relatorios.pdf.produtosSemEstoque', compact('produtos'));
 
-        return $pdf->stream('produtos_sem_estoque_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_') . '.pdf');
+        return $pdf->stream('produtos_sem_estoque_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
-
-    public function produtosComEstoque() {}
 
     public function produtosComEstoquePdf()
     {
@@ -140,6 +151,6 @@ class RelatorioController extends Controller
 
         $pdf = Pdf::loadView('relatorios.pdf.produtosComEstoque', compact('produtos'));
 
-        return $pdf->stream();
+        return $pdf->stream('produtos_com_estoque_' . now(tz: 'America/Sao_Paulo')->format('y-m-d_H:i:s') . '.pdf');
     }
 }

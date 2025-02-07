@@ -42,24 +42,6 @@
         @endforeach
     </table>
 
-    <!-- <div class="content"> -->
-    <!--     <div class="grid"> -->
-    <!--         @foreach ($produtos as $i => $produto)
--->
-    <!--             <div class="grid-item"> -->
-    <!--                 <label class="" for="nome"> -->
-    <!--                     {{ $i + 1 }}. {{ $produto->nome }} ({{ $produto->categoria->nome }}): -->
-    <!--                 </label> -->
-    <!--                 <p class=""> -->
-    <!--                     {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}. -->
-    <!--                     ({{ $produto->percentAtual }}%) -->
-    <!--                 </p> -->
-    <!--             </div> -->
-    <!--             <hr> -->
-    <!--
-@endforeach -->
-    <!--     </div> -->
-    <!-- </div> -->
 
     <footer>
         Emitido em {{ now()->timezone('America/Sao_Paulo')->format('d/m/Y H:i:s') }}

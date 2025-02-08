@@ -67,6 +67,4 @@
             </div>
         </div>
     </div>
-
-    <script src="{{ asset('js/produtos/index.js') }}"></script>
 </x-app-layout>

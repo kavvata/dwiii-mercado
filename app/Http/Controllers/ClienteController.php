@@ -144,6 +144,10 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente): RedirectResponse
     {
+        foreach ($cliente->vendas as $v) {
+            $v->delete();
+        }
+
         $cliente->delete();
 
         return to_route('clientes.index')->with('resposta', [

@@ -16,7 +16,7 @@ class ProdutoSeeder extends Seeder
     {
         $un = UnidadeMedida::factory()->create([
             'sigla' => 'un',
-            'descricao' => 'Unidade',
+            'descricao' => 'Unidades',
         ]);
         $kg = UnidadeMedida::factory()->create([
             'sigla' => 'Kg',

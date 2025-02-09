@@ -24,7 +24,7 @@ class ProdutosComEstoque extends Component
             $produto->percentAtual = $percentAtual;
         }
 
-        $this->produtos = $produtos;
+        $this->produtos = $produtos->sortByDesc('percentAtual')->values();
     }
 
     public function render()

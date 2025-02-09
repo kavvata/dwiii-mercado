@@ -1,6 +1,6 @@
 <div class="border dark:border-slate-700 rounded-lg w-full lg:w-[calc(50%-0.5rem)] min-w-max">
     {{-- Do your work, then step back. --}}
-    <div class="dark:bg-slate-700 rounded-t-md flex justify-between p-2">
+    <div class="dark:bg-slate-700 rounded-t-md flex justify-between p-2 border-b dark:border-b-slate-600">
         <p class="font-bold text-center">
             Retiradas agrupadas por período
         </p>
@@ -12,7 +12,7 @@
     <div class="overflow-x-auto overflow-y-auto max-h-96">
         <table id="table-produto" class="w-full table-auto min-w-max">
             <thead>
-                <tr class="bg-gray-200 dark:bg-slate-700">
+                <tr class="bg-gray-200 dark:bg-slate-700 border-b dark:border-b-slate-600">
                     <th class="px-6 pb-2 text-start">Cliente</th>
                     <th class="px-6 pb-2 text-start">Produto</th>
                     <th class="px-6 pb-2 text-start">Categoria</th>

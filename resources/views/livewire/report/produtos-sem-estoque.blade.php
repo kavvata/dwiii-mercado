@@ -1,6 +1,6 @@
 <div class="border dark:border-slate-700 rounded-lg w-full lg:w-[calc(50%-0.5rem)] min-w-64">
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-    <div class="dark:bg-slate-700 rounded-t-md flex justify-between p-2">
+    <div class="dark:bg-slate-700 rounded-t-md flex justify-between p-2 border-b dark:border-b-slate-600">
         <p class="font-bold align-middle text-center">
             Produtos sem estoque
         </p>
@@ -12,7 +12,7 @@
     <div class="overflow-x-auto overflow-y-auto max-h-96">
         <table id="table-produto" class="table-auto w-full min-w-max">
             <thead>
-                <tr class="bg-gray-200 dark:bg-slate-700">
+                <tr class="bg-gray-200 dark:bg-slate-700 border-b dark:border-b-slate-600">
                     <th class="w-12 px-4 pb-2 text-end whitespace-nowrap">#</th>
                     <th class="px-4 pb-2 text-start whitespace-nowrap">Nome</th>
                     <th class="px-4 pb-2 text-start whitespace-nowrap">Categoria</th>

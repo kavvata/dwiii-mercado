@@ -6,36 +6,13 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <ul>
-                        <li>
-                            <a class="hover:underline" href="{{ route('relatorios.produtosPorLucro') }}">
-                                Produtos mais vendidos
-                            </a>
-                        </li>
-                        <li>
-                            <a class="hover:underline" href="{{ route('relatorios.retiradasPorPeriodo') }}">
-                                Retiradas agrupadas por Período
-                            </a>
-                        </li>
-                        <li>
-                            <a class="hover:underline" href="{{ route('relatorios.retiradasPorCliente') }}">
-                                Retiradas agrupadas por Cliente
-                            </a>
-                        </li>
-                        <li>
-                            <a class="hover:underline" href="{{ route('relatorios.produtosSemEstoque') }}">
-                                Produtos sem estoque
-                            </a>
-                        </li>
-                        <li>
-                            <a class="hover:underline" href="{{ route('relatorios.produtosComEstoque') }}">
-                                Produtos com estoque
-                            </a>
-                        </li>
-                    </ul>
+                <div class="sm:p-4 flex gap-y-6 gap-x-2 flex-wrap text-gray-900 dark:text-gray-100">
+                    <livewire:report.retiradas-agrupadas-por-cliente />
+                    <livewire:report.produtos-com-estoque />
+                    <livewire:report.retiradas-agrupadas-por-periodo />
+                    <livewire:report.produtos-sem-estoque />
                 </div>
             </div>
         </div>

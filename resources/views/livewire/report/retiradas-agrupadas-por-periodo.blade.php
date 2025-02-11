@@ -1,15 +1,28 @@
-<div class="border dark:border-slate-700 rounded-lg w-full lg:w-[calc(50%-0.5rem)] min-w-max">
+<div x-data="{ open: null }" class="border dark:border-slate-700 rounded-lg w-full min-w-max">
     {{-- Do your work, then step back. --}}
-    <div class="dark:bg-slate-700 rounded-t-md flex justify-between p-2 border-b dark:border-b-slate-600">
-        <p class="font-bold text-center">
-            Retiradas agrupadas por período
-        </p>
+    <div :class="{ 'rounded-b-none border-b dark:border-b-slate-600': open === 1 }"
+        class="dark:bg-slate-700 rounded-md flex justify-between p-2 ">
+        <div>
+            <button @click="open === 1 ? open = null : open = 1"
+                class="w-full text-left px-4 py-2 flex justify-between items-center">
+                <p class="font-bold text-center">
+                    Retiradas agrupadas por período
+                </p>
+                <svg :class="{ 'rotate-180': open === 1 }" class="w-4 h-4 transition-transform" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd" />
+                </svg>
+
+            </button>
+        </div>
         <a class="h-8 max-w-36 flex items-center justify-center rounded-md border border-gray-600 dark:border-slate-700 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-800"
             href="{{ route('relatorios.pdf.retiradasPorPeriodo') }}">
             Exportar em PDF
         </a>
     </div>
-    <div class="overflow-x-auto overflow-y-auto max-h-96">
+    <div x-show="open === 1" x-collapse class="overflow-y-auto overflow-x-auto max-h-96">
         <table id="table-produto" class="w-full table-auto min-w-max">
             <thead>
                 <tr class="bg-gray-200 dark:bg-slate-700 border-b dark:border-b-slate-600">

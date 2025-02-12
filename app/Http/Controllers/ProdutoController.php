@@ -137,30 +137,37 @@ class ProdutoController extends Controller
             'preco' => 'required',
             'categoria_id' => 'required',
             'unidade_medida_id' => 'required',
-            'imagem' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'imagem' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $imagem = $request->file('imagem');
-        $imageName = time() . '.' . $imagem->extension();
+        if (isset($imagem)) {
+            $imageName = time() . '.' . $imagem->extension();
 
-        Storage::disk('produto-imagens')->putFileAs(
-            '',
-            $imagem,
-            name: $imageName
-        );
+            Storage::disk('produto-imagens')->putFileAs(
+                '',
+                $imagem,
+                name: $imageName
+            );
+        }
 
         $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
 
-        $produto->update([
+        $novosDados = [
             'nome' => $request->nome,
             'descricao' => $request->descricao,
             'medida' => $request->medida,
             'quantidade' => $request->quantidade,
             'preco' => $preco,
-            'imagem_src' => Storage::disk('produto-imagens')->url($imageName),
-        ]);
+        ];
+
+        if (isset($imagem)) {
+            $novosDados['imagem_src'] = Storage::disk('produto-imagens')->url($imageName);
+        }
+
+        $produto->update($novosDados);
 
         if ($request->categoria_id != $produto->categoria->id) {
             $novaMedida = Categoria::findOrFail($request->categoria_id);

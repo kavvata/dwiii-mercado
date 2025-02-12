@@ -15,12 +15,18 @@ class Table extends Component
 
     public function mount()
     {
-        $this->produtoSelecionado = $this->produtos->get(0);
+        $this->produtoSelecionado = new Produto;
     }
 
     public function render()
     {
         return view('livewire.produtos.table');
+    }
+
+    public function criarProduto()
+    {
+        $this->produtoSelecionado = new Produto;
+        $this->dispatch('open-modal', 'editar-produto');
     }
 
     public function editarProduto($produtoId)

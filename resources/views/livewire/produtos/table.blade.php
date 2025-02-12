@@ -36,10 +36,9 @@
                         </select>
                     </div>
                     <div>
-                        <a class="h-10 flex items-center justify-items-center rounded-md border border-gray-600 bg-slate-600 p-2 text-white hover:bg-slate-800 dark:bg-slate-600 dark:hover:bg-slate-700"
-                            href="{{ route('produtos.create') }}">
+                        <x-primary-button wire:click="criarProduto()">
                             Novo Produto
-                        </a>
+                        </x-primary-button>
                     </div>
                 </div>
                 <div class="justify-center">
@@ -66,7 +65,7 @@
                         <th class="w-28 px-6 pb-2 text-start">Preço</th>
                     </tr>
                     @foreach ($produtos as $produto)
-                        <tr wire:model="produtoSelecionado"
+                        <tr
                             class="border-b last:border-b-0 hover:bg-gray-300 dark:border-slate-600 dark:hover:bg-gray-900">
                             <td class="px-6 py-2 text-end text-gray-500 dark:text-gray-400">
                                 {{ $produto->quantidade }} {{ $produto->unidadeMedida->sigla }}

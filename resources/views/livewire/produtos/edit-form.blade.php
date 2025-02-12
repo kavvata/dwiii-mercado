@@ -90,40 +90,44 @@
 
         </div>
 
-        <div class="w-full flex justify-center pt-12 gap-2">
+        <div class="w-full flex justify-between pt-12 gap-2">
+            @if ($produto->id)
+                <x-danger-button x-data=""
+                    x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-produto')">
+                    {{ __('Remover') }}
+                </x-danger-button>
+            @endif
             <x-secondary-button x-on:click="$dispatch('close')">
                 {{ __('Cancelar') }}
             </x-secondary-button>
-            <x-danger-button x-data=""
-                x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-produto')">
-                {{ __('Remover') }}
-            </x-danger-button>
             <x-primary-button>Salvar</x-primary-button>
         </div>
         <div class="w-full flex justify-center pt-2 gap-2">
         </div>
     </form>
 
-    <x-modal name="confirmar-remocao-produto" focusable>
-        <form method="POST" action="{{ route('produtos.destroy', $produto) }}" class="p-6">
-            @csrf
-            @method('delete')
+    @if ($produto->id)
+        <x-modal name="confirmar-remocao-produto" focusable>
+            <form method="POST" action="{{ route('produtos.destroy', $produto) }}" class="p-6">
+                @csrf
+                @method('delete')
 
-            <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {{ __('Tem certeza que quer remover esse produto?') }}
-            </h2>
+                <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
+                    {{ __('Tem certeza que quer remover esse produto?') }}
+                </h2>
 
-            <div class="mt-6 flex justify-end">
-                <x-secondary-button x-on:click="$dispatch('close')">
-                    {{ __('Cancel') }}
-                </x-secondary-button>
+                <div class="mt-6 flex justify-end">
+                    <x-secondary-button x-on:click="$dispatch('close')">
+                        {{ __('Cancel') }}
+                    </x-secondary-button>
 
-                <x-danger-button class="ms-3">
-                    {{ __('Remover produto') }}
-                </x-danger-button>
-            </div>
-        </form>
-    </x-modal>
+                    <x-danger-button class="ms-3">
+                        {{ __('Remover produto') }}
+                    </x-danger-button>
+                </div>
+            </form>
+        </x-modal>
+    @endif
 
 
     @assets

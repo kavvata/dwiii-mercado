@@ -23,7 +23,7 @@ class EnderecoFactory extends Factory
             'bairro' => fake('pt_BR')->city(),
             'rua' => fake('pt_BR')->streetName(),
             'numero' => fake('pt_BR')->buildingNumber(),
-            'complemento' => fake('pt_BR')->paragraph(),
+            'complemento' => fake('pt_BR')->paragraph(9),
         ];
     }
 }

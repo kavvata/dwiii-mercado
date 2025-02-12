@@ -1,6 +1,3 @@
-const precoInput = document.getElementById("preco");
-console.log(precoInput)
-
 const formatar = (event) => {
     // brigado https://stackoverflow.com/a/68203262 !!
 
@@ -17,12 +14,10 @@ const formatar = (event) => {
         parseFloat(value) / 100,
     );
 
-    precoInput.value = "R$ " + result;
+    event.target.value = "R$ " + result;
 };
 
-precoInput.onkeyup = formatar;
-
-document.getElementById('imageUpload').addEventListener('change', function (event) {
+const previewImage = (event) => {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -31,4 +26,10 @@ document.getElementById('imageUpload').addEventListener('change', function (even
         };
         reader.readAsDataURL(file);
     }
-});
+}
+
+document.addEventListener('edit-form-loaded', function () {
+    document.getElementById("preco").addEventListener("keyup", formatar);
+    document.getElementById('imageUpload').addEventListener('change', previewImage);
+})
+

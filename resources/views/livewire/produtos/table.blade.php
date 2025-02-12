@@ -104,8 +104,8 @@
 
                             <td class="px-6 py-2">
                                 <div class="flex flex-col items-center justify-center gap-4 lg:flex-row">
-                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center shadow-lg hover:bg-slate-800 hover:text-gray-200 dark:bg-slate-800 dark:hover:bg-slate-900"
-                                        href="{{ route('produtos.edit', $produto) }}">Detalhes</a>
+                                    <!-- <a class="w-20 rounded-md border border-slate-600 px-2 text-center shadow-lg hover:bg-slate-800 hover:text-gray-200 dark:bg-slate-800 dark:hover:bg-slate-900" -->
+                                    <!--     href="{{ route('produtos.edit', $produto) }}">Detalhes</a> -->
 
                                     <form method="POST" action="{{ route('produtos.destroy', $produto) }}">
                                         @method('DELETE')

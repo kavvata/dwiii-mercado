@@ -94,4 +94,13 @@
             <x-primary-button>Salvar</x-primary-button>
         </div>
     </form>
+
+    @assets
+        <script src="{{ asset('js/produtos/create.js') }}"></script>
+    @endassets
+    @script
+        <script>
+            $wire.dispatch('edit-form-loaded');
+        </script>
+    @endscript
 </div>

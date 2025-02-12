@@ -10,13 +10,13 @@
             @method('POST')
         @endif
         <div class="relative">
-            <div class="rounded-lg relative group">
-                <label for="imageUpload" class="cursor-pointer relative block">
+            <div class="group relative rounded-lg">
+                <label for="imageUpload" class="relative block cursor-pointer">
                     <img id="previewImage" src="{{ $produto->imagem() }}" alt="Product Image"
-                        class="w-full h-96 rounded-lg object-cover transition-opacity duration-200 group-hover:opacity-80">
+                        class="h-96 w-full rounded-lg object-cover transition-opacity duration-200 group-hover:opacity-80">
 
                     <div
-                        class="rounded-lg absolute inset-0 flex items-center justify-center bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        class="absolute inset-0 flex items-center justify-center rounded-lg bg-black/50 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                         <svg class="h-12 w-12 text-white" viewBox="0 0 20 20" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -30,24 +30,24 @@
                 <input type="file" id="imageUpload" name="imagem" accept="image/*" class="hidden">
             </div>
 
-            <div class="absolute bottom-0 rounded-b-lg left-0 w-full p-3 bg-gradient-to-t from-gray-700 to-transparent">
+            <div class="absolute bottom-0 left-0 w-full rounded-b-lg bg-gradient-to-t from-gray-700 to-transparent p-3">
                 <div class="relative flex items-center">
                     <input name="nome" type="text" placeholder="Digite o nome do produto..."
                         value="{{ $produto->nome }}"
-                        class="text-lg w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 outline-none placeholder-gray-300 focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-lg text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
                 </div>
             </div>
         </div>
         <div class="mt-4 space-y-3">
             <div class="relative">
                 <textarea name="descricao" placeholder="Descrição do produto..."
-                    class=" w-full py-4 border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">{{ $produto->descricao }}</textarea>
+                    class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">{{ $produto->descricao }}</textarea>
             </div>
 
             <div class="flex items-center gap-2">
                 <div class="relative flex-1">
                     <select name="categoria_id"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 outline-none placeholder-gray-500 focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
                         @foreach ($categorias as $categoria)
                             <option @if ($categoria == $produto->categoria) selected="selected" @endif
                                 value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
@@ -55,7 +55,7 @@
                     </select>
                 </div>
                 <a href="{{ route('categorias.create') }}"
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </a>
             </div>
@@ -63,17 +63,17 @@
             <div class="relative">
                 <input name="preco" id="preco" type="text" placeholder="Preço"
                     value="R$ {{ number_format($produto->preco, 2, ',') }}"
-                    class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 outline-none placeholder-gray-500 focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                    class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
             </div>
 
             <div class="flex gap-3">
                 <div class="relative flex-1">
                     <input name="quantidade" type="text" placeholder="Quantidade" value="{{ $produto->quantidade }}"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 outline-none placeholder-gray-500 focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
                 </div>
                 <div class="relative flex-1">
                     <select name="unidade_medida_id"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 outline-none placeholder-gray-500 focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
                         @foreach ($unidadeMedidas as $unidadeMedida)
                             <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
                                 value="{{ $unidadeMedida->id }}">
@@ -83,14 +83,14 @@
                     </select>
                 </div>
                 <a href="{{ route('unidade_medidas.create') }}"
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 dark:bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-white dark:text-gray-800 uppercase tracking-widest hover:bg-gray-700 dark:hover:bg-white focus:bg-gray-700 dark:focus:bg-white active:bg-gray-900 dark:active:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
+                    class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </a>
             </div>
 
         </div>
 
-        <div class="w-full flex justify-between pt-12 gap-2">
+        <div class="flex w-full justify-between gap-2 pt-12">
             @if ($produto->id)
                 <x-danger-button x-data=""
                     x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-produto')">
@@ -102,7 +102,7 @@
             </x-secondary-button>
             <x-primary-button>Salvar</x-primary-button>
         </div>
-        <div class="w-full flex justify-center pt-2 gap-2">
+        <div class="flex w-full justify-center gap-2 pt-2">
         </div>
     </form>
 

@@ -45,7 +45,7 @@
                         value="{{ $cliente->endereco->cep }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
 
-                    <x-primary-button class="w-1/3" id="buscarCep">
+                    <x-primary-button class="w-1/3 justify-center items-center" id="buscarCep">
                         Buscar
                     </x-primary-button>
                 </div>
@@ -64,16 +64,15 @@
                         value="{{ $cliente->endereco->bairro }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                 </div>
-                <div class="relative">
+                <div class="flex gap-2">
                     <input id="rua" name="rua" type="text" placeholder="Digite o rua do cliente..."
                         value="{{ $cliente->endereco->rua }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
-                </div>
 
-                <div class="relative">
-                    <input id="rua" name="rua" type="text" placeholder="Digite o rua do cliente..."
-                        value="{{ $cliente->endereco->rua }}"
-                        class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+                    <input id="numero" name="numero" type="text" placeholder="Numero..."
+                        value="{{ $cliente->endereco->numero }}"
+                        class="w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+
                 </div>
             </div>
 

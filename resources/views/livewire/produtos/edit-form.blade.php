@@ -34,7 +34,7 @@
                 <div class="relative flex items-center">
                     <input name="nome" type="text" placeholder="Digite o nome do produto..."
                         value="{{ $produto->nome }}"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-lg text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
+                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
                 </div>
             </div>
         </div>
@@ -45,48 +45,42 @@
             </div>
 
             <div class="flex items-center gap-2">
-                <div class="relative flex-1">
-                    <select name="categoria_id"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
-                        @foreach ($categorias as $categoria)
-                            <option @if ($categoria == $produto->categoria) selected="selected" @endif
-                                value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                <select name="categoria_id"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+                    @foreach ($categorias as $categoria)
+                        <option @if ($categoria == $produto->categoria) selected="selected" @endif
+                            value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                    @endforeach
+                </select>
                 <a href="{{ route('categorias.create') }}"
                     class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </a>
             </div>
 
-            <div class="relative">
-                <input name="preco" id="preco" type="text" placeholder="Preço"
-                    value="R$ {{ number_format($produto->preco, 2, ',') }}"
-                    class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
-            </div>
-
             <div class="flex gap-3">
-                <div class="relative flex-1">
-                    <input name="quantidade" type="text" placeholder="Quantidade" value="{{ $produto->quantidade }}"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
-                </div>
-                <div class="relative flex-1">
-                    <select name="unidade_medida_id"
-                        class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-500 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
-                        @foreach ($unidadeMedidas as $unidadeMedida)
-                            <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
-                                value="{{ $unidadeMedida->id }}">
-                                {{ $unidadeMedida->sigla }}.
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
+                <input name="quantidade" type="text" placeholder="Quantidade" value="{{ $produto->quantidade }}"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+                <select name="unidade_medida_id"
+                    class="w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+                    @foreach ($unidadeMedidas as $unidadeMedida)
+                        <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
+                            value="{{ $unidadeMedida->id }}">
+                            {{ $unidadeMedida->sigla }}.
+                        </option>
+                    @endforeach
+                </select>
                 <a href="{{ route('unidade_medidas.create') }}"
                     class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </a>
             </div>
+            <div class="relative">
+                <input name="preco" id="preco" type="text" placeholder="Preço"
+                    value="R$ {{ number_format($produto->preco, 2, ',') }}"
+                    class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+            </div>
+
 
         </div>
 

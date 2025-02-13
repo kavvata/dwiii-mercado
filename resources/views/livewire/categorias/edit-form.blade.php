@@ -20,7 +20,7 @@
         <div class="mt-4 space-y-3">
             <div class="relative">
                 <textarea name="descricao" placeholder="Descrição da categoria..."
-                                    class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">{{ $categoria->descricao }}</textarea>
+                    class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">{{ $categoria->descricao }}</textarea>
             </div>
 
 
@@ -51,6 +51,10 @@
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ __('Tem certeza que quer remover esse categoria?') }}
                 </h2>
+
+                <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                    {{ __('Certifique-se que essa categoria nao possui nenhum produto vinculado.') }}
+                </p>
 
                 <div class="mt-6 flex justify-end">
                     <x-secondary-button x-on:click="$dispatch('close')">

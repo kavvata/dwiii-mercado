@@ -73,6 +73,14 @@ class ProdutoController extends Controller
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
 
+        if ($preco < 0) {
+            return back()->withErrors('Preco invalido');
+        }
+
+        if ($request->quantidade < 0) {
+            return back()->withErrors('Quantidade invalida');
+        }
+
         $produto->nome = $request->nome;
         $produto->descricao = $request->descricao;
         $produto->quantidade = $request->quantidade;
@@ -153,6 +161,14 @@ class ProdutoController extends Controller
         $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
+
+        if ($preco < 0) {
+            return back()->withErrors('Preco invalido');
+        }
+
+        if ($request->quantidade < 0) {
+            return back()->withErrors('Quantidade invalida');
+        }
 
         $novosDados = [
             'nome' => $request->nome,

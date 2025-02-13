@@ -32,7 +32,6 @@
                         <th class="px-6 pb-2 text-start">Nome</th>
                         <th class="px-6 pb-2 text-start">CPF</th>
                         <th class="px-6 pb-2 text-start">Email</th>
-                        <th class="px-6 pb-2">Ações</th>
                     </tr>
                     @foreach ($clientes as $cliente)
                         <tr
@@ -58,19 +57,6 @@
                                 {{ substr($cliente->cpf, 0, 3) . '.' . substr($cliente->cpf, 3, 3) . '.' . substr($cliente->cpf, 6, 3) . '-' . substr($cliente->cpf, 9) }}
                             </td>
                             <td class="px-6 py-2"> {{ $cliente->email }} </td>
-                            <td class=" px-6 py-2">
-                                <div class="flex flex-col items-center justify-center gap-4 lg:flex-row">
-                                    <a class="w-20 rounded-md border border-slate-600 px-2 text-center shadow-lg hover:bg-slate-800 hover:text-gray-200 dark:bg-slate-800 dark:hover:bg-slate-900"
-                                        href="{{ route('clientes.edit', $cliente) }}">Detalhes</a>
-
-                                    <form method="POST" action="{{ route('clientes.destroy', $cliente) }}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button class="w-20 rounded-md bg-red-600 px-2 text-white hover:bg-red-900"
-                                            type="">Remover</button>
-                                    </form>
-                                </div>
-                            </td>
                         </tr>
                     @endforeach
                 </table>

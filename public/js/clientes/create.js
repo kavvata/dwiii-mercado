@@ -1,7 +1,3 @@
-const cpfInput = document.getElementById("cpf");
-const cepInput = document.getElementById("cep");
-const buscarCepButton = document.getElementById("buscarCep");
-
 const formatarCpf = (event) => {
     let value = event.target.value
 
@@ -65,7 +61,7 @@ const pesquisaCep = (event) => {
     event.preventDefault()
 
     //Nova variável "cep" somente com dígitos.
-    let cep = cepInput.value.replace(/\D/g, '');
+    let cep = document.getElementById('cep').value.replace(/\D/g, '');
 
     //Verifica se campo cep possui valor informado.
     if (cep != "") {
@@ -105,10 +101,10 @@ const pesquisaCep = (event) => {
     }
 };
 
-cpfInput.onkeyup = formatarCpf
-cpfInput.dispatchEvent(new Event('keyup'))
+document.addEventListener('edit-form-loaded', function () {
+    document.getElementById("cpf").addEventListener("keyup", formatarCpf);
+    document.getElementById("cep").addEventListener("keyup", formatarCep);
+    //FIXME: nao funcionando
+    document.getElementById("buscarCep").addEventListener("click", pesquisaCep);
+})
 
-cepInput.onkeyup = formatarCep
-cepInput.dispatchEvent(new Event('keyup'))
-
-buscarCepButton.onclick = pesquisaCep

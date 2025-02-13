@@ -4,12 +4,12 @@ namespace App\Livewire\Clientes;
 
 use Livewire\Component;
 
-class EditForm extends Component
+class EditCliente extends Component
 {
     public $cliente;
 
     public function render()
     {
-        return view('livewire.clientes.edit-form');
+        return view('livewire.clientes.edit-cliente');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Livewire\UnidadeMedidas;
 use App\Models\UnidadeMedida;
 use Livewire\Component;
 
-class EditForm extends Component
+class EditUnidadeMedida extends Component
 {
     public $medida;
 

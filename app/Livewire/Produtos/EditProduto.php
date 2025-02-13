@@ -29,13 +29,13 @@ class EditProduto extends Component
 
     public function criarCategoria()
     {
-        $this->componenteModal = 'categorias.edit-form';
+        $this->componenteModal = 'categorias.edit-categoria';
         $this->dispatch('open-modal', 'criar-outro');
     }
 
     public function criarUnidadeMedida()
     {
-        $this->componenteModal = 'unidade-medidas.edit-form';
+        $this->componenteModal = 'unidade-medidas.edit-unidade-medida';
         $this->dispatch('open-modal', 'criar-outro');
     }
 }

@@ -5,7 +5,7 @@ namespace App\Livewire\Categorias;
 use App\Models\Categoria;
 use Livewire\Component;
 
-class EditForm extends Component
+class EditCategoria extends Component
 {
     public $categoria;
 
@@ -16,6 +16,6 @@ class EditForm extends Component
 
     public function render()
     {
-        return view('livewire.categorias.edit-form');
+        return view('livewire.categorias.edit-categoria');
     }
 }

@@ -23,7 +23,7 @@
                 <div class="mt-6 space-y-3">
                     <div class="relative">
                         <input id="cpf" name="cpf" type="text" placeholder="Digite o CPF do cliente..."
-                            value="{{ $cliente->cpf }}"
+                            value="{{ $cliente->cpf ? substr($cliente->cpf, 0, 3) . '.' . substr($cliente->cpf, 3, 3) . '.' . substr($cliente->cpf, 6, 3) . '-' . substr($cliente->cpf, 9) : '' }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     </div>
                     <div class="relative">

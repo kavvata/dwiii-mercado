@@ -44,7 +44,7 @@
                     class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">{{ $produto->descricao }}</textarea>
             </div>
 
-            <div class="flex items-center gap-2">
+            <div class="flex gap-3">
                 <select name="categoria_id"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($categorias as $categoria)
@@ -62,7 +62,7 @@
                 <input name="quantidade" type="text" placeholder="Quantidade" value="{{ $produto->quantidade }}"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                 <select name="unidade_medida_id"
-                    class="w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
+                    class="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($unidadeMedidas as $unidadeMedida)
                         <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
                             value="{{ $unidadeMedida->id }}">

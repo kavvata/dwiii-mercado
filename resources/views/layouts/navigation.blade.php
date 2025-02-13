@@ -28,7 +28,7 @@
                         {{ __('Categorias') }}
                     </x-nav-link>
                     <x-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.*')">
-                        {{ __('Unidades de Medida') }}
+                        {{ __('Un. de Medida') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -106,7 +106,7 @@
                 {{ __('Categorias') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('unidade_medidas.index')" :active="request()->routeIs('unidade_medidas.*')">
-                {{ __('Unidades de Medida') }}
+                {{ __('Un. de Medida') }}
             </x-responsive-nav-link>
         </div>
 

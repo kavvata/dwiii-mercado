@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" class="border dark:border-slate-700 rounded-lg w-full min-w-64">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-    <div :class="{ 'rounded-b-none border-b dark:border-b-slate-600': open }"
+    <div :class="{ 'rounded-b-none border-b dark:border-b-slate-600 shadow-md': open }"
         class="dark:bg-slate-700 rounded-md flex justify-between p-2 ">
         <div>
             <button @click="open ? open = null : open = 1"
@@ -25,7 +25,7 @@
     <div x-show="open" x-collapse class="overflow-x-auto overflow-y-auto max-h-96">
         <table id="table-produto" class="w-full table-auto min-w-max">
             <thead>
-                <tr class="bg-gray-200 dark:bg-slate-700 border-b dark:border-b-slate-600">
+                <tr class="bg-white dark:bg-slate-700 border-b dark:border-b-slate-600">
                     <th class="w-6 px-4 pb-2 text-end">#</th>
                     <th class="px-4 pb-2 text-start">Nome</th>
                     <th class="px-4 pb-2 text-start">Categoria</th>

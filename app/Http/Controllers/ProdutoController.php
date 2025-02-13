@@ -101,7 +101,7 @@ class ProdutoController extends Controller
             name: $imageName
         );
 
-        $produto->imagem_src = 'storage/images' . $imageName;
+        $produto->imagem_src = Storage::disk('produto-imagens')->url($imageName);
 
         $produto->save();
 

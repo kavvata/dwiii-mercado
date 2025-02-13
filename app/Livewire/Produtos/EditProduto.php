@@ -3,17 +3,19 @@
 namespace App\Livewire\Produtos;
 
 use App\Models\Categoria;
+use App\Models\Produto;
 use App\Models\UnidadeMedida;
 use Livewire\Component;
 
-class EditForm extends Component
+class EditProduto extends Component
 {
-    public $produto;
+    public Produto $produto;
 
     public $componenteModal;
 
-    public function mount()
+    public function mount($produto)
     {
+        $this->produto = $produto ?? new Produto;
         $this->componenteModal = 'categorias.edit-form';
     }
 
@@ -22,7 +24,7 @@ class EditForm extends Component
         $categorias = Categoria::all();
         $unidadeMedidas = UnidadeMedida::all();
 
-        return view('livewire.produtos.edit-form', ['produto' => $this->produto, 'categorias' => $categorias, 'unidadeMedidas' => $unidadeMedidas]);
+        return view('livewire.produtos.edit-produto', ['produto' => $this->produto, 'categorias' => $categorias, 'unidadeMedidas' => $unidadeMedidas]);
     }
 
     public function criarCategoria()

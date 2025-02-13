@@ -75,14 +75,13 @@ class ProdutoController extends Controller
 
         $produto->nome = $request->nome;
         $produto->descricao = $request->descricao;
-        $produto->medida = $request->medida;
         $produto->quantidade = $request->quantidade;
         $produto->preco = $preco;
 
         $categoria = Categoria::findOrFail($request->categoria_id);
         $produto->categoria()->associate($categoria);
 
-        $unidadeMedida = Categoria::findOrFail($request->unidade_medida_id);
+        $unidadeMedida = UnidadeMedida::findOrFail($request->unidade_medida_id);
         $produto->unidadeMedida()->associate($unidadeMedida);
 
         $imagem = $request->file('imagem');

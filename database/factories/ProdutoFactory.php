@@ -68,9 +68,10 @@ class ProdutoFactory extends Factory
 
         return [
             'nome' => $listaNomeProdutos[fake()->unique()->numberBetween(int1: 0, int2: count($listaNomeProdutos) - 1)],
-            'descricao' => fake()->sentence(10),
+            'descricao' => fake()->sentence(9),
             'quantidade' => fake()->numberBetween(int1: 1, int2: 50),
             'preco' => fake()->randomFloat(max: 50),
+            'imagem_src' => 'https://images2.habeco.si/Upload/Product/paper-small---gift-paper-bag-small-size_14063_productmain.jpg',
         ];
     }
 }

@@ -61,7 +61,7 @@ const pesquisaCep = (event) => {
     event.preventDefault()
 
     //Nova variável "cep" somente com dígitos.
-    let cep = cepInput.value.replace(/\D/g, '');
+    let cep = document.getElementById('cep').value.replace(/\D/g, '');
 
     //Verifica se campo cep possui valor informado.
     if (cep != "") {

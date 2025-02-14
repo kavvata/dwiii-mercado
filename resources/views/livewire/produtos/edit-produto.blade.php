@@ -60,8 +60,7 @@
                 <select name="categoria_id" wire:model="form.categoria_id"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($categorias as $categoria)
-                        <option @if (isset($form->produto) && $categoria == $form->produto->categoria) selected="selected" @endif
-                            value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                        <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                     @endforeach
                 </select>
                 <button wire:click.prevent="criarCategoria"
@@ -102,8 +101,7 @@
                 <select name="unidade_medida_id" wire:model="form.unidade_medida_id"
                     class="w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($unidadeMedidas as $unidadeMedida)
-                        <option @if (isset($form->produto) && $unidadeMedida == $form->produto->unidadeMedida) selected="selected" @endif
-                            value="{{ $unidadeMedida->id }}">
+                        <option value="{{ $unidadeMedida->id }}">
                             {{ $unidadeMedida->sigla }}.
                         </option>
                     @endforeach

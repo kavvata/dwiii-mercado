@@ -26,10 +26,10 @@ class ProdutoForm extends Form
     public $quantidade = 1;
 
     #[Validate('required')]
-    public $categoria_id = null;
+    public $categoria_id;
 
     #[Validate('required')]
-    public $unidade_medida_id = null;
+    public $unidade_medida_id;
 
     #[Validate('required')]
     public $preco = 'R$ 00,00';
@@ -39,10 +39,8 @@ class ProdutoForm extends Form
 
     public function setProduto(Produto $produto)
     {
-        if (!$produto->id) {
-            return;
-        }
         $this->produto = $produto;
+
         $this->nome = $produto->nome;
         $this->descricao = $produto->descricao;
         $this->quantidade = $produto->quantidade;

@@ -19,6 +19,9 @@ class EditProduto extends Component
 
         if ($produto->id) {
             $this->form->setProduto($produto);
+        } else {
+            $this->form->categoria_id = Categoria::all()->first()->id;
+            $this->form->unidade_medida_id = UnidadeMedida::all()->first()->id;
         }
     }
 
@@ -26,9 +29,6 @@ class EditProduto extends Component
     {
         $categorias = Categoria::all();
         $unidadeMedidas = UnidadeMedida::all();
-
-        $this->form->categoria_id = $categorias->get(0)->id;
-        $this->form->unidade_medida_id = $unidadeMedidas->get(0)->id;
 
         return view('livewire.produtos.edit-produto', ['categorias' => $categorias, 'unidadeMedidas' => $unidadeMedidas]);
     }
@@ -66,6 +66,11 @@ class EditProduto extends Component
         if ($this->form->quantidade <= 1) {
             $this->form->quantidade = 1;
         }
+    }
+
+    public function selecionarCategoria()
+    {
+        $this->form->categoria_id = $this->categoria_id;
     }
 
     public function save()

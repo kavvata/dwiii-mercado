@@ -76,6 +76,6 @@ class EditProduto extends Component
     public function save()
     {
         $this->form->save();
-        $this->dispatch('close-modal');
+        $this->dispatch('close');
     }
 }

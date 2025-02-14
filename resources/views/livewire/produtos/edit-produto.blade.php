@@ -1,18 +1,11 @@
 <div class="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-800">
-    <form method="POST" enctype="multipart/form-data"
-        action="{{ $produto->id ? route('produtos.update', $produto) : route('produtos.store', $produto) }}"
+    <form wire:submit="save"
         class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
-
-        @csrf
-        @if ($produto->id)
-            @method('PUT')
-        @else
-            @method('POST')
-        @endif
         <div class="relative">
             <div class="group relative rounded-lg">
                 <label for="imageUpload" class="relative block cursor-pointer">
-                    <img id="previewImage" src="{{ $produto->imagem() }}" alt="Imagem do produto"
+                    <img id="previewImage" src="{{ isset($form->produto) ? $form->produto->imagem() : '' }}"
+                        alt="Imagem do produto"
                         class="h-96 w-full rounded-lg object-cover transition-opacity flex justify-center items-center duration-200 group-hover:opacity-80">
 
                     <div
@@ -32,7 +25,7 @@
                 <div
                     class="relative flex items-center border-b border-gray-300 dark:border-gray-400 focus:border-gray-800 dark:focus:border-gray-400">
                     <input name="nome" type="text" placeholder="Digite o nome do produto..."
-                        value="{{ $produto->nome }}"
+                        wire:model="form.nome"
                         class="w-full border-0  bg-transparent py-1 text-center text-gray-800 placeholder-gray-500 dark:placeholder-gray-300 outline-none  focus:ring-0 dark:text-white">
                     <div
                         class="absolute right-2 flex items-center justify-center rounded-lg bg-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100">
@@ -47,17 +40,27 @@
                 </div>
             </div>
         </div>
+        @error('form.imagem')
+            <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+        @enderror
+
+        @error('form.nome')
+            <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+        @enderror
         <div class="mt-4 space-y-3">
             <div class="relative">
-                <textarea name="descricao" placeholder="Descrição do produto..."
-                    class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">{{ $produto->descricao }}</textarea>
+                <textarea name="descricao" placeholder="Descrição do produto..." wire:model="form.descricao"
+                    class="w-full rounded-md border-gray-300 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600"></textarea>
             </div>
+            @error('form.descricao')
+                <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+            @enderror
 
             <div class="flex gap-3">
-                <select name="categoria_id"
+                <select name="categoria_id" wire:model="form.categoria_id"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($categorias as $categoria)
-                        <option @if ($categoria == $produto->categoria) selected="selected" @endif
+                        <option @if (isset($form->produto) && $categoria == $form->produto->categoria) selected="selected" @endif
                             value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                     @endforeach
                 </select>
@@ -66,10 +69,13 @@
                     Novo
                 </button>
             </div>
+            @error('form.categoria_id')
+                <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+            @enderror
 
             <div class="flex gap-3">
                 <div class="relative flex items-center">
-                    <button type="button" id="decrement-button"
+                    <button type="button" id="decrement-button" wire:click.prevent="diminuirQuantidade"
                         class="bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-s-md p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                         <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 2">
@@ -79,12 +85,12 @@
                     </button>
                     <input type="text" id="quantidade" name="quantidade"
                         class="bg-gray-50 border-x-0 border-gray-300 h-11 font-medium text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full pb-6 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" value="{{ $produto->quantidade ?? 1 }}" />
+                        placeholder="" wire:model="form.quantidade" />
                     <div
                         class="absolute bottom-1 start-1/2 -translate-x-1/2 rtl:translate-x-1/2 flex items-center text-xs text-gray-400 space-x-1 rtl:space-x-reverse">
                         <span>Qntd.</span>
                     </div>
-                    <button type="button" id="increment-button"
+                    <button type="button" wire:click.prevent="aumentarQuantidade" id="increment-button"
                         class="bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-600 dark:border-gray-600 hover:bg-gray-200 border border-gray-300 rounded-e-md p-3 h-11 focus:ring-gray-100 dark:focus:ring-gray-700 focus:ring-2 focus:outline-none">
                         <svg class="w-3 h-3 text-gray-900 dark:text-white" aria-hidden="true"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -93,10 +99,10 @@
                         </svg>
                     </button>
                 </div>
-                <select name="unidade_medida_id"
+                <select name="unidade_medida_id" wire:model="form.unidade_medida_id"
                     class="w-1/3 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     @foreach ($unidadeMedidas as $unidadeMedida)
-                        <option @if ($unidadeMedida == $produto->unidadeMedida) selected="selected" @endif
+                        <option @if (isset($form->produto) && $unidadeMedida == $form->produto->unidadeMedida) selected="selected" @endif
                             value="{{ $unidadeMedida->id }}">
                             {{ $unidadeMedida->sigla }}.
                         </option>
@@ -107,9 +113,14 @@
                     Novo
                 </button>
             </div>
+            @error('form.quantidade')
+                <span class="error text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+            @enderror
+            @error('form.unidade_medida_id')
+                <span class="error text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+            @enderror
             <div class="relative">
-                <input name="preco" id="preco" type="text" placeholder="Preço"
-                    value="R$ {{ number_format($produto->preco, 2, ',') }}"
+                <input name="preco" id="preco" type="text" placeholder="Preço" wire:model="form.preco"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
             </div>
 
@@ -117,7 +128,7 @@
         </div>
 
         <div class="flex w-full justify-between gap-2 pt-12">
-            @if ($produto->id)
+            @if (isset($form->produto))
                 <x-danger-button x-data=""
                     x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-produto')">
                     {{ __('Remover') }}
@@ -132,9 +143,9 @@
         </div>
     </form>
 
-    @if ($produto->id)
+    @if (isset($form->produto))
         <x-modal name="confirmar-remocao-produto" focusable>
-            <form method="POST" action="{{ route('produtos.destroy', $produto) }}" class="p-6">
+            <form method="POST" action="{{ route('produtos.destroy', $form->produto) }}" class="p-6">
                 @csrf
                 @method('delete')
 

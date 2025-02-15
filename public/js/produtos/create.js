@@ -1,4 +1,4 @@
-const formatar = (event) => {
+const formatarPreco = (event) => {
     // brigado https://stackoverflow.com/a/68203262 !!
 
     let value = event.target.value;
@@ -15,6 +15,7 @@ const formatar = (event) => {
     );
 
     event.target.value = "R$ " + result;
+    event.target.dispatchEvent(new Event('input'));
 };
 
 const previewImage = (event) => {
@@ -48,13 +49,13 @@ const validarQuantidade = (event) => {
     if (quantidadeInput.value < 1) {
         quantidadeInput.value = 1
     }
+
+    event.target.dispatchEvent(new Event('input'));
 }
 
 document.addEventListener('edit-form-loaded', function () {
-    document.getElementById("increment-button").addEventListener("click", aumentarQuantidade);
-    document.getElementById("decrement-button").addEventListener("click", diminuirQuantidade);
     document.getElementById("quantidade").addEventListener("change", validarQuantidade);
-    document.getElementById("preco").addEventListener("keyup", formatar);
+    document.getElementById("preco").addEventListener("keyup", formatarPreco);
     document.getElementById('imageUpload').addEventListener('change', previewImage);
 })
 

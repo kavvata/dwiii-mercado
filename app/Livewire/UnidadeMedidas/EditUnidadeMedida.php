@@ -16,6 +16,6 @@ class EditUnidadeMedida extends Component
 
     public function render()
     {
-        return view('livewire.unidade-medidas.edit-form');
+        return view('livewire.unidade-medidas.edit-unidade-medida');
     }
 }

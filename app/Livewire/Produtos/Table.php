@@ -60,7 +60,7 @@ class Table extends Component
 
     public function editarProduto($produtoId)
     {
-        $this->produtoSelecionado = $this->produtos->find($produtoId);
+        $this->produtoSelecionado = Produto::findOrFail($produtoId);
         $this->dispatch('open-modal', 'editar-produto');
     }
 

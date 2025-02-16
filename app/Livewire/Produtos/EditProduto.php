@@ -6,12 +6,17 @@ use App\Livewire\Forms\ProdutoForm;
 use App\Models\Categoria;
 use App\Models\UnidadeMedida;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class EditProduto extends Component
 {
+    use WithFileUploads;
+
     public ProdutoForm $form;
 
     public $componenteModal;
+
+    public $imagemUrl;
 
     public function mount($produto)
     {
@@ -19,6 +24,7 @@ class EditProduto extends Component
 
         if ($produto->id) {
             $this->form->setProduto($produto);
+            $this->imagemUrl = $produto->imagem();
         } else {
             $this->form->categoria_id = Categoria::all()->first()->id;
             $this->form->unidade_medida_id = UnidadeMedida::all()->first()->id;
@@ -68,14 +74,20 @@ class EditProduto extends Component
         }
     }
 
-    public function selecionarCategoria()
-    {
-        $this->form->categoria_id = $this->categoria_id;
-    }
-
     public function save()
     {
         $this->form->save();
         $this->dispatch('close');
+    }
+
+    public function formatarPreco()
+    {
+        $precoFormatado = preg_replace('/\D/', '', $this->form->preco);
+        if (empty($precoFormatado)) {
+            $precoFormatado = 0;
+        }
+
+        $precoFormatado = (float) $precoFormatado / 100;
+        $this->form->preco = 'R$ ' . number_format($precoFormatado, 2, ',', '.');
     }
 }

@@ -56,6 +56,6 @@ const validarQuantidade = (event) => {
 document.addEventListener('edit-form-loaded', function () {
     document.getElementById("quantidade").addEventListener("change", validarQuantidade);
     document.getElementById("preco").addEventListener("keyup", formatarPreco);
-    document.getElementById('imageUpload').addEventListener('change', previewImage);
+    // document.getElementById('imageUpload').addEventListener('change', previewImage);
 })
 

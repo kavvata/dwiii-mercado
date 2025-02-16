@@ -66,12 +66,6 @@ class ProdutoForm extends Form
             $this->addError('form.quantidade', 'Quantidade invalida.');
         }
 
-        if ($this->getErrorBag()) {
-            dd($this);
-
-            return;
-        }
-
         if (!isset($this->produto)) {
             $this->produto = new Produto;
         }
@@ -93,7 +87,6 @@ class ProdutoForm extends Form
 
         $this->produto->imagem_src = Storage::url($imagem_src);
 
-        dd($this->produto);
         $this->produto->save();
     }
 
@@ -135,13 +128,11 @@ class ProdutoForm extends Form
         if (isset($this->imagem)) {
             $imageName = time() . '.' . $this->imagem->extension();
 
-            $imagem_src = $this->imagem->storeAs('produto-imagens', $imageName, 'public');
-
+            $imagem_src = $this->imagem->storeAs('', $imageName, 'produto-imagens');
             $this->produto->imagem_src = Storage::url($imagem_src);
         }
 
         $this->produto->save();
-        dd($this->produto);
     }
 
     public function save()

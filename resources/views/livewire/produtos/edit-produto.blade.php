@@ -4,8 +4,9 @@
         <div class="relative">
             <div class="group relative rounded-lg">
                 <label for="imageUpload" class="relative block cursor-pointer">
-                    <img id="previewImage" src="{{ isset($form->produto) ? $form->produto->imagem() : '' }}"
-                        alt="Imagem do produto"
+                    <img id="previewImage"
+                        src="{{ $this->form->imagem ? $this->form->imagem->temporaryUrl() : $this->imagemUrl }}"
+                        :key="imagem_url" alt="Imagem do produto"
                         class="h-96 w-full rounded-lg object-cover transition-opacity flex justify-center items-center duration-200 group-hover:opacity-80">
 
                     <div
@@ -17,7 +18,8 @@
                     </div>
                 </label>
 
-                <input type="file" id="imageUpload" name="imagem" accept="image/*" class="hidden">
+                <input type="file" id="imageUpload" wire:model="form.imagem" name="imagem" accept="image/*"
+                    class="hidden">
             </div>
 
             <div
@@ -171,6 +173,7 @@
     @assets
         <script src="{{ asset('js/produtos/create.js') }}"></script>
     @endassets
+
     @script
         <script>
             $wire.dispatch('edit-form-loaded');

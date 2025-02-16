@@ -65,7 +65,7 @@
                         <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                     @endforeach
                 </select>
-                <button wire:click.prevent="criarCategoria"
+                <button type="button" wire:click.prevent="criarCategoria"
                     class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </button>
@@ -108,7 +108,7 @@
                         </option>
                     @endforeach
                 </select>
-                <button wire:click.prevent="criarUnidadeMedida"
+                <button type="button" wire:click.prevent="criarUnidadeMedida"
                     class="inline-flex items-center rounded-md border border-transparent bg-gray-800 px-4 py-2 text-xs font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 dark:bg-gray-200 dark:text-gray-800 dark:hover:bg-white dark:focus:bg-white dark:focus:ring-offset-gray-800 dark:active:bg-gray-300">
                     Novo
                 </button>
@@ -129,15 +129,15 @@
 
         <div class="flex w-full justify-between gap-2 pt-12">
             @if (isset($form->produto))
-                <x-danger-button x-data=""
+                <x-danger-button type="button" x-data=""
                     x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-produto')">
                     {{ __('Remover') }}
                 </x-danger-button>
             @endif
-            <x-secondary-button x-on:click="$dispatch('close')">
+            <x-secondary-button type="button" x-on:click="$dispatch('close')">
                 {{ __('Cancelar') }}
             </x-secondary-button>
-            <x-primary-button>Salvar</x-primary-button>
+            <x-primary-button type="submit">Salvar</x-primary-button>
         </div>
         <div class="flex w-full justify-center gap-2 pt-2">
         </div>

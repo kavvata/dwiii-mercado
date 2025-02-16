@@ -20,8 +20,8 @@ return new class extends Migration {
             $table->integer('quantidade');
             $table->float('preco');
             $table->dateTime('data_venda');
-            $table->foreignIdFor(Produto::class);
-            $table->foreignIdFor(Cliente::class);
+            $table->foreignIdFor(Produto::class)->onDelete('cascade');
+            $table->foreignIdFor(Cliente::class)->onDelete('cascade');
             $table->foreignIdFor(User::class);
         });
     }

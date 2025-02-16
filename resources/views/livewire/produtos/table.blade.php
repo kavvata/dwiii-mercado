@@ -7,32 +7,20 @@
                 <div class="align-center flex justify-between">
                     <div class="h-10 flex gap-2">
 
-                        <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
-                            placeholder="Procure um nome..." type="text">
+                        <input class="rounded-lg border border-slate-600 dark:bg-slate-900"
+                            placeholder="Procure um nome..." type="text" wire:model.change="filtroTexto"
+                            wire:keyup.debounce="atualizarProdutos">
 
-                        <select x-data="{}" @change="window.location = $event.target.value"
+                        <select wire:model.change="idCategoriaSelecionada" wire:change="atualizarProdutos"
                             class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">
 
-                            @if (Request::route()->getName() == 'produtos.filtrar')
+                            <option selected="selected" value="">Todos</option>
 
-                                <option value="{{ route('produtos.index') }}">Todos</option>
-
-                                @foreach ($categorias as $categoria)
-                                    <option @if ($categoria == $produtos[0]->categoria) selected="selected" @endif
-                                        value="{{ route('produtos.filtrar', $categoria) }}">
-                                        {{ $categoria->nome }}
-                                    </option>
-                                @endforeach
-                            @else
-                                <option selected="selected" value="{{ route('produtos.index') }}">Todos</option>
-
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{ route('produtos.filtrar', $categoria) }}">
-                                        {{ $categoria->nome }}
-                                    </option>
-                                @endforeach
-                            @endif
-
+                            @foreach ($categorias as $categoria)
+                                <option value="{{ $categoria->id }}">
+                                    {{ $categoria->nome }}
+                                </option>
+                            @endforeach
                         </select>
                     </div>
                     <div>
@@ -106,6 +94,6 @@
         </div>
     </div>
     <x-modal name="editar-produto" :maxWidth="'md'" focusable>
-        <livewire:produtos.edit-produto :produto="$produtoSelecionado" key="{{ $produtoSelecionado->id }}" />
+        <livewire:produtos.edit-produto :produto="$produtoSelecionado" key="{{ $produtoSelecionado->id }} " />
     </x-modal>
 </div>

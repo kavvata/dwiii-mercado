@@ -10,5 +10,5 @@
     </x-slot>
 
     <!-- You must be the change you wish to see in the world. - Mahatma Gandhi -->
-    <livewire:produtos.table :produtos="$produtos" :categorias="$categorias" />
+    <livewire:produtos.table :$produtos :$categorias />
 </x-app-layout>

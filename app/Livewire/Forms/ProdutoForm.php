@@ -83,9 +83,8 @@ class ProdutoForm extends Form
 
         $imageName = time() . '.' . $this->imagem->extension();
 
-        $imagem_src = $this->imagem->storeAs('produto-imagens', $imageName, 'public');
-
-        $this->produto->imagem_src = Storage::url($imagem_src);
+        $imagem_src = $this->imagem->storeAs('', $imageName, 'produto-imagens');
+        $this->produto->imagem_src = Storage::disk('produto-imagens')->url($imagem_src);
 
         $this->produto->save();
     }

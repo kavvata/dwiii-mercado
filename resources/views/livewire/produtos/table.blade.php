@@ -9,7 +9,7 @@
 
                         <input class="rounded-lg border border-slate-600 dark:bg-slate-900"
                             placeholder="Procure um nome..." type="text" wire:model.change="filtroTexto"
-                            wire:keyup.debounce="atualizarProdutos">
+                            wire:keyup.debounce="filtrar">
 
                         <select wire:model.change="idCategoriaSelecionada" wire:change="atualizarProdutos"
                             class="block w-full rounded-lg bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-200">

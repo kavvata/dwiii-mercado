@@ -67,6 +67,11 @@ class Table extends Component
     #[On('atualizar-produtos')]
     public function atualizarProdutos()
     {
+        $this->gotoPage($this->getPage());
+    }
+
+    public function filtrar()
+    {
         $this->resetPage();
     }
 }

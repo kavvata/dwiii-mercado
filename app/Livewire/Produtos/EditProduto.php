@@ -26,8 +26,8 @@ class EditProduto extends Component
             $this->form->setProduto($produto);
             $this->imagemUrl = $produto->imagem();
         } else {
-            $this->form->categoria_id = Categoria::all()->first()->id;
-            $this->form->unidade_medida_id = UnidadeMedida::all()->first()->id;
+            $this->form->categoria_id = $produto->categoria->id ?? Categoria::all()->first()->id;
+            $this->form->unidade_medida_id = $produto->unidadeMedida->id ?? UnidadeMedida::all()->first()->id;
         }
     }
 
@@ -78,16 +78,18 @@ class EditProduto extends Component
     {
         $this->form->save();
         $this->dispatch('close');
+        $this->dispatch('atualizar-produtos');
     }
 
-    public function formatarPreco()
+    public function destroy()
     {
-        $precoFormatado = preg_replace('/\D/', '', $this->form->preco);
-        if (empty($precoFormatado)) {
-            $precoFormatado = 0;
+        foreach ($this->form->produto->vendas() as $v) {
+            $v->delete();
         }
 
-        $precoFormatado = (float) $precoFormatado / 100;
-        $this->form->preco = 'R$ ' . number_format($precoFormatado, 2, ',', '.');
+        $this->form->produto->delete();
+
+        $this->dispatch('close');
+        $this->dispatch('atualizar-produtos');
     }
 }

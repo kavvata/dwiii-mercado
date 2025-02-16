@@ -145,10 +145,7 @@
 
     @if (isset($form->produto))
         <x-modal name="confirmar-remocao-produto" focusable>
-            <form method="POST" action="{{ route('produtos.destroy', $form->produto) }}" class="p-6">
-                @csrf
-                @method('delete')
-
+            <div class="p-6">
                 <h2 class="text-lg font-medium text-gray-900 dark:text-gray-100">
                     {{ __('Tem certeza que quer remover esse produto?') }}
                 </h2>
@@ -158,11 +155,11 @@
                         {{ __('Cancel') }}
                     </x-secondary-button>
 
-                    <x-danger-button class="ms-3">
+                    <x-danger-button wire:click="destroy" class="ms-3">
                         {{ __('Remover produto') }}
                     </x-danger-button>
                 </div>
-            </form>
+            </div>
         </x-modal>
     @endif
 

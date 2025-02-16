@@ -32,7 +32,7 @@ class ProdutoForm extends Form
     public $unidade_medida_id;
 
     #[Validate('required')]
-    public $preco = 'R$ 00,00';
+    public $preco = 'R$ 0,00';
 
     #[Validate('image|mimes:jpeg,png,jpg,gif|max:2048')]
     public $imagem;

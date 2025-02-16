@@ -56,7 +56,6 @@ class ProdutoForm extends Form
         $preco = $this->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
-        $this->preco = $preco;
 
         if ($this->preco <= 0) {
             $this->addError('form.preco', 'Preco invalido.');
@@ -73,7 +72,7 @@ class ProdutoForm extends Form
         $this->produto->nome = $this->nome;
         $this->produto->descricao = $this->descricao;
         $this->produto->quantidade = $this->quantidade;
-        $this->produto->preco = $this->preco;
+        $this->produto->preco = $preco;
 
         $categoria = Categoria::findOrFail($this->categoria_id);
         $this->produto->categoria()->associate($categoria);
@@ -103,7 +102,6 @@ class ProdutoForm extends Form
         $preco = $this->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
-        $this->preco = $preco;
 
         if ($this->preco < 0) {
             $this->addError('preco', 'Preco invalido.');
@@ -116,7 +114,7 @@ class ProdutoForm extends Form
         $this->produto->nome = $this->nome;
         $this->produto->descricao = $this->descricao;
         $this->produto->quantidade = $this->quantidade;
-        $this->produto->preco = $this->preco;
+        $this->produto->preco = $preco;
 
         $categoria = Categoria::findOrFail($this->categoria_id);
         $this->produto->categoria()->associate($categoria);

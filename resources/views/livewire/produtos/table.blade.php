@@ -89,7 +89,11 @@
                             </td>
                         </tr>
                     @endforeach
+
                 </table>
+                <div class="px-6 py-2">
+                    {{ $produtos->links() }}
+                </div>
             </div>
         </div>
     </div>

@@ -6,34 +6,49 @@ use App\Models\Categoria;
 use App\Models\Produto;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Table extends Component
 {
+    use WithPagination;
+
     public $filtroTexto = '';
 
     public $produtoSelecionado;
 
     public $idCategoriaSelecionada = '';
 
-    public $produtos;
-
     public $categorias;
 
-    public function mount($produtos, $categorias)
+    private function fetchProdutos()
     {
-        if (!isset($produtos)) {
-            $this->atualizarProdutos();
+        $query = Produto::query()->with('categoria')->orderByDesc('preco');
+
+        if (!empty($this->filtroTexto)) {
+            $query->where('nome', 'like', '%' . $this->filtroTexto . '%');
+            $query->orWhereRelation('categoria', 'nome', 'like', '%' . $this->filtroTexto . '%');
         }
 
+        if (!empty($this->idCategoriaSelecionada)) {
+            $query->where('categoria_id', '=', $this->idCategoriaSelecionada);
+        }
+
+        return $query->paginate(15);
+    }
+
+    public function mount($categorias)
+    {
         if (!isset($categorias)) {
             $this->categorias = Categoria::all();
         }
-        $this->produtoSelecionado = $this->produtos->get(0);
+        $this->produtoSelecionado = Produto::first();
     }
 
     public function render()
     {
-        return view('livewire.produtos.table');
+        return view('livewire.produtos.table', [
+            'produtos' => $this->fetchProdutos(),
+        ]);
     }
 
     public function criarProduto()
@@ -52,17 +67,6 @@ class Table extends Component
     #[On('atualizar-produtos')]
     public function atualizarProdutos()
     {
-        $query = Produto::query()->with('categoria')->orderByDesc('preco');
-
-        if (!empty($this->filtroTexto)) {
-            $query->where('nome', 'like', '%' . $this->filtroTexto . '%');
-            $query->orWhereRelation('categoria', 'nome', 'like', '%' . $this->filtroTexto . '%');
-        }
-
-        if (!empty($this->idCategoriaSelecionada)) {
-            $query->where('categoria_id', '=', $this->idCategoriaSelecionada);
-        }
-
-        $this->produtos = $query->get()->sortByDesc(fn(Produto $produto) => $produto->preco * $produto->quantidade);
+        $this->resetPage();
     }
 }

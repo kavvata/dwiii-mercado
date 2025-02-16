@@ -40,10 +40,6 @@ class Table extends Component
     {
         $this->produtoSelecionado = new Produto;
 
-        if (!empty($this->idCategoriaSelecionada)) {
-            $this->produtoSelecionado->categoria = $this->categorias->find($this->idCategoriaSelecionada);
-        }
-
         $this->dispatch('open-modal', 'editar-produto');
     }
 

@@ -25,9 +25,6 @@ class EditProduto extends Component
         if ($produto->id) {
             $this->form->setProduto($produto);
             $this->imagemUrl = $produto->imagem();
-        } else {
-            $this->form->categoria_id = $produto->categoria->id ?? Categoria::all()->first()->id;
-            $this->form->unidade_medida_id = $produto->unidadeMedida->id ?? UnidadeMedida::all()->first()->id;
         }
     }
 

@@ -7,5 +7,5 @@
 
     <!-- Breathing in, I calm body and mind. Breathing out, I smile. - Thich Nhat Hanh -->
 
-    <livewire:unidade-medidas.table :medidas="$medidas" />
+    <livewire:unidade-medidas.table />
 </x-app-layout>

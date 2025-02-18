@@ -1,32 +1,29 @@
 <div class="w-full rounded-xl border border-gray-200 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-800">
     {{-- Be like water. --}}
-    <form method="POST" enctype="multipart/form-data"
-        action="{{ $medida->id ? route('unidade_medidas.update', $medida) : route('unidade_medidas.store', $medida) }}"
+    <form wire:submit="save"
         class="flex-col gap-6 overflow-hidden rounded-lg bg-white p-6 text-gray-800 shadow-sm dark:bg-gray-800 dark:text-gray-200">
-
-        @csrf
-        @if ($medida->id)
-            @method('PUT')
-        @else
-            @method('POST')
-        @endif
         <div class="relative">
             <div class="relative flex items-center">
                 <input name="descricao" type="text" placeholder="Digite o nome da unidade de medida..."
-                    value="{{ $medida->descricao }}"
+                    wire:model="descricao"
                     class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
             </div>
         </div>
+        @error('descricao')
+            <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+        @enderror
         <div class="mt-4 space-y-3">
             <div class="relative">
                 <input name="sigla" type="text" placeholder="Digite a sigla da unidade de medida..."
-                    value="{{ $medida->sigla }}"
+                    wire:model="sigla"
                     class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
             </div>
         </div>
-
+        @error('sigla')
+            <span class="text-sm text-red-600 dark:text-red-400 space-y-1">{{ $message }}</span>
+        @enderror
         <div class="flex w-full justify-between gap-2 pt-12">
-            @if ($medida->id)
+            @if (isset($this->medida))
                 <x-danger-button x-data=""
                     x-on:click.prevent="$dispatch('open-modal', 'confirmar-remocao-medida')">
                     {{ __('Remover') }}
@@ -35,7 +32,7 @@
             <x-secondary-button x-on:click="$dispatch('close')">
                 {{ __('Cancelar') }}
             </x-secondary-button>
-            <x-primary-button>Salvar</x-primary-button>
+            <x-primary-button type="submit">Salvar</x-primary-button>
         </div>
         <div class="flex w-full justify-center gap-2 pt-2">
         </div>

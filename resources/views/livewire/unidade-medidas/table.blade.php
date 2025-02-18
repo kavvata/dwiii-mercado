@@ -5,8 +5,9 @@
             <div
                 class="flex flex-col overflow-hidden bg-white  p-6 text-gray-800 shadow-sm sm:rounded-lg dark:bg-gray-800 dark:text-gray-200">
                 <div class="align-center flex h-10 justify-between">
-                    <input id="search" class="rounded-lg border border-slate-600 dark:bg-slate-900"
-                        placeholder="Procure um nome..." type="text">
+                    <input wire:keyup.debounce="filtrar" wire:model="filtroTexto"
+                        class="rounded-lg border border-slate-600 dark:bg-slate-900" placeholder="Procure um nome..."
+                        type="text">
                     <x-primary-button wire:click="criarMedida()">
                         Nova Medida
                     </x-primary-button>
@@ -56,6 +57,9 @@
                         </tr>
                     @endforeach
                 </table>
+                <div class="px-6 py-2">
+                    {{ $medidas->links() }}
+                </div>
             </div>
         </div>
     </div>

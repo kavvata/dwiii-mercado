@@ -30,6 +30,20 @@ const formatarCep = (event) => {
     event.target.value = cep
 }
 
+const formatarTelefone = (event) => {
+    let telefone = event.target.value;
+
+    telefone = telefone.replace(/\D/g, '');
+
+    if (telefone.length > 11) {
+        telefone = telefone.substring(0, 11);
+    }
+
+    telefone = telefone.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+
+    event.target.value = telefone;
+};
+
 function limpaCep() {
     //Limpa valores do formulário de cep.
     document.getElementById('rua').value = ("");
@@ -104,7 +118,7 @@ const pesquisaCep = (event) => {
 document.addEventListener('edit-form-loaded', function () {
     document.getElementById("cpf").addEventListener("keyup", formatarCpf);
     document.getElementById("cep").addEventListener("keyup", formatarCep);
-    //FIXME: nao funcionando
+    document.getElementById("telefone").addEventListener("keyup", formatarTelefone);
     document.getElementById("buscarCep").addEventListener("click", pesquisaCep);
 })
 

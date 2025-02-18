@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Storage;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Produto>
@@ -71,7 +72,7 @@ class ProdutoFactory extends Factory
             'descricao' => fake()->sentence(9),
             'quantidade' => fake()->numberBetween(int1: 1, int2: 50),
             'preco' => fake()->randomFloat(max: 50),
-            'imagem_src' => 'https://images2.habeco.si/Upload/Product/paper-small---gift-paper-bag-small-size_14063_productmain.jpg',
+            'imagem_src' => Storage::disk('produto-imagens')->url('default.png'),
         ];
     }
 }

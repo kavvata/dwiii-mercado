@@ -12,27 +12,25 @@
         @endif
         <div class="flex flex-row gap-6">
             <div class="flex-col">
-                <div class="relative">
-                    <div class="relative flex items-center">
-                        <input name="nome" type="text" placeholder="Digite o nome do cliente..."
-                            value="{{ $cliente->nome }}"
-                            class="w-full border-0 border-b border-gray-400 bg-transparent py-1 text-center text-gray-900 placeholder-gray-300 outline-none focus:border-gray-400 focus:ring-0 dark:text-white dark:focus:border-gray-400">
-                    </div>
+                <div
+                    class="group relative flex items-center border-b border-gray-400 focus:border-gray-400 dark:focus:border-gray-400">
+                    <input name="nome" type="text" placeholder="Nome do cliente..." value="{{ $cliente->nome }}"
+                        class="w-full border-0  bg-transparent py-1 text-center text-gray-900 placeholder-gray-300 outline-none  focus:ring-0 dark:text-white">
                 </div>
 
                 <div class="mt-6 space-y-3">
                     <div class="relative">
-                        <input id="cpf" name="cpf" type="text" placeholder="Digite o CPF do cliente..."
-                            value="{{ $cliente->cpf }}"
+                        <input id="cpf" name="cpf" type="text" placeholder="CPF do cliente..."
+                            value="{{ $cliente->cpf ? substr($cliente->cpf, 0, 3) . '.' . substr($cliente->cpf, 3, 3) . '.' . substr($cliente->cpf, 6, 3) . '-' . substr($cliente->cpf, 9) : '' }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     </div>
                     <div class="relative">
-                        <input id="telefone" name="telefone" type="text"
-                            placeholder="Digite o telefone do cliente..." value="{{ $cliente->telefone }}"
+                        <input id="telefone" name="telefone" type="text" placeholder="telefone do cliente..."
+                            value="{{ $cliente->telefone }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     </div>
                     <div class="relative">
-                        <input name="email" type="text" placeholder="Digite o email do cliente..."
+                        <input name="email" type="text" placeholder="email do cliente..."
                             value="{{ $cliente->email }}"
                             class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                     </div>
@@ -41,7 +39,7 @@
 
             <div class="flex flex-col gap-3">
                 <div class="flex gap-2">
-                    <input id="cep" name="cep" type="text" placeholder="Digite o CEP do cliente..."
+                    <input id="cep" name="cep" type="text" placeholder="CEP do cliente..."
                         value="{{ $cliente->endereco->cep }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
 
@@ -50,22 +48,22 @@
                     </x-primary-button>
                 </div>
                 <div class="relative">
-                    <input id="uf" name="uf" type="text" placeholder="Digite o uf do cliente..."
+                    <input id="uf" name="uf" type="text" placeholder="uf do cliente..."
                         value="{{ $cliente->endereco->uf }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                 </div>
                 <div class="relative">
-                    <input id="cidade" name="cidade" type="text" placeholder="Digite o cidade do cliente..."
+                    <input id="cidade" name="cidade" type="text" placeholder="cidade do cliente..."
                         value="{{ $cliente->endereco->cidade }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                 </div>
                 <div class="relative">
-                    <input id="bairro" name="bairro" type="text" placeholder="Digite o bairro do cliente..."
+                    <input id="bairro" name="bairro" type="text" placeholder="bairro do cliente..."
                         value="{{ $cliente->endereco->bairro }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
                 </div>
                 <div class="flex gap-2">
-                    <input id="rua" name="rua" type="text" placeholder="Digite o rua do cliente..."
+                    <input id="rua" name="rua" type="text" placeholder="rua do cliente..."
                         value="{{ $cliente->endereco->rua }}"
                         class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-indigo-600 dark:focus:ring-indigo-600">
 

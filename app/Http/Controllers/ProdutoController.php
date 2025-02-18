@@ -73,16 +73,23 @@ class ProdutoController extends Controller
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
 
+        if ($preco < 0) {
+            return back()->withErrors('Preco invalido');
+        }
+
+        if ($request->quantidade < 0) {
+            return back()->withErrors('Quantidade invalida');
+        }
+
         $produto->nome = $request->nome;
         $produto->descricao = $request->descricao;
-        $produto->medida = $request->medida;
         $produto->quantidade = $request->quantidade;
         $produto->preco = $preco;
 
         $categoria = Categoria::findOrFail($request->categoria_id);
         $produto->categoria()->associate($categoria);
 
-        $unidadeMedida = Categoria::findOrFail($request->unidade_medida_id);
+        $unidadeMedida = UnidadeMedida::findOrFail($request->unidade_medida_id);
         $produto->unidadeMedida()->associate($unidadeMedida);
 
         $imagem = $request->file('imagem');
@@ -94,7 +101,7 @@ class ProdutoController extends Controller
             name: $imageName
         );
 
-        $produto->imagem_src = 'storage/images' . $imageName;
+        $produto->imagem_src = Storage::disk('produto-imagens')->url($imageName);
 
         $produto->save();
 
@@ -154,6 +161,14 @@ class ProdutoController extends Controller
         $preco = $request->preco;
         $preco = preg_replace('/[^0-9,]/', '', $preco);
         $preco = (float) str_replace(',', '.', $preco);
+
+        if ($preco < 0) {
+            return back()->withErrors('Preco invalido');
+        }
+
+        if ($request->quantidade < 0) {
+            return back()->withErrors('Quantidade invalida');
+        }
 
         $novosDados = [
             'nome' => $request->nome,

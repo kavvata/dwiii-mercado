@@ -1,6 +1,6 @@
 <div x-data="{ open: false }" class="border dark:border-slate-700 rounded-lg w-full min-w-64">
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
-    <div :class="{ 'rounded-b-none border-b dark:border-b-slate-600': open }"
+    <div :class="{ 'rounded-b-none border-b dark:border-b-slate-600 shadow-md': open }"
         class="dark:bg-slate-700 rounded-md flex justify-between p-2 ">
         <div>
             <button @click="open ? open = false : open = true"
@@ -25,7 +25,7 @@
     <div x-show="open" x-collapse class="overflow-x-auto overflow-y-auto max-h-96">
         <table id="table-produto" class="table-auto w-full min-w-max">
             <thead>
-                <tr class="bg-gray-200 dark:bg-slate-700 border-b dark:border-b-slate-600">
+                <tr class="bg-white dark:bg-slate-700 border-b dark:border-b-slate-600">
                     <th class="w-12 px-4 pb-2 text-end whitespace-nowrap">#</th>
                     <th class="px-4 pb-2 text-start whitespace-nowrap">Nome</th>
                     <th class="px-4 pb-2 text-start whitespace-nowrap">Categoria</th>

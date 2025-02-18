@@ -1,4 +1,4 @@
-const formatar = (event) => {
+const formatarPreco = (event) => {
     // brigado https://stackoverflow.com/a/68203262 !!
 
     let value = event.target.value;
@@ -15,6 +15,7 @@ const formatar = (event) => {
     );
 
     event.target.value = "R$ " + result;
+    event.target.dispatchEvent(new Event('input'));
 };
 
 const previewImage = (event) => {
@@ -28,8 +29,33 @@ const previewImage = (event) => {
     }
 }
 
+const diminuirQuantidade = (event) => {
+    let quantidadeInput = document.getElementById("quantidade")
+
+
+    quantidadeInput.value = Number(quantidadeInput.value) - 1
+    validarQuantidade(event)
+}
+const aumentarQuantidade = (event) => {
+    let quantidadeInput = document.getElementById("quantidade")
+
+    quantidadeInput.value = Number(quantidadeInput.value) + 1
+    validarQuantidade(event)
+}
+
+const validarQuantidade = (event) => {
+    let quantidadeInput = event.target.id == "quantidade" ? event.target : document.getElementById("quantidade")
+
+    if (quantidadeInput.value < 1) {
+        quantidadeInput.value = 1
+    }
+
+    event.target.dispatchEvent(new Event('input'));
+}
+
 document.addEventListener('edit-form-loaded', function () {
-    document.getElementById("preco").addEventListener("keyup", formatar);
-    document.getElementById('imageUpload').addEventListener('change', previewImage);
+    document.getElementById("quantidade").addEventListener("change", validarQuantidade);
+    document.getElementById("preco").addEventListener("keyup", formatarPreco);
+    // document.getElementById('imageUpload').addEventListener('change', previewImage);
 })
 
